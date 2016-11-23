@@ -1,0 +1,17 @@
+{
+  "name": "express-server",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Kiril_Velichkov <kvelichkow@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

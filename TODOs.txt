@@ -1,0 +1,29 @@
+front end requester
+data layer
+
+
+- COLLECTIONS -
+# User
+ - username
+ - firstName
+ - lastName
+ - salt
+ - hashedPassword
+ - roles[]
+ - bankAccount
+ - campaings[]
+ - profile pic
+
+# Campaign
+ - createdOn
+ - comments[]
+ - userCreator
+ - donators[]
+ - likes/dislikes
+ - categories[]
+ - picture
+
+# Bank account
+ - user
+ - balance
+ - cardNumber
