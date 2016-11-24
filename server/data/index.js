@@ -11,7 +11,7 @@ module.exports = function (config) {
     let models = { Campaign };
     let data = {};
 
-    fs.readdirSync('__dirname')
+    fs.readdirSync(__dirname)
     .filter(x=> x.includes('-data'))
     .forEach(file => {
         let dataModule = require(path.join(__dirname,file))(models);
