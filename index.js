@@ -9,12 +9,12 @@ let stage = 'development';
 let config = require('./server/config/config')[stage];
 let logger = require('./server/utilities/logger');
 
-require('./server/config/database')(config, logger);
 require('./server/config/express')(config, app);
 
 
 const data ="";
 app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
     res.render('home/home');
 });
 require('./server/routers')(app, data);
