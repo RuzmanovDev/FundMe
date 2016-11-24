@@ -9,6 +9,10 @@
         "array-bracket-spacing": "off",
         "array-callback-return": "off",
         "arrow-body-style": "error",
+        "quotes": [
+            "warn",
+            "single"
+        ],
         "arrow-parens": [
             "error",
             "as-needed"
@@ -213,7 +217,6 @@
         "prefer-spread": "error",
         "prefer-template": "off",
         "quote-props": "off",
-        "quotes": "off",
         "radix": [
             "error",
             "always"

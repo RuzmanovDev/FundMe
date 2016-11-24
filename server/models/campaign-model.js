@@ -1,10 +1,14 @@
 /* globals require module */
-"use strict";
+'use strict';
 
-const mongoose = require("mongoose"),
+const mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 let campaignSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
     createdOn: {
         type: Date,
         required: true
@@ -22,21 +26,22 @@ let campaignSchema = new Schema({
         required: true
     },
     likes: {
-        type: Number,
+        type: Number
     },
     dislikes: {
-        type: Number,
+        type: Number
     },
     categories: {
         type: [String], //name
         required: true
     },
     image: {
-        type: String, //url
+        data: Buffer,
+        contentType: String
     }
 });
 
-mongoose.model("Campaign", campaignSchema);
+mongoose.model('Campaign', campaignSchema);
 
-module.exports = mongoose.model("Campaign");
+module.exports = mongoose.model('Campaign');
 
