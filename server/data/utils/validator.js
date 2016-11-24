@@ -1,13 +1,12 @@
 'use strict';
 
 module.exports = {
-    validateLength(password, min, max) {
-        return min <= password && password <= max;
-    },
-    validatePassword(text) {
-        const PasswordMinLength = 3;
-        const PasswordMaxLength = 20;
+    validateLength(value, min, max) {
+        if (!max) {
+            max = min;
+            min = 3;
+        }
 
-        return this.validateLength(text, PasswordMinLength, PasswordMaxLength);
+        return min <= value.length && value.length <= max;
     }
 }
