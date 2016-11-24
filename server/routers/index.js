@@ -7,6 +7,6 @@ module.exports = function (app, data) {
     fs.readdirSync('./routers')
         .filter(x => x.includes('-router'))
         .forEach(file => {
-            require(path.join(__dirname, file))(app, data)
-        })
-}
+            require(path.join(__dirname, file))(app, data);
+        });
+};
