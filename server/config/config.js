@@ -7,6 +7,7 @@ module.exports = {
         rootPath: rootPath,
         localDB: 'mongodb://localhost:27017/some-express-db',
         cloudDB: 'mongodb://admin:djagascript1234@ds161487.mlab.com:61487/djagascript',
-        port: 1337
+        localPort: 1337,
+        cloudPort: 8080,
     }
 };

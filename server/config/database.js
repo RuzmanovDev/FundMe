@@ -14,5 +14,7 @@ module.exports = (config, logger) => {
     });
 
     db.on('error', (err) => logger.log('Database error : ' + err));
+
+    console.log('Database connected!');
 };
 
