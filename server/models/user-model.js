@@ -4,7 +4,7 @@
 
 const mongoose = require('mongoose');
 
-const fieldsValidator = require('./validator');
+const fieldsValidator = require('./utils/validator');
 
 const MinUsernameLength = 3;
 const MaxUsernameLength = 20;
