@@ -1,0 +1,45 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "eslint.enable": true,
+    "eslint.options": {
+        "parserOptions": {
+            "ecmaVersion": 6,
+            "sourceType": "es6",
+            "env": {
+                "es6": true
+            }
+        },
+        "rules": {
+            "eqeqeq": "warn",
+            "quotes": [
+                "warn",
+                "single"
+            ],
+            //"strict": "warn",
+            "no-dupe-args": "error",
+            "no-dupe-keys": "error",
+            // "no-extra-semi": "warn",
+            "semi": [2, "always"],
+            "no-func-assign": "error",
+            "no-invalid-regexp": "error",
+            "no-unreachable": "warn",
+            "use-isnan": "error",
+            "valid-typeof": "error",
+            "consistent-return": "warn",
+            "curly": "warn",
+            "default-case": "error",
+            "no-alert": "warn",
+            "no-else-return": "warn",
+            "no-eval": "warn",
+            "no-extend-native": "warn",
+            "no-loop-func": "warn",
+            "no-native-reassign": "warn",
+            "no-useless-escape": "warn",
+            "no-void": "warn",
+            "no-with": "warn",
+            "no-unused-vars": "warn"
+        }
+    },
+    "window.zoomLevel": 0,
+    "typescript.check.tscVersion": false
+}

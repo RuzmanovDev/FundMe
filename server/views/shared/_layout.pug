@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+head
+    meta(charset="UTF-8")
+    title Document
+    script(src='/public/bower_components/jquery/dist/jquery.min.js')
+    script(src='public/bower_components/bootstrap/dist/js/bootstrap.min.js')
+    link(href='/public/bower_components/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet')
+    link(href='/public/css/main.css' rel='stylesheet')
+body
+    header
+        nav.navbar.navbar-default
+            ul.nav.navbar-nav
+                li
+                    a(href="/") Home
+                li
+                    a(href="/Iniciatives") Iniciatives
+    .wrapper
+        block content

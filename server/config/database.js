@@ -9,8 +9,10 @@ module.exports = (config, logger) => {
 
     db.once('open', (err) => {
         if (err) {
-            logger.log('Database error :', err);
+            logger.log(err);
         }
     });
+
+    db.on('error', (err) => logger.log('Database error : ' + err));
 };
 
