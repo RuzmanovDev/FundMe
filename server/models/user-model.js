@@ -5,8 +5,6 @@ const mongoose = require('mongoose');
 
 const minUsernameLength = 3;
 const maxUsernameLength = 20;
-const minPasswordLength = 3;
-const maxPasswordLength = 20;
 
 function validateLength(value, min, max) {
     if (!max) {
@@ -32,13 +30,7 @@ const userSchema = new mongoose.Schema({
     },
     passHash: {
         type: String,
-        required: true,
-        validate: {
-            validator: function (value) {
-                return validateLength(value, minPasswordLength, maxPasswordLength);
-            },
-            message: '{VALUE} is not a valid pass!'
-        }
+        required: true
     },
     email: {
         type: String,

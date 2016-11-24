@@ -1,6 +1,8 @@
 /* globals module, require */
+'use strict';
 
-const encryption = require('../utilities/encryption');
+const validator = require('./utils/validator');
+
 
 module.exports = (models) => {
     const { User } = models;
@@ -28,12 +30,17 @@ module.exports = (models) => {
                 });
             });
         },
-        createUser(username, passHash, email) {
+        createUser(username, passHash, email, salt) {
             return new Promise((resolve, reject) => {
+                // '' is the default value
                 let user = new User({
+                    firstname: '',
+                    lastname: '',
                     username,
                     passHash,
-                    email
+                    email,
+                    salt,
+                    roles: ['regular']
                 });
 
                 user.save((err) => {
