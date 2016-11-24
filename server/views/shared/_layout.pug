@@ -7,6 +7,7 @@ head
     script(src='public/bower_components/bootstrap/dist/js/bootstrap.min.js')
     link(href='/public/bower_components/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet')
     link(href='/public/css/main.css' rel='stylesheet')
+    block login-css
 body
     header
         nav.navbar.navbar-default
@@ -21,3 +22,7 @@ body
                     a(href="/register") Register
     .wrapper
         block content
+
+
+        script(src="/public/js/requester.js")
+        script(src="/public/js/app.js")

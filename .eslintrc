@@ -13,10 +13,6 @@
             "warn",
             "single"
         ],
-        "arrow-parens": [
-            "error",
-            "as-needed"
-        ],
         "arrow-spacing": [
             "error",
             {
