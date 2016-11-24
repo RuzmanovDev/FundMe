@@ -19,7 +19,7 @@ function validateLength(value, min, max) {
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
+       //required: true,
         validate: {
             validator: function(value) {
                 return validateLength(value, minUsernameLength, maxUsernameLength);
@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+       // required: true,
         validate: {
             validator: function(value) {
                 return validateLength(value, minPasswordLength, maxPasswordLength);

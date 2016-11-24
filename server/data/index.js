@@ -1,18 +1,20 @@
 /*globals */
+ 
 
-const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
-
+const mongoose = require('mongoose');
+console.log("blq");
+  
 module.exports = function (config) {
+    let Campaign = require('../models/campaign-model');
+    let User = require('../models/user-model');
+    let models = { Campaign,User };
+    let data = {};
     mongoose.Promise = global.Promise;
     mongoose.connect(config.localDB);
-    let Campaign = require('../models/campaign-model');
-    let models = { Campaign };
-    let data = {};
-
-    fs.readdirSync('__dirname')
-    .filter(x=> x.includes('-data'))
+    fs.readdirSync(__dirname)
+    .filter(x => x.includes('-data'))
     .forEach(file => {
         let dataModule = require(path.join(__dirname,file))(models);
 
@@ -21,4 +23,6 @@ module.exports = function (config) {
             data[key] = dataModule[key];
         });
     });
+
+    return data;
 };
