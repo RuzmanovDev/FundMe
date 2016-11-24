@@ -1,4 +1,8 @@
 /* globals module, require */
+'use strict';
+
+const validator = require('./utils/validator');
+
 
 module.exports = (models) => {
     const { User } = models;
@@ -12,7 +16,7 @@ module.exports = (models) => {
                     } else {
                         return resolve(user);
                     }
-                })
+                });
             });
         },
         getByUsername(username) {
@@ -26,11 +30,17 @@ module.exports = (models) => {
                 });
             });
         },
-        createUser(username, passHash) {
+        createUser(username, passHash, email, salt) {
             return new Promise((resolve, reject) => {
+                // '' is the default value
                 let user = new User({
+                    firstname: '',
+                    lastname: '',
                     username,
-                    passHash
+                    passHash,
+                    email,
+                    salt,
+                    roles: ['regular']
                 });
 
                 user.save((err) => {
