@@ -4,8 +4,6 @@
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
-console.log("blq");
-  
 module.exports = function (config) {
     let Campaign = require('../models/campaign-model');
     let User = require('../models/user-model');

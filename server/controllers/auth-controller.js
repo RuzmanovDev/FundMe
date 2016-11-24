@@ -4,20 +4,22 @@ const encryption = require('../utilities/encryption');
 
 module.exports = function (data) {
     return {
-        login(){
+        login() {
 
         },
-        register(user){
-            console.log(user.body);
-            let username = user.body.username;
-            let passhas = user.body.password;
-            let repeatPassHash = user.body.password;
+        register(req, res) {
+            const user = {
+                username: req.body.username,
+                password: req.body.password,
+                email: req.body.email
+            };
 
-console.log(data);
-            data.createUser(username,passhas)
-            .then((user)=> {
-                console.log(user);
-            },(err)=> console.log(err));
+            console.log(user);
+            data.createUser(user.username, user.password, user.email)
+                .then((user) => {
+                    console.log(user);
+                    res.redirect('/');
+                }, (err) => console.log(err));
         }
     };
 };

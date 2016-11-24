@@ -12,7 +12,7 @@ module.exports = (models) => {
                     } else {
                         return resolve(user);
                     }
-                })
+                });
             });
         },
         getByUsername(username) {
@@ -26,13 +26,15 @@ module.exports = (models) => {
                 });
             });
         },
-        createUser(username, passHash) {
+        createUser(username, passHash, email) {
             return new Promise((resolve, reject) => {
                 let user = new User({
                     username,
-                    passHash
+                    passHash,
+                    email
                 });
-
+                console.log(user);
+                
                 user.save((err) => {
                     if (err) {
                         return reject(err);
