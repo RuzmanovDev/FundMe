@@ -2,6 +2,6 @@
 
 const express = require('express');
 
-module.exports = function (app, data) {
-let controller = 
-}
+// module.exports = function (app, data) {
+
+// }
