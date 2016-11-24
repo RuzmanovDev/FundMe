@@ -23,11 +23,9 @@ let campaignSchema = new Schema({
     },
     likes: {
         type: Number,
-        required: true
     },
     dislikes: {
         type: Number,
-        required: true
     },
     categories: {
         type: [String], //name
@@ -35,7 +33,6 @@ let campaignSchema = new Schema({
     },
     image: {
         type: String, //url
-        required: true
     }
 });
 
