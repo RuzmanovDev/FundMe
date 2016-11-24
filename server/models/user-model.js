@@ -19,13 +19,23 @@ function validateLength(value, min, max) {
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
-        validate: [validateLength(value, minUsernameLength, maxUsernameLength), 'Username is invalid!']
+       //required: true,
+        validate: {
+            validator: function(value) {
+                return validateLength(value, minUsernameLength, maxUsernameLength);
+            },
+            message: '{VALUE} is not a valid username!'
+        }
     },
     password: {
         type: String,
-        required: true,
-        validate: [validateLength(value, minPasswordLength, maxPasswordLength), 'Password is invalid!']
+       // required: true,
+        validate: {
+            validator: function(value) {
+                return validateLength(value, minPasswordLength, maxPasswordLength);
+            },
+            message: '{VALUE} is not a valid pass!'
+        }
     }
 });
 

@@ -1,7 +1,22 @@
 extends ../shared/_layout
+block login-css
+     link(href='/public/css/theme-css/flexslider.css' rel='stylesheet')
+     link(href='/public/css/theme-css/lightbox.min.css' rel='stylesheet')
+     link(href='/public/css/theme-css/theme.css' rel='stylesheet')
+     link(href='/public/css/theme-css/ytplayer.css' rel='stylesheet')
+
 block content
-    form(action="/register" method="POST")
-        input(type="text" name="username" placeholder="Username")
-        input(type="password" name="password" placeholder="Password")
-        input(type="password" name="repeat-password" placeholder="Repeat-password")
-        input(type="submit" value="register")
+     section.cover.fullscreen.image-bg.overlay
+        div.container.v-align-transform
+            div.row
+                div.col-sm-6.col-sm-offset-3
+                    div.feature.bordered.text-center
+                        h4.uppercase Register Here
+                        form.text-left
+                            input(type='text', name='name', placeholder='Username')
+                            input(type='text', name='email', placeholder='Email Address')
+                            input(type='password', placeholder='Password')
+                            input(type='password', placeholder='Confirm Password')
+                            input(type='submit', value='Register')
+                        p.mb0 By signing up, you agree to our
+                            a(href='#') Terms Of Use
