@@ -13,7 +13,6 @@ require('./server/config/express')(config, app);
 
 
 const data ="";
-app.get('/',(req,res)=>{
 app.get('/', (req, res) => {
     res.render('home/home');
 });
