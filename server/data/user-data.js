@@ -33,6 +33,7 @@ module.exports = (models) => {
         createUser(username, passHash, email, salt) {
             return new Promise((resolve, reject) => {
                 // '' is the default value
+                console.log(username);
                 let user = new User({
                     firstname: '',
                     lastname: '',
@@ -42,7 +43,8 @@ module.exports = (models) => {
                     salt,
                     roles: ['regular']
                 });
-
+                console.log(user.username);
+                console.log(username === user.username);
                 user.save((err) => {
                     if (err) {
                         return reject(err);
