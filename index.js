@@ -11,6 +11,8 @@ let data = require('./server/data')(config);
 require('./server/config/express')(config, app);
 
 
+
+
 require('./server/routers')(app, data);
 
 app.listen(config.localPort, () => console.log('Server running at port : ' + config.localPort));
