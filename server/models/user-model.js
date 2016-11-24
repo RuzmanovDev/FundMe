@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
+        unique: true,
         validate: {
             validator: function (value) {
                 return validateLength(value, minUsernameLength, maxUsernameLength);
@@ -34,6 +35,7 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        unique: true,
         validate: {
             validator: function (value) {
                 // TO DO : REGEX for email

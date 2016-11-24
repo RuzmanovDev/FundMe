@@ -28,22 +28,16 @@ module.exports = function (data) {
 
             if (req.body.password !== req.body.confirmedPassword) {
                 // to do make global error and send the error message
-                res.send('The passsword do not match');
+                res.send(JSON.stringify('The passsword do not match'));
             }
 
             const salt = encryption.generateSalt();
             const passHash = encryption.generateHashedPassword(salt, user.password);
 
-            let u = data.getByUsername(user.username);
-
             data.createUser(user.username, passHash, user.email, salt)
                 .then((user) => {
                     console.log(user);
-                    res.redirect('/');
-                })
-                .catch((err) => {
-                    console.log(err);
-                    res.send(err);
+                    return res.render('home/home');
                 });
         },
         logout(req, res) {

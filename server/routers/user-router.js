@@ -7,6 +7,7 @@ module.exports = function (app, data) {
 
 const userController = require('../controllers/user-controller')(data);
 
+    // TODO MOve login and register to auth-router and controller
     router
         .get('/login',userController.getLogin)
         .get('/register', userController.getRegister);
