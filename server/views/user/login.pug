@@ -1,6 +1,21 @@
 extends ../shared/_layout
+
+block login-css
+     link(href='/public/css/theme-css/flexslider.css' rel='stylesheet')
+     link(href='/public/css/theme-css/lightbox.min.css' rel='stylesheet')
+     link(href='/public/css/theme-css/theme.css' rel='stylesheet')
+     link(href='/public/css/theme-css/ytplayer.css' rel='stylesheet')
+
 block content
-    form(action="/login" method="POST")
-        input(type="text" name="username" placeholder="Username")
-        input(type="password" name="password" placeholder="Password")
-        input(type="submit" value="login")
+     section.cover.fullscreen.image-bg.overlay
+        div.container.v-align-transform
+            div.row
+                div.col-md-4.col-md-offset-4.col-sm-8.col-sm-offset-2
+                    div.feature.bordered.text-center
+                        h4.uppercase Login Here
+                        form.text-left
+                            input.mb0(type='password', placeholder='Password')
+                            input.mb0(type='text', placeholder='Username')
+                            input(type='submit', value='Login')
+                        p.mb0 Forgot your password?
+                            a(href='#') Click Here To Reset
