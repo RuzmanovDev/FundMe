@@ -1,5 +1,7 @@
 /* globals module, require */
 
+const encryption = require('../utilities/encryption');
+
 module.exports = (models) => {
     const { User } = models;
 
@@ -33,8 +35,7 @@ module.exports = (models) => {
                     passHash,
                     email
                 });
-                console.log(user);
-                
+
                 user.save((err) => {
                     if (err) {
                         return reject(err);

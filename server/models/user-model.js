@@ -1,4 +1,5 @@
 /* globals const, module, require */
+'use strict';
 
 const mongoose = require('mongoose');
 
@@ -17,14 +18,14 @@ function validateLength(value, min, max) {
 }
 
 const userSchema = new mongoose.Schema({
+    firstname: String,
+    lastname: String,
     username: {
         type: String,
-       required: true,
+        required: true,
         validate: {
-            validator: function(value) {
-                let isCorrect = validateLength(value, minUsernameLength, maxUsernameLength);
-                console.log(isCorrect);
-                return isCorrect;
+            validator: function (value) {
+                return validateLength(value, minUsernameLength, maxUsernameLength);
             },
             message: '{VALUE} is not a valid username!'
         }
@@ -33,7 +34,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         validate: {
-            validator: function(value) {
+            validator: function (value) {
                 return validateLength(value, minPasswordLength, maxPasswordLength);
             },
             message: '{VALUE} is not a valid pass!'
@@ -41,13 +42,15 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        validate:{
-            validator: function(value){
+        validate: {
+            validator: function (value) {
                 // TO DO : REGEX for email
             },
-              message: '{VALUE} is not a valid pass!'
+            message: '{VALUE} is not a valid pass!'
         }
-    }
+    },
+    salt: String,
+    roles: [String]
 });
 
 mongoose.model('User', userSchema);
