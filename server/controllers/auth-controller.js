@@ -38,6 +38,10 @@ module.exports = function (data) {
                 .then((user) => {
                     console.log(user);
                     return res.render('home/home');
+                })
+                .catch((err) => {
+                    res.send("User with the same username already exists!");
+                    console.log(err);
                 });
         },
         logout(req, res) {

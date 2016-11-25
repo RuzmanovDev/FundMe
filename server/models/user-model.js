@@ -8,8 +8,6 @@ const fieldsValidator = require('./utils/validator');
 
 const MinUsernameLength = 3;
 const MaxUsernameLength = 20;
-const MinPasswordLength = 3;
-const MaxPasswordLength = 20;
 
 const userSchema = new mongoose.Schema({
     firstname: {
