@@ -31,20 +31,17 @@ module.exports = (models) => {
             });
         },
         createUser(username, passHash, email, salt) {
+            let user = new User({
+                firstname: ' ',
+                lastname: ' ',
+                username: username,
+                passHash: passHash,
+                email: email,
+                salt: salt,
+                roles: ['regular']
+            });
+
             return new Promise((resolve, reject) => {
-                // '' is the default value
-                console.log(username);
-                let user = new User({
-                    firstname: '',
-                    lastname: '',
-                    username,
-                    passHash,
-                    email,
-                    salt,
-                    roles: ['regular']
-                });
-                console.log(user.username);
-                console.log(username === user.username);
                 user.save((err) => {
                     if (err) {
                         return reject(err);
