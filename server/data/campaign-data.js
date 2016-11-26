@@ -25,6 +25,9 @@ module.exports = function (models) {
                     return resolve(campaign);
                 });
             });
+        },
+        createCampaign(campaign) {
+
         }
     };
 };

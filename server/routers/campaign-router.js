@@ -8,6 +8,7 @@ module.exports = function (options){
     router
     .get('/', controller.getAll)  
     .get('/create', controller.getCreateForm)
+    .post('/create', controller.create)
     .get('/campaign/:id', controller.getById);
 
     options.app.use('/campaigns', router);

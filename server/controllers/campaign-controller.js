@@ -5,7 +5,7 @@ module.exports = function (data) {
         getAll(req, res) {
             data.getAllCampaigns()
                 .then(campaigns => {
-                    res.render('campaigns/all-campaigns', {
+                    res.status(200).render('campaigns/all-campaigns', {
                         result: campaigns
                     });
                 });
@@ -18,13 +18,17 @@ module.exports = function (data) {
                             .redirect('/error');
                     }
 
-                    return res.render('campaigns/campaign-details', {
+                    return res.status(200).render('campaigns/campaign-details', {
                         result: campaign
                     });
                 });
         },
         getCreateForm(req, res) {
-            return res.render('campaigns/create-campaign');
+            return res.status(200).render('campaigns/create-campaign');
+        },
+        create(req, res) {
+            let body = req.body;
+            console.log(body);
         }
     };
 };

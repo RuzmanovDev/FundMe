@@ -1,7 +1,54 @@
 extends ../shared/_layout
 
 block content 
-    form(action="/campaigns/new", method = "POST")  
-        label(for="usernamr") Username:
-            input(type="text", name="user", id="username")
+    form(action="/campaigns/create", method = "POST")  
+        label(for="title") Title:
+            input(type="text", name="title", id="title")
+        h4 Category:
+        p
+            label(for="bussines") Start a bussines:        
+            input(type="radio", name="category", id="bussines", value="bussines")
+        p
+            label(for="communityGroups") Community Groups:        
+            input(type="radio", name="category", id="communityGroups", value="communityGroups")
+        p
+            label(for="creativeProjects") Creative Projects:        
+            input(type="radio", name="category", id="creativeProjects", value="creativeProjects")
+        p
+            label(for="education") Education:        
+            input(type="radio", name="category", id="education", value="education")
+        p
+            label(for="religion") Religion:        
+            input(type="radio", name="category", id="religion", value="religion")
+        p
+            label(for="pets") Pets:        
+            input(type="radio", name="category", id="pets", value="pets")
+        p
+            label(for="sports") Sports:        
+            input(type="radio", name="category", id="sports", value="sports")
+        p
+            label(for="medical") Medical:        
+            input(type="radio", name="category", id="medical", value="medical")
+        
+        label(for="videoLink") Video Link:
+            input(type="text", name="videoLink", id="videoLink")
+        p
+            label(for="avatar") Image:
+                input(type="file" id="avatar" name="avatar")
+
+        p
+            label(for="target") Target:        
+                input(type="text", name="target", id="target")
+
+        h4 Description
+        textarea(name"description")
+        p
+            input(type="submit" value="Create")
+
+
+
+
+       
+
+
     
