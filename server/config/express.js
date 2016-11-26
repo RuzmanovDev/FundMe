@@ -10,10 +10,13 @@ module.exports = (config, app) => {
     app.use('/public', express.static(config.rootPath + '/public'));
 
     app.use(cookieParser());
-    app.use(session({ secret: 'This is the most secret secret WOHAA!' }));
+    app.use(session({
+        secret: 'djagascript', cookie: { maxAge: 60000 },
+        rolling: true, resave: true, saveUninitialized: false
+    }));
 
-    require('./passport/')(app);
-    
+    require('./passport')(app);
+
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 

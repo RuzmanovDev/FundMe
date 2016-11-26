@@ -3,7 +3,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-
+const encryption = require('../utilities/encryption');
 const fieldsValidator = require('./utils/validator');
 
 const MinUsernameLength = 3;
@@ -50,7 +50,24 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    avatar: {
+        type: String,
+        //TO DO - set dafault imageID
+        default: '58376b58c14d6d15f8d4f3ab'
+    },
     roles: [String]
+});
+
+userSchema.method({
+    authenticate: function (password) {
+        let inputHashedPassword = encryption.generateHashedPassword(this.salt, password);
+
+        if (inputHashedPassword === this.passHash) {
+            return true;
+        }
+
+        return false;
+    }
 });
 
 mongoose.model('User', userSchema);
