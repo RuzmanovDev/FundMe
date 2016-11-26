@@ -1,6 +1,6 @@
 /*globals */
 
-module.exports = function(models) {
+module.exports = function (models) {
     let Campaign = models.Campaign;
 
     return {
@@ -39,6 +39,12 @@ module.exports = function(models) {
         },
         createCampaign(campaign) {
 
+        },
+        fundCampaign(id, value) {
+            return this.getCampaignById(id)
+                .then((campaign) => {
+                    campaign.funded += value;
+                });
         }
     };
 };

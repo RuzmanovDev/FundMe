@@ -1,15 +1,16 @@
 const express = require('express');
 
-module.exports = function (options){
+module.exports = function (options) {
     let controller = require('../controllers/campaign-controller')(options.data);
 
     let router = new express.Router();
 
     router
-    .get('/', controller.getAll)  
-    .get('/create', controller.getCreateForm)
-    .post('/create', controller.create)
-    .get('/campaign/:id', controller.getById);
+        .get('/', controller.getAll)
+        .get('/create', controller.getCreateForm)
+        .post('/create', controller.create)
+        .get('/campaign/:id', controller.getById)
+        .post('/donate', controller.donate);
 
     options.app.use('/campaigns', router);
 };

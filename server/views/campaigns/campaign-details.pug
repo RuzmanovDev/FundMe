@@ -1,0 +1,9 @@
+extends ../shared/_layout
+block content
+    h1 #{campaign.title}
+    p #{campaign.description}
+    form(method='POST', action='/campaigns/donate')
+        input(type="hidden", name="campaignId", value= campaign._id )
+        input(type="text", name="creditCardNumber")
+        input(type="text", name="donationValue")
+        input(type="submit", value="Donate")
