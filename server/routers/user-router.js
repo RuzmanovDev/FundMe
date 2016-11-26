@@ -1,16 +1,17 @@
-/*globals */
 'use strict';
 
 const router = require('express').Router();
 
-module.exports = function (app, data) {
+module.exports = function (options) {
 
-const userController = require('../controllers/user-controller')(data);
+    const userController = require('../controllers/user-controller')(options);
 
-    // TODO MOve login and register to auth-router and controller
+    // TODO Move login and register to auth-router and controller
     router
-        .get('/login',userController.getLogin)
-        .get('/register', userController.getRegister);
-
-    app.use(router);
+        .get('/login', userController.getLogin)
+        .get('/register', userController.getRegister)
+        .get('/user/settings', userController.getSettings)
+        .post('/settings/update', options.upload.single('avatar'), userController.updateSettings)
+        .get('/users/avatars/:id', userController.getAvatar);
+    options.app.use(router);
 };

@@ -1,14 +1,15 @@
 /*globals */
 'use strict';
-let stage = 'development';
 
+const passport = require('passport');
 const router = require('express').Router();
 
-module.exports = function (app, data) {
-    const authController = require('../controllers/auth-controller')(data);
+module.exports = function (options) {
+    const authController = require('../controllers/auth-controller')(options.data);
+
     router
-        .post('/login', authController.login)
+        .post('/login', passport.authenticate('local', { successRedirect: '/user/settings' }), authController.login)
         .post('/register', authController.register);
 
-    app.use('/auth', router);
+    options.app.use('/auth', router);
 };

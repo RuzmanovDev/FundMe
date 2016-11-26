@@ -1,21 +1,22 @@
 'use strict';
 
-const passport = require('passport'),
-    data = require('../../data');
+const passport = require('passport');
+const data = require('../../data')();
 
 passport.serializeUser((user, done) => {
     if (user) {
         return done(null, user.id);
     }
+
+    return done(null, false);
 });
 
 passport.deserializeUser((userId, done) => {
     // maybe missing return
     data
-        .findById(userId)
+        .getById(userId)
         .then(user => done(null, user || false))
         .catch(error => done(error, false));
-
 });
 
 require('./local-strategy')(passport, data);

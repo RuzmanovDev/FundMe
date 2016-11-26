@@ -13,9 +13,9 @@ module.exports = (models) => {
                 User.findOne({ _id: userId }, (err, user) => {
                     if (err) {
                         return reject(err);
-                    } else {
-                        return resolve(user);
                     }
+
+                    return resolve(user);
                 });
             });
         },
@@ -24,9 +24,9 @@ module.exports = (models) => {
                 User.findOne({ username: username }, (err, user) => {
                     if (err) {
                         return reject(err);
-                    } else {
-                        return resolve(user);
                     }
+
+                    return resolve(user);
                 });
             });
         },
@@ -45,11 +45,21 @@ module.exports = (models) => {
                 user.save((err) => {
                     if (err) {
                         return reject(err);
-                    } else {
-                        return resolve(user);
                     }
+
+                    return resolve(user);
                 });
             });
+        },
+        updateUser(id, info) {
+            return Promise.resolve(
+                this.getById(id)
+                    .then((foundUser) => {
+                        foundUser.avatar = info.avatar || foundUser.avatar;
+                        //TO DO add OSTANALITE PROPERTIES!!!!
+                        foundUser.save();
+                    })
+            );
         }
     };
 };

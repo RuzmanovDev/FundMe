@@ -1,7 +1,7 @@
 const express = require('express');
 
-module.exports = function (app, data){
-    let controller = require('../controllers/campaign-controller')(data);
+module.exports = function (options){
+    let controller = require('../controllers/campaign-controller')(options.data);
 
     let router = new express.Router();
 
@@ -9,5 +9,5 @@ module.exports = function (app, data){
     .get('/', controller.getAll)
     .get('/:id', controller.getById);
 
-    app.use('/campaigns', router);
+    options.app.use('/campaigns', router);
 };

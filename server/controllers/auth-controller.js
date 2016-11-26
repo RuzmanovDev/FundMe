@@ -36,11 +36,10 @@ module.exports = function (data) {
 
             data.createUser(user.username, passHash, user.email, salt)
                 .then((user) => {
-                    console.log(user);
                     return res.render('home/home');
                 })
                 .catch((err) => {
-                    res.send("User with the same username already exists!");
+                    res.send('User with the same username already exists!');
                     console.log(err);
                 });
         },
