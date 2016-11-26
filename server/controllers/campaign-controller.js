@@ -1,6 +1,6 @@
 /*globals*/
 
-module.exports = function (data) {
+module.exports = function(data) {
     return {
         getAll(req, res) {
             data.getAllCampaigns()
@@ -29,6 +29,14 @@ module.exports = function (data) {
         create(req, res) {
             let body = req.body;
             console.log(body);
+        },
+        getByCategory(category) {
+            data.findCampaigns(category)
+                .then((categories) => {
+                    return res.render('campaigns/all-campaigns', {
+                        result: categories
+                    })
+                });
         }
     };
 };

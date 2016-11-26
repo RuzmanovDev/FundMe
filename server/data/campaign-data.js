@@ -1,12 +1,23 @@
 /*globals */
 
-module.exports = function (models) {
+module.exports = function(models) {
     let Campaign = models.Campaign;
 
     return {
         getAllCampaigns() {
             return new Promise((resolve, reject) => {
                 Campaign.find((err, campaigns) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(campaigns);
+                });
+            });
+        },
+        findCampaigns(filter) {
+            return new Promise((resolve, reject) => {
+                Campaign.find({ filter }, (err, campaigns) => {
                     if (err) {
                         return reject(err);
                     }
