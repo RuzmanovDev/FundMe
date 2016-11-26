@@ -5,7 +5,7 @@ module.exports = function (data) {
         getAll(req, res) {
             data.getAllCampaigns()
                 .then(campaigns => {
-                    res.render('all-campaigns', {
+                    res.render('campaigns/all-campaigns', {
                         result: campaigns
                     });
                 });
@@ -18,7 +18,7 @@ module.exports = function (data) {
                             .redirect('/error');
                     }
 
-                    return res.render('campaign-details', {
+                    return res.render('campaigns/campaign-details', {
                         result: campaign
                     });
                 });
