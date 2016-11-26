@@ -10,6 +10,11 @@ let campaignSchema = new Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        required: true,
+        maxlength: 2000
+    },
     createdOn: {
         type: Date,
         required: true
