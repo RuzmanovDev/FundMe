@@ -6,8 +6,9 @@ module.exports = function (options){
     let router = new express.Router();
 
     router
-    .get('/', controller.getAll)
-    .get('/:id', controller.getById);
+    .get('/', controller.getAll)    
+    .get('/create', controller.getCreateForm)
+    .get('/campaign/:id', controller.getById);
 
     options.app.use('/campaigns', router);
 };
