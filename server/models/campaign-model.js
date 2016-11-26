@@ -1,8 +1,9 @@
 /* globals require module */
+
 'use strict';
 
-const mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 let campaignSchema = new Schema({
     title: {
@@ -14,34 +15,42 @@ let campaignSchema = new Schema({
         required: true
     },
     comments: {
-        type: [String],
+        type: {
+            content: String,
+            userId: String
+        },
         required: true
     },
-    userCreator: {
-        type: String,
+    creator: {
+        type: {},
         required: true
     },
     donators: {
-        type: [String], //name
+        type: {},
         required: true
     },
-    likes: {
-        type: Number
+    upVotes: {
+        type: Number,
+        required: true,
+        default: 0
     },
-    dislikes: {
-        type: Number
-    },
-    categories: {
-        type: [String], //name
+    category: {
+        type: String,
         required: true
     },
     image: {
         data: Buffer,
         contentType: String
+    },
+    target: {
+        type: Number,
+        required: true
+    },
+    funded: {
+        type: Number
     }
 });
 
 mongoose.model('Campaign', campaignSchema);
 
 module.exports = mongoose.model('Campaign');
-
