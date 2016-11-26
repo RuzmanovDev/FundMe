@@ -1,0 +1,7 @@
+extends ./shared/_layout
+
+block content 
+    form(action="/campaigns/new", method = "POST")  
+        label(for="usernamr") Username:
+            input(type="text", name="user", id="username")
+    
