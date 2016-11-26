@@ -1,16 +1,20 @@
 extends ../shared/_layout
-block content
+block content 
 
-    form(action="/settings/update", method="POST", enctype="multipart/form-data")
-    div
+    form(action="/user/settings/update", method="POST", enctype="multipart/form-data")
       div
-        img(class="settings-avatar" src="/user/avatar/" + avatar)
-      input(type="file" id="avatar" name="avatar" src="")
-    div
-      label(for="firstName") FirstName: 
-        input(type="text" name="firstname" id="firstName")
-    div
-      label(for="lastName") LastName: 
-        input(type="text" name="lastname" id="lastName")
-    input(type="submit" value="update")
+        div
+          img(class="settings-avatar" src="/user/avatar/" + avatar)
+        input(type="file" id="avatar" name="avatar" src="")
+      div
+        label(for="firstName") FirstName: 
+          input(type="text" name="firstname" id="firstName")
+      div
+        label(for="lastName") LastName: 
+          input(type="text" name="lastname" id="lastName")
+      div
+        label(for="cardNumber") Card number:
+         input(type="text" name="account" id="cardNumber")
+        
+         input(type="submit" value="update")
     //- img(src="/users/avatars/" + avatar)
