@@ -12,7 +12,7 @@ module.exports = function(options) {
             res.status(200).render('user/register');
         },
         getSettings(req, res) {
-            res.status(200).render('user/settings', { avatar: req.user.avatar });
+            res.status(200).render('user/settings');
         },
         updateSettings(req, res) {
 
@@ -27,7 +27,8 @@ module.exports = function(options) {
                     let infoToUpdate = {
                         avatar: avatar
                     };
-
+                    console.log('1111');
+                    
                     data.updateUser(user._id, infoToUpdate)
                         .then(() => {
                             res.redirect('/user/settings');
