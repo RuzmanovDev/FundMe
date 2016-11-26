@@ -10,7 +10,7 @@ module.exports = function (data) {
                     });
                 });
         },
-         getById(req, res) {
+        getById(req, res) {
             data.getCampaignById(req.params.id)
                 .then(campaign => {
                     if (campaign === null) {
@@ -24,7 +24,7 @@ module.exports = function (data) {
                 });
         },
         getCreateForm(req, res) {
-         return res.render('create-campaign');
+            return res.render('campaigns/create-campaign');
         }
     };
 };

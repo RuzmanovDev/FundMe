@@ -4,13 +4,6 @@ var Grid = require('gridfs');
 
 module.exports = function(options) {
     return {
-        getLogin(req, res) {
-            //todo Is this code correct?
-            res.status(200).render('user/login');
-        },
-        getRegister(req, res) {
-            res.status(200).render('user/register');
-        },
         getSettings(req, res) {
             res.status(200).render('user/settings');
         },
@@ -27,8 +20,6 @@ module.exports = function(options) {
                     let infoToUpdate = {
                         avatar: avatar
                     };
-                    console.log('1111');
-                    
                     data.updateUser(user._id, infoToUpdate)
                         .then(() => {
                             res.redirect('/user/settings');

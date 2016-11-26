@@ -1,7 +1,7 @@
 extends ../shared/_layout
 block content
 
-    form(action="/settings/update", method="POST", enctype="multipart/form-data")
+    form(action="/user/settings/update", method="POST", enctype="multipart/form-data")
         input(type="file" name="avatar")
         input(type="submit" value="update")
     //- img(src="/users/avatars/" + avatar)

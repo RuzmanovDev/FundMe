@@ -8,6 +8,8 @@ module.exports = function (options) {
     const authController = require('../controllers/auth-controller')(options.data);
 
     router
+        .get('/login', authController.getLogin)
+        .get('/register', authController.getRegister)
         .post('/login', passport.authenticate('local', { successRedirect: '/user/settings' }), authController.login)
         .post('/register', authController.register);
 
