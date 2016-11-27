@@ -1,0 +1,41 @@
+mixin main-navigation
+    div.nav-container
+            nav.bg-dark
+                .nav-bar
+                    .module.left
+                        a(href='#')
+                            img.logo(alt='Foundry', src='')
+                    .module.widget-handle.mobile-toggle.right.visible-sm.visible-xs
+                        i.ti-menu
+                    .module-group.right
+                        .module.left
+                            ul.menu
+                                li
+                                    a(href='/login')
+                                        | Start a campaign
+                                li
+                                    a(href='/campaigns')
+                                        | Campaigns
+                                li
+                                    a(href='/about')
+                                        | About Us
+                        .module.widget-handle.search-widget-handle.left
+                            .search
+                                i.ti-search
+                                span.title | Search Campaign
+                            .function
+                                form.search-form
+                                    input(type='text', placeholder='Type Here')
+                        if(user)
+                            form#sign-out-form(action='/auth/login' method='POST')
+                                ul.menu
+                                    li
+                                        a(href="/user/" + user.id) My Account
+                                    li
+                                    .module.widget-handle.left
+                                        a.btn.btn-filled(href="javascript:document.getElementById('sign-out-form').submit()") SIGN OUT
+                        else
+                            .module.widget-handle.left
+                                a.btn.btn-filled(href='/auth/register') SIGN UP
+                            .module.widget-handle.left
+                                a.btn.btn-filled(href='/auth/login') SIGN IN
