@@ -79,7 +79,6 @@ module.exports = function (options) {
         donate(req, res) {
             let campaignId = req.body.campaignId;
             let valueToDonate = +req.body.donationValue;
-            console.log(campaignId);
             options.data.fundCampaign(campaignId, valueToDonate)
                 .then(() => {
                     res.send('Campaign Funded');
@@ -95,12 +94,25 @@ module.exports = function (options) {
         },
         upVote(req, res) {
             let campaignId = req.body.campaignId;
-            console.log(req.user);
-            console.log(req.body);
             let userLikedCampaign = req.body;
             options.data.upVoteCampaign(campaignId, userLikedCampaign)
                 .then(() => {
                     res.status(201);
+                });
+        },
+        createComment(req, res) {
+            let author = req.user.username;
+            let content = req.body.commentContent;
+            let campaignId = req.body.campaignId;
+
+            let comment = {
+                campaignId,
+                author,
+                content
+            };
+
+            options.data.createComment(comment)
+                .then(() => {
                 });
         }
     };

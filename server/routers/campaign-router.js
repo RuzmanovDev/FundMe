@@ -14,6 +14,7 @@ module.exports = function (options) {
         .get('/create', auth.isAuthenticated, controller.getCreateForm)
         .post('/create', options.upload.single('avatar'), controller.create)
         .get('/campaign/:id', controller.getById)
+        .post('/campaign/:id', controller.createComment)
         .post('/campaign/upvote/:id', controller.upVote)
         .get('/campaign/picture/:id', controller.getPicture)
         .get('/campaign/category/:name', controller.getByCategory)

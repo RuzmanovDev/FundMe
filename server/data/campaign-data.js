@@ -80,9 +80,7 @@ module.exports = function (models) {
         fundCampaign(id, value) {
             return this.getCampaignById(id)
                 .then((campaign) => {
-                    console.log(campaign.funded);
                     campaign.funded += value;
-                    console.log(campaign.funded);
                     campaign.save();
                 });
         },
@@ -91,6 +89,16 @@ module.exports = function (models) {
                 .then((campaign) => {
                     campaign.upVotes += 1;
                     // campaign.likedBy.push(userLikedCampaign);
+                    campaign.save();
+                });
+        },
+        createComment(comment) {
+            return this.getCampaignById(comment.campaignId)
+                .then((campaign) => {
+                    let commentContent = comment.content;
+                    let commentAuthor = comment.author;
+                    let newComment = { commentContent, commentAuthor };
+                    campaign.comments.push(newComment);
                     campaign.save();
                 });
         }

@@ -18,5 +18,13 @@ block content
     p votes 
         span#votes-count #{campaign.upVotes}
         a#upvote-btn.btn.btn-sm Like
+    .comments
+        each comment in campaign.comments
+                p #{comment.commentContent}
+                span Posted by: #{comment.commentAuthor}
+    form(method='POST', action="/campaigns/campaign/:id")
+        input(type="hidden", name="campaignId", value= campaign._id )
+        textarea(id="comment-content", name="commentContent")
+        input(id="add-comment", type="submit", value="AddComment")
 block scripts
     script(src="/public/js/campaign-details.js")
