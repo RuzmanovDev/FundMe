@@ -27,13 +27,14 @@ mixin main-navigation
                                 form.search-form
                                     input(type='text', placeholder='Type Here')
                         if(user)
-                            form#sign-out-form(action='/auth/login' method='POST')
-                                ul.menu
-                                    li
-                                        a(href="/user/" + user.id) My Account
-                                    li
-                                    .module.widget-handle.left
-                                        a.btn.btn-filled(href="javascript:document.getElementById('sign-out-form').submit()") SIGN OUT
+                            .module.left
+                                form#sign-out-form(action='/auth/logout' method='POST')
+                                    ul.menu
+                                        li
+                                            a(href="/user/" + user.id) My Account
+                                        li
+                                        .module.widget-handle.left
+                                            a.btn.btn-filled(href="javascript:document.getElementById('sign-out-form').submit()") SIGN OUT
                         else
                             .module.widget-handle.left
                                 a.btn.btn-filled(href='/auth/register') SIGN UP
