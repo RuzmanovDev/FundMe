@@ -3,7 +3,7 @@ mixin main-navigation
             nav.bg-dark
                 .nav-bar
                     .module.left
-                        a(href='#')
+                        a(href='/home')
                             img.logo(alt='Foundry', src='')
                     .module.widget-handle.mobile-toggle.right.visible-sm.visible-xs
                         i.fa.fa-bars
@@ -11,7 +11,10 @@ mixin main-navigation
                         .module.left
                             ul.menu
                                 li
-                                    a(href='/login')
+                                    a(href='/home')
+                                        | Home
+                                li
+                                    a(href='/campaigns/create')
                                         | Start a campaign
                                 li
                                     a(href='/campaigns')
