@@ -1,34 +1,34 @@
 extends ../shared/_layout
 
 block content 
-    form(action="/campaigns/create", method = "POST")  
+    form(action="/campaigns/create", method = "POST",  enctype="multipart/form-data")  
         label(for="title") Title:
             input(type="text", name="title", id="title")
         h4 Category:
         p
             label(for="bussines") Start a bussines:        
-            input(type="radio", name="category", id="bussines", value="bussines")
+            input(type="radio", name="category", id="bussines", value="Start a bussines")
         p
             label(for="communityGroups") Community Groups:        
-            input(type="radio", name="category", id="communityGroups", value="communityGroups")
+            input(type="radio", name="category", id="communityGroups", value="Community Groups")
         p
             label(for="creativeProjects") Creative Projects:        
-            input(type="radio", name="category", id="creativeProjects", value="creativeProjects")
+            input(type="radio", name="category", id="creativeProjects", value="Creative Projects")
         p
             label(for="education") Education:        
-            input(type="radio", name="category", id="education", value="education")
+            input(type="radio", name="category", id="education", value="Education")
         p
             label(for="religion") Religion:        
-            input(type="radio", name="category", id="religion", value="religion")
+            input(type="radio", name="category", id="religion", value="Religion")
         p
             label(for="pets") Pets:        
-            input(type="radio", name="category", id="pets", value="pets")
+            input(type="radio", name="category", id="pets", value="Pets")
         p
             label(for="sports") Sports:        
-            input(type="radio", name="category", id="sports", value="sports")
+            input(type="radio", name="category", id="sports", value="Sports")
         p
             label(for="medical") Medical:        
-            input(type="radio", name="category", id="medical", value="medical")
+            input(type="radio", name="category", id="medical", value="Medical")
         
         label(for="videoLink") Video Link:
             input(type="text", name="videoLink", id="videoLink")
@@ -41,7 +41,7 @@ block content
                 input(type="text", name="target", id="target")
 
         h4 Description
-        textarea(name"description")
+        textarea(name="description")
         p
             input(type="submit" value="Create")
 

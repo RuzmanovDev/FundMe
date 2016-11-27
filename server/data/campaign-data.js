@@ -38,6 +38,32 @@ module.exports = function (models) {
             });
         },
         createCampaign(campaign) {
+            let camp = new Campaign({
+                title: campaign.title,
+                description: campaign.description,
+                createdOn: campaign.createdOn,
+                comments: campaign.comments,
+                creator: {
+                   creatorId: campaign.creator._id,
+                   creatorName: campaign.creator.username
+                },
+                donators: campaign.donators,
+                upVotes: campaign.upVotes,
+                target: campaign.target,
+                funded: campaign.funded,
+                image: campaign.avatar,
+                category: campaign.category
+            });
+
+            return new Promise((resolve, reject) => {
+                camp.save((err) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(camp);
+                });
+            });
 
         },
         fundCampaign(id, value) {

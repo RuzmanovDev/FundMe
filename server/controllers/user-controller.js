@@ -2,7 +2,7 @@
 
 var Grid = require('gridfs');
 
-module.exports = function(options) {
+module.exports = function (options) {
     return {
         getSettings(req, res) {
             res.status(200).render('user/settings', { avatar: req.user.avatar });

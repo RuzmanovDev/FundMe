@@ -20,11 +20,7 @@ let campaignSchema = new Schema({
         required: true
     },
     comments: {
-        type: {
-            content: String,
-            userId: String
-        },
-        required: true
+        type: [{}]
     },
     creator: {
         type: {},

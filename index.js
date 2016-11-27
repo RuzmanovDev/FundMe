@@ -9,6 +9,7 @@ let database = require('./server/config/database')(config);
 let data = require('./server/data')();
 let multer = require('multer');
 let storage = multer.memoryStorage();
+
 let upload = multer({ storage: storage });
 
 let options = {
