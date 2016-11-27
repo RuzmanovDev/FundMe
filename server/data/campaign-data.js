@@ -15,9 +15,9 @@ module.exports = function (models) {
                 });
             });
         },
-        findCampaigns(filter) {
+        findCampaignsByCategory(category) {
             return new Promise((resolve, reject) => {
-                Campaign.find({ filter }, (err, campaigns) => {
+                Campaign.find({ category }, (err, campaigns) => {
                     if (err) {
                         return reject(err);
                     }
@@ -44,14 +44,14 @@ module.exports = function (models) {
                 createdOn: campaign.createdOn,
                 comments: campaign.comments,
                 creator: {
-                   creatorId: campaign.creator._id,
-                   creatorName: campaign.creator.username
+                    creatorId: campaign.creator._id,
+                    creatorName: campaign.creator.username
                 },
                 donators: campaign.donators,
                 upVotes: campaign.upVotes,
                 target: campaign.target,
                 funded: campaign.funded,
-                image: campaign.avatar,
+                image: campaign.image,
                 category: campaign.category
             });
 
@@ -69,7 +69,10 @@ module.exports = function (models) {
         fundCampaign(id, value) {
             return this.getCampaignById(id)
                 .then((campaign) => {
+                    console.log(campaign.funded);
                     campaign.funded += value;
+                    console.log(campaign.funded);
+                    campaign.save();
                 });
         }
     };

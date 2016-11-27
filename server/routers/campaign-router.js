@@ -10,6 +10,9 @@ module.exports = function (options) {
         .get('/create', controller.getCreateForm)
         .post('/create', options.upload.single('avatar'), controller.create)
         .get('/campaign/:id', controller.getById)
+
+        .get('/campaign/picture/:id', controller.getPicture)
+        .get('/campaign/category/:name', controller.getByCategory)
         .post('/donate', controller.donate);
 
     options.app.use('/campaigns', router);
