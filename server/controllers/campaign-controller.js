@@ -2,8 +2,11 @@
 
 var Grid = require('gridfs');
 
-module.exports = function (options) {
+module.exports = function(options) {
     return {
+        filterCategories(filter) {
+
+        },
         getAll(req, res) {
             options.data.getAllCampaigns()
                 .then(campaigns => {

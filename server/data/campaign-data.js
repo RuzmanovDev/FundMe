@@ -1,9 +1,20 @@
 /*globals */
 
-module.exports = function (models) {
+module.exports = function(models) {
     let Campaign = models.Campaign;
 
     return {
+        filterCampaigns(filter) {
+            return new Promise((resolve, reject) => {
+                Campaign.find({ filter }, (err, campaigns) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(campaigns);
+                    }
+                })
+            })
+        },
         getAllCampaigns() {
             return new Promise((resolve, reject) => {
                 Campaign.find((err, campaigns) => {
@@ -44,8 +55,8 @@ module.exports = function (models) {
                 createdOn: campaign.createdOn,
                 comments: campaign.comments,
                 creator: {
-                   creatorId: campaign.creator._id,
-                   creatorName: campaign.creator.username
+                    creatorId: campaign.creator._id,
+                    creatorName: campaign.creator.username
                 },
                 donators: campaign.donators,
                 upVotes: campaign.upVotes,
