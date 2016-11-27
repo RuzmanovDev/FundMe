@@ -4,3 +4,10 @@ ul li{
 .settings-avatar{
     height:100px;
 }
+.hidden{
+    visibility:hidden;
+}
+#error{
+    color: red;
+    font-weight: bold;
+}
