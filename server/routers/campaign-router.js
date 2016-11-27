@@ -12,13 +12,13 @@ module.exports = function (options) {
         })
         .get('/', controller.getAll)
         .get('/create', auth.isAuthenticated, controller.getCreateForm)
-        .post('/create', options.upload.single('avatar'), controller.create)
+        .post('/create', auth.isAuthenticated, options.upload.single('avatar'), controller.create)
         .get('/campaign/:id', controller.getById)
-        .post('/campaign/:id', controller.createComment)
-        .post('/campaign/upvote/:id', controller.upVote)
+        .post('/campaign/:id', auth.isAuthenticated, controller.createComment)
+        .post('/campaign/upvote/:id', auth.isAuthenticated, controller.upVote)
         .get('/campaign/picture/:id', controller.getPicture)
         .get('/campaign/category/:name', controller.getByCategory)
-        .post('/donate', controller.donate);
+        .post('/donate', auth.isAuthenticated, controller.donate);
 
     options.app.use('/campaigns', router);
 };

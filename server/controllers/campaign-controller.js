@@ -113,6 +113,7 @@ module.exports = function (options) {
 
             options.data.createComment(comment)
                 .then(() => {
+                    res.redirect(`/campaigns/campaign/${campaignId}`);
                 });
         }
     };
