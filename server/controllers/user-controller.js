@@ -5,7 +5,10 @@ var Grid = require('gridfs');
 module.exports = function (options) {
     return {
         getSettings(req, res) {
-            res.status(200).render('user/settings', { avatar: req.user.avatar });
+            res.status(200).render('user/settings', {
+                avatar: req.user.avatar,
+                user: req.user
+            });
         },
         updateSettings(req, res) {
 
