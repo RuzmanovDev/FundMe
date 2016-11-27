@@ -15,9 +15,9 @@ module.exports = function (models) {
                 });
             });
         },
-        findCampaigns(filter) {
+        findCampaignsByCategory(category) {
             return new Promise((resolve, reject) => {
-                Campaign.find({ filter }, (err, campaigns) => {
+                Campaign.find({ category }, (err, campaigns) => {
                     if (err) {
                         return reject(err);
                     }
@@ -51,7 +51,7 @@ module.exports = function (models) {
                 upVotes: campaign.upVotes,
                 target: campaign.target,
                 funded: campaign.funded,
-                image: campaign.avatar,
+                image: campaign.image,
                 category: campaign.category
             });
 
