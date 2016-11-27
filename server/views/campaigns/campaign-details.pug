@@ -1,9 +1,12 @@
 extends ../shared/_layout
 block content
     h1 #{campaign.title}
+    img(class="settings-avatar" src="/campaigns/campaign/picture/" + campaign.image)
     p #{campaign.description}
     form(method='POST', action='/campaigns/donate')
         input(type="hidden", name="campaignId", value= campaign._id )
-        input(type="text", name="creditCardNumber")
-        input(type="text", name="donationValue")
+        label(for="credit-card") Credit card number
+        input(id="credit-card", type="text", name="creditCardNumber")
+        label(for="donation-value") Credit card number
+        input(id="donation-value", type="text", name="donationValue")
         input(type="submit", value="Donate")

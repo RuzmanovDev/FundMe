@@ -51,7 +51,7 @@ module.exports = function (models) {
                 upVotes: campaign.upVotes,
                 target: campaign.target,
                 funded: campaign.funded,
-                image: campaign.avatar,
+                image: campaign.image,
                 category: campaign.category
             });
 

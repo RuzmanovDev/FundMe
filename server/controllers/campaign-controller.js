@@ -13,23 +13,16 @@ module.exports = function (options) {
                 });
         },
         getById(req, res) {
-            let campaign = {
-                _id: req.params.id,
-                title: 'Idea for millions',
-                description: 'lorem ipsum dolar sit amet summoning deamons blabalbalbablalb'
-            };
-            res.status(200).render('campaigns/campaign-details', { campaign });
-            // options.data.getCampaignById(req.params.id)
-            //     .then(campaign => {
-            //         if (campaign === null) {
-            //             return res.status(404)
-            //                 .redirect('/error');
-            //         }
-
-            //         return res.status(200).render('campaigns/campaign-details', {
-            //             result: campaign
-            //         });
-            //     });
+            options.data.getCampaignById(req.params.id)
+                .then(campaign => {
+                    if (campaign === null) {
+                        return res.status(404)
+                            .redirect('/error');
+                    }
+                    return res.status(200).render('campaigns/campaign-details', {
+                        campaign
+                    });
+                });
         },
         getCreateForm(req, res) {
             return res.status(200).render('campaigns/create-campaign');
@@ -50,7 +43,7 @@ module.exports = function (options) {
             let data = options.data;
 
             gfs.writeFile({}, req.file.buffer, (err, file) => {
-                let avatar = file._id;
+                let image = file._id;
                 let campaign = {
                     title,
                     description,
@@ -61,10 +54,10 @@ module.exports = function (options) {
                     upVotes,
                     target,
                     funded,
-                    avatar,
+                    image,
                     category
                 };
-
+                console.log("tuk" + image);
                 data.createCampaign(campaign)
                     .then(() => {
                         res.redirect('/home');
@@ -89,6 +82,14 @@ module.exports = function (options) {
                 .then(() => {
                     res.send('Campaign Funded');
                 });
+        },
+        getPicture(req, res) {
+            var gfs = Grid(options.database.connection.db, options.database.mongo);
+            var id = req.params.id;
+            gfs.readFile({ _id: id }, (err, data) => {
+                res.write(data);
+                res.end();
+            });
         }
     };
 };
