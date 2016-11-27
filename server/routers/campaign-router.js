@@ -1,7 +1,7 @@
 const express = require('express');
 const auth = require('../config/auth');
 
-module.exports = function(options) {
+module.exports = function (options) {
     let controller = require('../controllers/campaign-controller')(options);
 
     let router = new express.Router();
@@ -14,8 +14,8 @@ module.exports = function(options) {
         .get('/create', auth.isAuthenticated, controller.getCreateForm)
         .post('/create', options.upload.single('avatar'), controller.create)
         .get('/campaign/:id', controller.getById)
-
-    .get('/campaign/picture/:id', controller.getPicture)
+        .post('/campaign/upvote/:id', controller.upVote)
+        .get('/campaign/picture/:id', controller.getPicture)
         .get('/campaign/category/:name', controller.getByCategory)
         .post('/donate', controller.donate);
 

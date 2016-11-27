@@ -1,6 +1,6 @@
 /*globals */
 
-module.exports = function(models) {
+module.exports = function (models) {
     let Campaign = models.Campaign;
 
     return {
@@ -83,6 +83,14 @@ module.exports = function(models) {
                     console.log(campaign.funded);
                     campaign.funded += value;
                     console.log(campaign.funded);
+                    campaign.save();
+                });
+        },
+        upVoteCampaign(id, userLikedCampaign) {
+            return this.getCampaignById(id)
+                .then((campaign) => {
+                    campaign.upVotes += 1;
+                    // campaign.likedBy.push(userLikedCampaign);
                     campaign.save();
                 });
         }

@@ -2,7 +2,7 @@
 
 var Grid = require('gridfs');
 
-module.exports = function(options) {
+module.exports = function (options) {
     return {
         filterCategories(filter) {
 
@@ -92,6 +92,16 @@ module.exports = function(options) {
                 res.write(data);
                 res.end();
             });
+        },
+        upVote(req, res) {
+            let campaignId = req.body.campaignId;
+            console.log(req.user);
+            console.log(req.body);
+            let userLikedCampaign = req.body;
+            options.data.upVoteCampaign(campaignId, userLikedCampaign)
+                .then(() => {
+                    res.status(201);
+                });
         }
     };
 };
