@@ -11,3 +11,8 @@ ul li{
     color: red;
     font-weight: bold;
 }
+
+/*Category-icons*/
+.fa.icon-30px {
+    font-size: 30px;
+}
