@@ -1,3 +1,5 @@
+include ../mixins/navigation
+
 doctype html
 html(lang="en")
 head
@@ -13,38 +15,12 @@ head
     link(href='/public/css/theme-css/themify-icons.css' rel='stylesheet' media='all')
     link(href='/public/css/theme-css/theme.css' rel='stylesheet' media='all')
 body
-    div.nav-container
-        nav.bg-dark
-            .nav-bar
-                .module.left
-                    a(href='#')
-                        img.logo(alt='Foundry', src='')
-                .module.widget-handle.mobile-toggle.right.visible-sm.visible-xs
-                    i.ti-menu
-                .module-group.right
-                    .module.left
-                        ul.menu
-                            li
-                                a(href='/login')
-                                    | Start a campaign
-                            li
-                                a(href='/campaigns')
-                                    | Campaigns
-                            li
-                                a(href='/about')
-                                    | About Us
-                    .module.widget-handle.search-widget-handle.left
-                        .search
-                            i.ti-search
-                            span.title Search Campaign
-                        .function
-                            form.search-form
-                                input(type='text', placeholder='Type Here')
-                    .module.widget-handle.left
-                        a.btn.btn-filled(href='/login') SIGN UP
+    header
+        +main-navigation
+
         block content
         script(src="/public/js/theme-js/scripts.js")
         script(src="/public/js/theme-js/smooth-scroll.min.js")
 
 
-   
+
