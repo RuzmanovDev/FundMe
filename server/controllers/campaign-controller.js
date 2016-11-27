@@ -60,10 +60,9 @@ module.exports = function(options) {
                     image,
                     category
                 };
-                console.log("tuk" + image);
                 data.createCampaign(campaign)
                     .then(() => {
-                        res.redirect('/home');
+                        res.redirect('/campaigns');
                     });
             });
 
@@ -78,9 +77,9 @@ module.exports = function(options) {
                 });
         },
         donate(req, res) {
-            let campaignId = req.body_id;
+            let campaignId = req.body.campaignId;
             let valueToDonate = +req.body.donationValue;
-
+            console.log(campaignId);
             options.data.fundCampaign(campaignId, valueToDonate)
                 .then(() => {
                     res.send('Campaign Funded');

@@ -80,7 +80,10 @@ module.exports = function(models) {
         fundCampaign(id, value) {
             return this.getCampaignById(id)
                 .then((campaign) => {
+                    console.log(campaign.funded);
                     campaign.funded += value;
+                    console.log(campaign.funded);
+                    campaign.save();
                 });
         }
     };

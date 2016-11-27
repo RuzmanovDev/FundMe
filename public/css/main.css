@@ -4,3 +4,15 @@ ul li{
 .settings-avatar{
     height:100px;
 }
+.hidden{
+    visibility:hidden;
+}
+#error{
+    color: red;
+    font-weight: bold;
+}
+
+/*Category-icons*/
+.fa.icon-30px {
+    font-size: 30px;
+}
