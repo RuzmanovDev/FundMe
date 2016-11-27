@@ -6,7 +6,7 @@ mixin main-navigation
                         a(href='#')
                             img.logo(alt='Foundry', src='')
                     .module.widget-handle.mobile-toggle.right.visible-sm.visible-xs
-                        i.ti-menu
+                        i.fa.fa-bars
                     .module-group.right
                         .module.left
                             ul.menu
@@ -21,7 +21,7 @@ mixin main-navigation
                                         | About Us
                         .module.widget-handle.search-widget-handle.left
                             .search
-                                i.ti-search
+                                i.fa.fa-search
                                 span.title | Search Campaign
                             .function
                                 form.search-form
@@ -36,7 +36,5 @@ mixin main-navigation
                                         .module.widget-handle.left
                                             a.btn.btn-filled(href="javascript:document.getElementById('sign-out-form').submit()") SIGN OUT
                         else
-                            .module.widget-handle.left
-                                a.btn.btn-filled(href='/auth/register') SIGN UP
                             .module.widget-handle.left
                                 a.btn.btn-filled(href='/auth/login') SIGN IN
