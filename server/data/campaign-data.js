@@ -15,9 +15,9 @@ module.exports = function (models) {
                 });
             });
         },
-        findCampaigns(filter) {
+        findCampaignsByCategory(category) {
             return new Promise((resolve, reject) => {
-                Campaign.find({ filter }, (err, campaigns) => {
+                Campaign.find({ category }, (err, campaigns) => {
                     if (err) {
                         return reject(err);
                     }

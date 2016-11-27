@@ -66,13 +66,13 @@ module.exports = function (options) {
 
         },
         getByCategory(req, res) {
-
-            //    options.data.findCampaigns(category)
-            //         .then((categories) => {
-            //             return res.render('campaigns/all-campaigns', {
-            //                 result: categories
-            //             })
-            //         });
+            let category = req.params.name;
+            options.data.findCampaignsByCategory(category)
+                .then((campaigns) => {
+                    return res.render('campaigns/all-campaigns', {
+                        result: campaigns
+                    });
+                });
         },
         donate(req, res) {
             let campaignId = req.body_id;
