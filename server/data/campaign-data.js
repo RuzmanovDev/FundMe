@@ -44,8 +44,8 @@ module.exports = function (models) {
                 createdOn: campaign.createdOn,
                 comments: campaign.comments,
                 creator: {
-                   creatorId: campaign.creator._id,
-                   creatorName: campaign.creator.username
+                    creatorId: campaign.creator._id,
+                    creatorName: campaign.creator.username
                 },
                 donators: campaign.donators,
                 upVotes: campaign.upVotes,
@@ -69,7 +69,10 @@ module.exports = function (models) {
         fundCampaign(id, value) {
             return this.getCampaignById(id)
                 .then((campaign) => {
+                    console.log(campaign.funded);
                     campaign.funded += value;
+                    console.log(campaign.funded);
+                    campaign.save();
                 });
         }
     };
