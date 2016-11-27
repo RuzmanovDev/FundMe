@@ -9,7 +9,7 @@ module.exports = function(options) {
 
     router
         .get('/:id', userController.getUserDetails)
-        .get('/my-profile', auth.isAuthenticated, userController.getOwnProfile)
+        // .get('/my-profile', auth.isAuthenticated, userController.getOwnProfile)
         .get('/settings', auth.isAuthenticated, userController.getSettings)
         .get('/settings', auth.isAuthenticated, userController.getSettings)
         .post('/settings/update', options.upload.single('avatar'), userController.updateSettings)
