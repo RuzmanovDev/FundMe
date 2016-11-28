@@ -1,4 +1,50 @@
 extends ../shared/_layout
 block content
-    h1 Home
-    button.btn.btn-default pesho
+    .main-container
+      section
+        .container
+          .row
+            .col-md-12
+              .image-slider.slider-paging-controls.controls-inside
+                ul.slides
+                  li
+                    img(src='/public/img/test/cover1.jpg', alt='Pic')
+                  li
+                    img(src='/public/img/test/cover1.jpg', alt='Pic')
+                  li
+                    img(src='/public/img/test/cover1.jpg', alt='Pic')
+      .container
+        .row
+          .col-sm-12.text-center
+            h4.uppercase.mb16 Categories
+        .row
+          .col-sm-6.col-md-4.col-lg-2
+            .feature-2
+              .text-center
+                i.fa.fa-star.icon-30px
+                h5.uppercase Wish
+          .col-sm-6.col-md-4.col-lg-2
+            .feature-2
+              .text-center
+                i.fa.fa-lightbulb-o.icon-30px
+                h5.uppercase Business
+          .col-sm-6.col-md-4.col-lg-2
+            .feature.feature-2
+              .text-center
+                i.fa.fa-futbol-o.icon-30px
+                h5.uppercase Sports
+          .col-sm-6.col-md-4.col-lg-2
+            .feature.feature-2
+              .text-center
+                i.fa.fa-heartbeat.icon-30px
+                h5.uppercase Medical
+          .col-sm-6.col-md-4.col-lg-2
+            .feature.feature-2
+              .text-center
+                i.fa.fa-plane.icon-30px
+                h5.uppercase Travel
+          .col-sm-6.col-md-4.col-lg-2
+            .feature.feature-2
+              .text-center
+                i.fa.fa-graduation-cap.icon-30px
+                h5.uppercase Education

@@ -4,6 +4,17 @@ module.exports = function (models) {
     let Campaign = models.Campaign;
 
     return {
+        filterCampaigns(filter) {
+            return new Promise((resolve, reject) => {
+                Campaign.find({ filter }, (err, campaigns) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(campaigns);
+                    }
+                })
+            })
+        },
         getAllCampaigns() {
             return new Promise((resolve, reject) => {
                 Campaign.find((err, campaigns) => {
@@ -69,9 +80,25 @@ module.exports = function (models) {
         fundCampaign(id, value) {
             return this.getCampaignById(id)
                 .then((campaign) => {
-                    console.log(campaign.funded);
                     campaign.funded += value;
-                    console.log(campaign.funded);
+                    campaign.save();
+                });
+        },
+        upVoteCampaign(id, userLikedCampaign) {
+            return this.getCampaignById(id)
+                .then((campaign) => {
+                    campaign.upVotes += 1;
+                    // campaign.likedBy.push(userLikedCampaign);
+                    campaign.save();
+                });
+        },
+        createComment(comment) {
+            return this.getCampaignById(comment.campaignId)
+                .then((campaign) => {
+                    let commentContent = comment.content;
+                    let commentAuthor = comment.author;
+                    let newComment = { commentContent, commentAuthor };
+                    campaign.comments.push(newComment);
                     campaign.save();
                 });
         }

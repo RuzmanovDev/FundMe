@@ -4,36 +4,19 @@ const encryption = require('../utilities/encryption');
 module.exports = function (data) {
     return {
         login(req, res) {
-            console.log(req);
             let userFromTheRequest = req.body;
-
-            data.getByUsername(userFromTheRequest.username)
-                .then((user) => {
-                    if (user) {
-                        let userSalt = user.salt;
-                        let userHashedPassword = user.passHash;
-                        let hashedPasswordFromRequest = encryption.generateHashedPassword(userSalt, userFromTheRequest.password);
-
-                        if (userHashedPassword === hashedPasswordFromRequest) {
-                            res.status(200).json({
-                                success: true,
-                                redirect: '/campaigns'
-                            });
-                        } else {
-                            res.status(400).json({
-                                success: false,
-                                message: 'Invalid username or password'
-                            });
-                        }
-                    } else {
-
-                        res.status(400).json({
-                            success: false,
-                            message: 'Invalid username or password'
-                        });
-                    }
-                })
-                .catch(console.log);
+            
+            if (userFromTheRequest) {
+                res.status(200).json({
+                    success: true,
+                    redirect: '/campaigns'
+                });
+            } else {
+                res.status(400).json({
+                    success: false,
+                    message: 'Invalid username or password'
+                });
+            }
         },
         register(req, res) {
             const user = {
