@@ -12,8 +12,8 @@ $('#login-form').on('submit', function (e) {
     };
 
     requester.postJSON('/auth/login', body, '')
-        .then((res) => {
-            window.location = res.redirect;
+        .then((response) => {
+            window.location = response.redirect;
         })
         .catch(() => {
             $('#error')

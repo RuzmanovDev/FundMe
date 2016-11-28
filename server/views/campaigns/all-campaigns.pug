@@ -1,7 +1,14 @@
 extends ../shared/_layout
-
-block content 
-    each campaign in result
-        li
-            a(href="/campaigns/campaign/" + campaign.id)= campaign.title 
-
+include ../mixins/non-detailed-campaign.pug
+block content
+    div.container
+        div.row
+            each campaign in result
+                div.col-lg-4.col-sm-6
+                    a(href="/campaigns/campaign/" + campaign._id)
+                        div.w3-card-4
+                            img(class="card-img-top" src="/campaigns/campaign/picture/" + campaign.image)
+                            div.card-block
+                                h4.card-title #{campaign.title}
+                                p.card-text #{campaign.description}
+                

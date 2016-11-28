@@ -24,7 +24,8 @@ module.exports = function (options) {
         getSettings(req, res) {
             res.status(200).render('user/settings', {
                 avatar: req.user.avatar,
-                user: req.user
+                user: req.user,
+                username: req.user.username
             });
         },
         updateSettings(req, res) {
@@ -33,13 +34,15 @@ module.exports = function (options) {
                 var gfs = Grid(options.database.connection.db, options.database.mongo);
                 let data = options.data;
 
-                gfs.writeFile({}, req.file.buffer, (err, file) => {
+                gfs.writeFile({}, req.file.buffer, (_, file) => {
                     let avatar = file._id;
                     let user = req.user;
 
                     let infoToUpdate = {
                         avatar: avatar
+                        //TO DO add the rest
                     };
+
                     data.updateUser(user._id, infoToUpdate)
                         .then(() => {
                             res.redirect('/user/settings');
@@ -50,7 +53,8 @@ module.exports = function (options) {
         getAvatar(req, res) {
             var gfs = Grid(options.database.connection.db, options.database.mongo);
             var id = req.params.id;
-            gfs.readFile({ _id: id }, (err, data) => {
+
+            gfs.readFile({ _id: id }, (_, data) => {
                 res.write(data);
                 res.end();
             });

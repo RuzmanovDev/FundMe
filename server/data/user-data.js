@@ -19,14 +19,25 @@ module.exports = (models) => {
                 });
             });
         },
-        getByUsername(username) {
+        getByEmail(email) {
             return new Promise((resolve, reject) => {
-                User.findOne({ username: username }, (err, user) => {
-                    
+                User.findOne({ email }, (err, user) => {
                     if (err) {
                         return reject(err);
                     }
-               
+
+                    return resolve(user);
+                });
+            });
+        },
+        getByUsername(username) {
+            return new Promise((resolve, reject) => {
+                User.findOne({ username: username }, (err, user) => {
+
+                    if (err) {
+                        return reject(err);
+                    }
+
                     return resolve(user);
                 });
             });

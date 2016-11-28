@@ -1,9 +1,25 @@
 ul li{
     display: inline-block
 }
+.no-padding{
+    padding:0px !important;
+}
+.signout-button{
+    background-color: #EA2A2A !important;
+    border-color: #EA2A2A !important;
+    color:white;
+}
+.profile-pic-small{
+    width:40px;
+    border-radius: 5px;
+    margin: 4px;
+}
+.profile-small{
+     background-color:#47B475 !important;
+}
 .settings-avatar{
     height:100px;
-}
+} 
 .hidden{
     visibility:hidden;
 }
@@ -11,8 +27,10 @@ ul li{
     color: red;
     font-weight: bold;
 }
-
-/*Category-icons*/
-.fa.icon-30px {
+.text-green{
+    color:#47B475 !important;
+    font-weight: bold;
+}
+.fa.icon-30px{
     font-size: 30px;
 }
