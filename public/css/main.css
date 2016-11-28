@@ -11,6 +11,7 @@ ul li{
 }
 .profile-pic-small{
     height:40px;
+    width:40px;
     border-radius: 5px;
     margin: 4px;
 }

@@ -12,12 +12,12 @@ module.exports = function (models) {
                     } else {
                         return resolve(campaigns);
                     }
-                })
-            })
+                });
+            });
         },
         getAllCampaigns() {
             return new Promise((resolve, reject) => {
-                Campaign.find((err, campaigns) => {
+                Campaign.find({},(err, campaigns) => {
                     if (err) {
                         return reject(err);
                     }
