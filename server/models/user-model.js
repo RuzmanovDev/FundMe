@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
         validate: {
-            validator: function (value) {
+            validator: function(value) {
                 return fieldsValidator.validateLength(value, MinUsernameLength, MaxUsernameLength);
             },
             message: '{VALUE} is not a valid username!'
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true,
         validate: {
-            validator: function (value) {
+            validator: function(value) {
 
                 // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
                 // var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -58,8 +58,14 @@ const userSchema = new mongoose.Schema({
     roles: [String]
 });
 
+userSchema
+    .virtual('fullname')
+    .get(function() {
+        return this.firstname + ' ' + this.lastname;
+    });
+
 userSchema.method({
-    authenticate: function (password) {
+    authenticate: function(password) {
         let inputHashedPassword = encryption.generateHashedPassword(this.salt, password);
 
         if (inputHashedPassword === this.passHash) {
