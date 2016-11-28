@@ -84,11 +84,17 @@ module.exports = function (models) {
                     campaign.save();
                 });
         },
-        upVoteCampaign(id, userLikedCampaign) {
+        voteCampaign(id, userLikedCampaign) {
             return this.getCampaignById(id)
                 .then((campaign) => {
-                    campaign.upVotes += 1;
-                    // campaign.likedBy.push(userLikedCampaign);
+                    if (campaign.likedBy.indexOf(userLikedCampaign) < 0) {
+                        campaign.upVotes += 1;
+                        campaign.likedBy.push(userLikedCampaign);
+                    } else {
+                        campaign.upVotes -= 1;
+                        let indexOfUser = campaign.likedBy.indexOf(userLikedCampaign);
+                        campaign.likedBy.splice(indexOfUser, 1);
+                    }
                     campaign.save();
                 });
         },

@@ -24,7 +24,8 @@ module.exports = function(options) {
         getSettings(req, res) {
             res.status(200).render('user/settings', {
                 avatar: req.user.avatar,
-                user: req.user
+                user: req.user,
+                username: req.user.username
             });
         },
         updateSettings(req, res) {
