@@ -3,11 +3,15 @@ ul li{
 }
 .settings-avatar{
     height:100px;
-}
+} 
 .hidden{
     visibility:hidden;
 }
 #error{
     color: red;
+    font-weight: bold;
+}
+.text-green{
+    color:#47B475 !important;
     font-weight: bold;
 }
