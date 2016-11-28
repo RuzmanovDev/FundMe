@@ -2,8 +2,8 @@
 
 module.exports = (data) => {
     return {
-        getHome() {
-            // TODO
+        getHome(req, res) {
+            res.render('home/home');
         }
     };
 };

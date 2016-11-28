@@ -7,9 +7,6 @@ module.exports = function (options) {
     let router = new express.Router();
 
     router
-        .get('/home', (req, res) => {
-            res.render('home/home');
-        })
         .get('/', controller.getAll)
         .get('/create', auth.isAuthenticated, controller.getCreateForm)
         .post('/create', auth.isAuthenticated, options.upload.single('avatar'), controller.create)

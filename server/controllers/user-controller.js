@@ -18,8 +18,8 @@ module.exports = function(options) {
                     res.status(200).render('user-details', {
                         user,
                         campaigns
-                    })
-                })
+                    });
+                });
         },
         getSettings(req, res) {
             res.status(200).render('user/settings', {
@@ -33,7 +33,7 @@ module.exports = function(options) {
                 var gfs = Grid(options.database.connection.db, options.database.mongo);
                 let data = options.data;
 
-                gfs.writeFile({}, req.file.buffer, (err, file) => {
+                gfs.writeFile({}, req.file.buffer, (_, file) => {
                     let avatar = file._id;
                     let user = req.user;
 
@@ -50,7 +50,7 @@ module.exports = function(options) {
         getAvatar(req, res) {
             var gfs = Grid(options.database.connection.db, options.database.mongo);
             var id = req.params.id;
-            gfs.readFile({ _id: id }, (err, data) => {
+            gfs.readFile({ _id: id }, (_, data) => {
                 res.write(data);
                 res.end();
             });

@@ -70,11 +70,11 @@ module.exports = function (options) {
         getByCategory(req, res) {
             let category = req.params.name;
             options.data.findCampaignsByCategory(category)
-                .then((campaigns) => {
-                    return res.render('campaigns/all-campaigns', {
+                .then((campaigns) =>
+                    res.render('campaigns/all-campaigns', {
                         result: campaigns
-                    });
-                });
+                    })
+                );
         },
         donate(req, res) {
             let campaignId = req.body.campaignId;
@@ -87,7 +87,7 @@ module.exports = function (options) {
         getPicture(req, res) {
             var gfs = Grid(options.database.connection.db, options.database.mongo);
             var id = req.params.id;
-            gfs.readFile({ _id: id }, (err, data) => {
+            gfs.readFile({ _id: id }, (_, data) => {
                 res.write(data);
                 res.end();
             });

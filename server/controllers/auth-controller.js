@@ -5,7 +5,7 @@ module.exports = function (data) {
     return {
         login(req, res) {
             let userFromTheRequest = req.body;
-            
+
             if (userFromTheRequest) {
                 res.status(200).json({
                     success: true,
