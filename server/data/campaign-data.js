@@ -1,6 +1,6 @@
 /*globals */
 
-module.exports = function (models) {
+module.exports = function(models) {
     let Campaign = models.Campaign;
 
     return {
@@ -55,8 +55,8 @@ module.exports = function (models) {
                 createdOn: campaign.createdOn,
                 comments: campaign.comments,
                 creator: {
-                    creatorId: campaign.creator._id,
-                    creatorName: campaign.creator.username
+                    id: campaign.creator.id,
+                    username: campaign.creator.username
                 },
                 donators: campaign.donators,
                 upVotes: campaign.upVotes,
