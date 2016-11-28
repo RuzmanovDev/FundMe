@@ -9,7 +9,7 @@ module.exports = function (data) {
             if (userFromTheRequest) {
                 res.status(200).json({
                     success: true,
-                    redirect: '/campaigns'
+                    redirect: '/home'
                 });
             } else {
                 res.status(400).json({

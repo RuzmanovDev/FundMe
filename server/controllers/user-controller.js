@@ -22,10 +22,7 @@ module.exports = function(options) {
                 });
         },
         getSettings(req, res) {
-            res.status(200).render('user/settings', {
-                avatar: req.user.avatar,
-                user: req.user
-            });
+            res.status(200).render('user/settings');
         },
         updateSettings(req, res) {
 
@@ -36,9 +33,10 @@ module.exports = function(options) {
                 gfs.writeFile({}, req.file.buffer, (_, file) => {
                     let avatar = file._id;
                     let user = req.user;
-
+                    
                     let infoToUpdate = {
                         avatar: avatar
+                        //TO DO add the rest
                     };
                     data.updateUser(user._id, infoToUpdate)
                         .then(() => {
