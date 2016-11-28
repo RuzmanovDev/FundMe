@@ -5,16 +5,13 @@ block content
       div
         div
           img(class="settings-avatar" src="/user/avatar/" + avatar)
-        input(type="file" id="avatar" name="avatar" src="")
+        input(type="file" id="avatar" name="avatar")
       div
         label(for="firstName") FirstName: 
           input(type="text" name="firstname" id="firstName")
       div
         label(for="lastName") LastName: 
           input(type="text" name="lastname" id="lastName")
-      div
-        label(for="cardNumber") Card number:
-         input(type="text" name="account" id="cardNumber")
-        
-         input(type="submit" value="update")
+
+      input(type="submit" value="update")
     //- img(src="/users/avatars/" + avatar)

@@ -2,7 +2,7 @@
 
 var Grid = require('gridfs');
 
-module.exports = function (options) {
+module.exports = function(options) {
     return {
         filterCategories(filter) {
 
@@ -44,9 +44,12 @@ module.exports = function (options) {
         create(req, res) {
             let title = req.body.title;
             let description = req.body.description;
-            let createdOn = Date.now();
+            let createdOn = new Date();
             let comments = [];
-            let creator = req.user;
+            let creator = {
+                username: req.user.username,
+                id: req.user.id
+            };
             let donators = [];
             let upVotes = 0;
             let target = req.body.target;
@@ -56,7 +59,7 @@ module.exports = function (options) {
             let gfs = Grid(options.database.connection.db, options.database.mongo);
             let data = options.data;
 
-            gfs.writeFile({}, req.file.buffer, (err, file) => {
+            gfs.writeFile({}, req.file.buffer, (_, file) => {
                 let image = file._id;
                 let campaign = {
                     title,
