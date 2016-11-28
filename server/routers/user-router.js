@@ -3,7 +3,7 @@
 const router = require('express').Router();
 const auth = require('../config/auth');
 
-module.exports = function(options) {
+module.exports = function (options) {
 
     const userController = require('../controllers/user-controller')(options);
 

@@ -1,6 +1,6 @@
 /*globals */
 
-module.exports = function (models) {
+module.exports = function(models) {
     let Campaign = models.Campaign;
 
     return {
@@ -12,12 +12,12 @@ module.exports = function (models) {
                     } else {
                         return resolve(campaigns);
                     }
-                })
-            })
+                });
+            });
         },
         getAllCampaigns() {
             return new Promise((resolve, reject) => {
-                Campaign.find((err, campaigns) => {
+                Campaign.find({},(err, campaigns) => {
                     if (err) {
                         return reject(err);
                     }
@@ -55,8 +55,8 @@ module.exports = function (models) {
                 createdOn: campaign.createdOn,
                 comments: campaign.comments,
                 creator: {
-                    creatorId: campaign.creator._id,
-                    creatorName: campaign.creator.username
+                    id: campaign.creator.id,
+                    username: campaign.creator.username
                 },
                 donators: campaign.donators,
                 upVotes: campaign.upVotes,
@@ -84,11 +84,17 @@ module.exports = function (models) {
                     campaign.save();
                 });
         },
-        upVoteCampaign(id, userLikedCampaign) {
+        voteCampaign(id, userLikedCampaign) {
             return this.getCampaignById(id)
                 .then((campaign) => {
-                    campaign.upVotes += 1;
-                    // campaign.likedBy.push(userLikedCampaign);
+                    if (campaign.likedBy.indexOf(userLikedCampaign) < 0) {
+                        campaign.upVotes += 1;
+                        campaign.likedBy.push(userLikedCampaign);
+                    } else {
+                        campaign.upVotes -= 1;
+                        let indexOfUser = campaign.likedBy.indexOf(userLikedCampaign);
+                        campaign.likedBy.splice(indexOfUser, 1);
+                    }
                     campaign.save();
                 });
         },

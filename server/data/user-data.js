@@ -68,7 +68,8 @@ module.exports = (models) => {
                 this.getById(id)
                     .then((foundUser) => {
                         foundUser.avatar = info.avatar || foundUser.avatar;
-                        //TO DO add OSTANALITE PROPERTIES!!!!
+                        foundUser.firstname = info.firstname || foundUser.firstname;
+                        foundUser.lastname = info.lastname || foundUser.lastname;
                         foundUser.save();
                     })
             );

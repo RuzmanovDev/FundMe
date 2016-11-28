@@ -54,7 +54,7 @@ module.exports = function (data) {
 
                     data.createUser(user.username, passHash, user.email, salt)
                         .then(() => {
-                            res.status(200).json({
+                            res.status(201).json({
                                 success: true,
                                 redirect: '/user/settings'
                             });
@@ -63,7 +63,7 @@ module.exports = function (data) {
         },
         logout(req, res) {
             req.logout();
-            res.redirect('/');
+            res.redirect('/auth/login');
         },
         getLogin(req, res) {
             //todo Is this code correct?

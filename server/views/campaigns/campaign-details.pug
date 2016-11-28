@@ -10,14 +10,21 @@ block content
         label(for="donation-value") Donation value
         input(id="donation-value", type="text", name="donationValue" required)
         input(id="donate-btn", type="submit", value="Donate")
-    p Created by #{campaign.creator.creatorName} on #{campaign.createdOn}
-    p 
-        span funds 
+    p Created by
+        a(href="/user/" + campaign.creator.id)  #{campaign.creator.username}
+        on  #{campaign.createdOn}
+    p
+        span funds
         span#funds  #{campaign.funded}
         span#target  / #{campaign.target}
-    p votes 
+    p votes
         span#votes-count #{campaign.upVotes}
-        a#upvote-btn.btn.btn-sm Like
+        if campaign.loggedUser.loggedIn
+            input(type="hidden", value= campaign.loggedUser.userId)
+            if campaign.loggedUser.alredayLiked
+                a#upvote-btn.btn.btn-sm Dislike
+            else
+                a#upvote-btn.btn.btn-sm Like
     .comments
         each comment in campaign.comments
                 p #{comment.commentContent}

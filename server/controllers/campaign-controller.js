@@ -2,7 +2,7 @@
 
 var Grid = require('gridfs');
 
-module.exports = function (options) {
+module.exports = function(options) {
     return {
         filterCategories(filter) {
 
@@ -22,6 +22,17 @@ module.exports = function (options) {
                         return res.status(404)
                             .redirect('/error');
                     }
+
+                    campaign['loggedUser'] = {};
+                    if (req.user) {
+                        campaign.loggedUser['loggedIn'] = true;
+                        if (campaign.likedBy.indexOf(req.user.username) >= 0) {
+                            campaign.loggedUser['alredayLiked'] = true;
+                        }
+                    } else {
+                        campaign.loggedUser['loggedIn'] = false;
+                    }
+
                     return res.status(200).render('campaigns/campaign-details', {
                         campaign
                     });
@@ -33,9 +44,12 @@ module.exports = function (options) {
         create(req, res) {
             let title = req.body.title;
             let description = req.body.description;
-            let createdOn = Date.now();
+            let createdOn = new Date();
             let comments = [];
-            let creator = req.user;
+            let creator = {
+                username: req.user.username,
+                id: req.user.id
+            };
             let donators = [];
             let upVotes = 0;
             let target = req.body.target;
@@ -45,7 +59,7 @@ module.exports = function (options) {
             let gfs = Grid(options.database.connection.db, options.database.mongo);
             let data = options.data;
 
-            gfs.writeFile({}, req.file.buffer, (err, file) => {
+            gfs.writeFile({}, req.file.buffer, (_, file) => {
                 let image = file._id;
                 let campaign = {
                     title,
@@ -92,10 +106,10 @@ module.exports = function (options) {
                 res.end();
             });
         },
-        upVote(req, res) {
+        vote(req, res) {
             let campaignId = req.body.campaignId;
-            let userLikedCampaign = req.body;
-            options.data.upVoteCampaign(campaignId, userLikedCampaign)
+            let userLikedCampaign = req.user.username;
+            options.data.voteCampaign(campaignId, userLikedCampaign)
                 .then(() => {
                     res.status(201);
                 });
