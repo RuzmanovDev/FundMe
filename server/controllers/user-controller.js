@@ -2,15 +2,15 @@
 
 var Grid = require('gridfs');
 
-module.exports = function(options) {
+module.exports = function (options) {
     return {
         getUserDetails(req, res) {
             const data = options.data;
             let userId = req.params.id;
             Promise.all([
-                    data.getById(userId),
-                    data.filterCampaigns(userId)
-                ])
+                data.getById(userId),
+                data.filterCampaigns(userId)
+            ])
                 .then((result) => {
                     let user = result[0];
                     let campaigns = result[1];
@@ -18,8 +18,8 @@ module.exports = function(options) {
                     res.status(200).render('user-details', {
                         user,
                         campaigns
-                    })
-                })
+                    });
+                });
         },
         getSettings(req, res) {
             res.status(200).render('user/settings', {

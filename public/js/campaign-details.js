@@ -1,4 +1,4 @@
-/* globals $ requester */
+/* globals $ requester document */
 
 function updateFunds(funds) {
     let $initialVal = $('#funds');
@@ -27,15 +27,16 @@ $('#donate-btn').on('click', function (ev) {
 
 $('#upvote-btn').on('click', function (ev) {
     let $this = $(this);
+
     ev.preventDefault();
     let $votesContainer = $('#votes-count');
 
     if ($this.text() === 'Like') {
-        $this.text('Dislike');
         $votesContainer.text(+$votesContainer.text() + 1);
+        $this.text('Dislike');
     } else {
-        $this.text('Like');
         $votesContainer.text(+$votesContainer.text() - 1);
+        $this.text('Like');
     }
 
     let campaignId = $('#campaign-id').val();
@@ -44,6 +45,6 @@ $('#upvote-btn').on('click', function (ev) {
         campaignId
     };
 
-    requester.postJSON(`/campaigns/campaign/upvote/${campaignId}`, body, '')
+    requester.putJSON(`/campaigns/campaign/vote/${campaignId}`, body, '')
         .then(() => console.log("done"));
 });
