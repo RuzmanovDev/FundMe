@@ -4,6 +4,17 @@ module.exports = function(models) {
     let Campaign = models.Campaign;
 
     return {
+        getUserCampaigns(userId) {
+            return new Promise((resolve, reject) => {
+                Campaign.find({ 'creator.id': userId }, (err, campaigns) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(campaigns);
+                    }
+                });
+            });
+        },
         filterCampaigns(filter) {
             return new Promise((resolve, reject) => {
                 Campaign.find({ filter }, (err, campaigns) => {
