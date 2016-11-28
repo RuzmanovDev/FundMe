@@ -1,18 +1,28 @@
 extends ../shared/_layout
 block content
     .main-container
-      section
-        .container
-          .row
-            .col-md-12
-              .image-slider.slider-paging-controls.controls-inside
-                ul.slides
-                  li
-                    img(src='/public/img/test/cover1.jpg', alt='Pic')
-                  li
-                    img(src='/public/img/test/cover1.jpg', alt='Pic')
-                  li
-                    img(src='/public/img/test/cover1.jpg', alt='Pic')
+      section.cover.fullscreen.image-slider.slider-all-controls.controls-inside
+        ul.slides
+          li.image-bg.bg-light
+            .background-image-holder
+              img.background-image(alt='image', src='/public/img/test/cover1.jpg')
+            .container.v-align-transform
+              .row
+                .col-sm-offset-1.text-center.col-sm-10
+                  h1.mb40.mb-xs-16.large Gosho e manqk!
+                  h6.uppercase.mb16 Ibe gi mnogo!
+                  p.lead.mb40 Tuka stana lesh!
+                  a.btn.btn-lg.btn-white(href='/campaigns') Start Exploring
+          li.overlay.image-bg.bg-dark
+            .background-image-holder
+              img.background-image(alt='image', src='/public/img/test/cover1.jpg')
+            .container.v-align-transform
+              .row
+                .col-sm-offset-1.text-center.col-sm-10
+                  h1.mb40.mb-xs-16.large Tuka nadpisa e bel!
+                  h6.uppercase.mb16 Tva moje da se smeni s 1 dvijenie
+                  p.lead.mb40 na Li-to slagame klas bg-dark, ako snimkata e tymna!
+                  a.btn.btn-lg.btn-white(href='/campaigns') Start Exploring
       .container
         .row
           .col-sm-12.text-center
