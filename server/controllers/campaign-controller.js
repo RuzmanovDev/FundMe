@@ -56,7 +56,7 @@ module.exports = function (options) {
             let gfs = Grid(options.database.connection.db, options.database.mongo);
             let data = options.data;
 
-            gfs.writeFile({}, req.file.buffer, (err, file) => {
+            gfs.writeFile({}, req.file.buffer, (_, file) => {
                 let image = file._id;
                 let campaign = {
                     title,
