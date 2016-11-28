@@ -1,12 +1,21 @@
-include '../mixins/non-detailed-campaign'
+extends ../shared/_layout
 
-div.project-author
-    div.media
-        div.thumb-left
-            img(src="/user/avatar/" + #{user.id} alt= #{user.fullname})
-        div.media-body
-        div class="author-action">
-            <a class="btn btn-red" href="#">Send a Message</a>
-    div.projects
-        each campaign in campaigns
-            +non-detailed-campaign
+block content
+    div.project-author
+        div.media
+            div.thumb-left
+                img(src="/user/avatar/" + user.avatar)
+            div.media-body
+            h4 #{user.username}
+            div.author-action
+                a.btn.btn-red(href="#") Send a Message
+    div.container
+        div.row
+            each campaign in campaigns
+                div.col-lg-4.col-sm-6
+                    a(href="/campaigns/campaign/" + campaign.id)
+                        div.w3-card-4
+                            img(class="card-img-top" src="/campaigns/campaign/picture/" + campaign.image)
+                            div.card-block
+                                h4.card-title #{campaign.title}
+                                p.card-text #{campaign.description}
