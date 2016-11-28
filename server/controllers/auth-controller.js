@@ -63,7 +63,7 @@ module.exports = function (data) {
         },
         logout(req, res) {
             req.logout();
-            res.redirect('/');
+            res.redirect('/auth/login');
         },
         getLogin(req, res) {
             //todo Is this code correct?

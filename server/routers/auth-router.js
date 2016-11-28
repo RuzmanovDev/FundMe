@@ -12,7 +12,8 @@ module.exports = function (options) {
         .get('/register', authController.getRegister)
         .post('/login', passport.authenticate('local'), authController.login)
         //.post('/login', passport.authenticate('local', { failureRedirect: '/auth/login' }), authController.login)
-        .post('/register', authController.register);
+        .post('/register', authController.register)
+        .post('/logout', authController.logout);
 
     options.app.use('/auth', router);
 };
