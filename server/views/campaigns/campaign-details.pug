@@ -4,12 +4,27 @@ block content
     img(class="settings-avatar" src="/campaigns/campaign/picture/" + campaign.image)
     p #{campaign.description}
     form(method='POST', action='/campaigns/donate')
-        input(type="hidden", name="campaignId", value= campaign._id )
+        input(id="campaign-id", type="hidden", name="campaignId", value= campaign._id )
         label(for="credit-card") Credit card number
-        input(id="credit-card", type="text", name="creditCardNumber")
-        label(for="donation-value") Credit card number
-        input(id="donation-value", type="text", name="donationValue")
-        input(type="submit", value="Donate")
+        input(id="credit-card", type="text", name="creditCardNumber" required)
+        label(for="donation-value") Donation value
+        input(id="donation-value", type="text", name="donationValue" required)
+        input(id="donate-btn", type="submit", value="Donate")
     p Created by #{campaign.creator.creatorName} on #{campaign.createdOn}
-    p funds #{campaign.funded} / #{campaign.target}
-    p votes #{campaign.upVotes}
+    p 
+        span funds 
+        span#funds  #{campaign.funded}
+        span#target  / #{campaign.target}
+    p votes 
+        span#votes-count #{campaign.upVotes}
+        a#upvote-btn.btn.btn-sm Like
+    .comments
+        each comment in campaign.comments
+                p #{comment.commentContent}
+                span Posted by: #{comment.commentAuthor}
+    form(method='POST', action="/campaigns/campaign/:id")
+        input(type="hidden", name="campaignId", value= campaign._id )
+        textarea(id="comment-content", name="commentContent")
+        input(id="add-comment", type="submit", value="AddComment")
+block scripts
+    script(src="/public/js/campaign-details.js")

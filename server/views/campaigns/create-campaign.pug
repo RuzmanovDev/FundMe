@@ -3,7 +3,7 @@ extends ../shared/_layout
 block content 
     form(action="/campaigns/create", method = "POST",  enctype="multipart/form-data")  
         label(for="title") Title:
-            input(type="text", name="title", id="title")
+            input(type="text", name="title", id="title" required)
         h4 Category:
         p
             label(for="bussines") Start a bussines:        
@@ -38,10 +38,10 @@ block content
 
         p
             label(for="target") Target:        
-                input(type="text", name="target", id="target")
+                input(type="number", name="target", id="target" required)
 
         h4 Description
-        textarea(name="description")
+        textarea(name="description" required)
         p
             input(type="submit" value="Create")
 

@@ -35,6 +35,9 @@ let campaignSchema = new Schema({
         required: true,
         default: 0
     },
+    likedBy: {
+        type: [String]
+    },
     category: {
         type: String,
         required: true

@@ -6,18 +6,17 @@ module.exports = function (data) {
         login(req, res) {
             let userFromTheRequest = req.body;
 
-            data.getByUsername(userFromTheRequest.username)
-                .then((user) => {
-                    let userSalt = user.salt;
-                    let userHashedPassword = user.passHash;
-                    let hashedPasswordFromRequest = encryption.generateHashedPassword(userSalt, userFromTheRequest.password);
-
-                    if (userHashedPassword === hashedPasswordFromRequest) {
-                        res.render('home/home');
-                    } else {
-                        res.send('Ne moja da se lognesh');
-                    }
+            if (userFromTheRequest) {
+                res.status(200).json({
+                    success: true,
+                    redirect: '/home'
                 });
+            } else {
+                res.status(400).json({
+                    success: false,
+                    message: 'Invalid username or password'
+                });
+            }
         },
         register(req, res) {
             const user = {
@@ -27,20 +26,39 @@ module.exports = function (data) {
             };
 
             if (req.body.password !== req.body.confirmedPassword) {
-                // to do make global error and send the error message
-                res.send(JSON.stringify('The passsword do not match'));
+                res.status(401);
+                return;
             }
 
             const salt = encryption.generateSalt();
             const passHash = encryption.generateHashedPassword(salt, user.password);
 
-            data.createUser(user.username, passHash, user.email, salt)
-                .then((user) => {
-                    return res.render('home/home');
-                })
-                .catch((err) => {
-                    res.send('User with the same username already exists!');
-                    console.log(err);
+            Promise.all([data.getByUsername(user.username), data.getByEmail(user.email)])
+                .then(([username, email]) => {
+                    console.log(username);
+                    console.log(email);
+
+                    if (username) {
+                        res.status(409).json({
+                            success: false,
+                            message: 'Username already exist!'
+                        });
+                        return;
+                    } else if (email) {
+                        res.status(409).json({
+                            success: false,
+                            message: 'Email already exist!'
+                        });
+                        return;
+                    }
+
+                    data.createUser(user.username, passHash, user.email, salt)
+                        .then(() => {
+                            res.status(200).json({
+                                success: true,
+                                redirect: '/user/settings'
+                            });
+                        });
                 });
         },
         logout(req, res) {

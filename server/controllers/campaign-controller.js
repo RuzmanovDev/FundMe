@@ -4,6 +4,9 @@ var Grid = require('gridfs');
 
 module.exports = function (options) {
     return {
+        filterCategories(filter) {
+
+        },
         getAll(req, res) {
             options.data.getAllCampaigns()
                 .then(campaigns => {
@@ -67,16 +70,15 @@ module.exports = function (options) {
         getByCategory(req, res) {
             let category = req.params.name;
             options.data.findCampaignsByCategory(category)
-                .then((campaigns) => {
-                    return res.render('campaigns/all-campaigns', {
+                .then((campaigns) =>
+                    res.render('campaigns/all-campaigns', {
                         result: campaigns
-                    });
-                });
+                    })
+                );
         },
         donate(req, res) {
             let campaignId = req.body.campaignId;
             let valueToDonate = +req.body.donationValue;
-            console.log(campaignId);
             options.data.fundCampaign(campaignId, valueToDonate)
                 .then(() => {
                     res.send('Campaign Funded');
@@ -85,10 +87,34 @@ module.exports = function (options) {
         getPicture(req, res) {
             var gfs = Grid(options.database.connection.db, options.database.mongo);
             var id = req.params.id;
-            gfs.readFile({ _id: id }, (err, data) => {
+            gfs.readFile({ _id: id }, (_, data) => {
                 res.write(data);
                 res.end();
             });
+        },
+        upVote(req, res) {
+            let campaignId = req.body.campaignId;
+            let userLikedCampaign = req.body;
+            options.data.upVoteCampaign(campaignId, userLikedCampaign)
+                .then(() => {
+                    res.status(201);
+                });
+        },
+        createComment(req, res) {
+            let author = req.user.username;
+            let content = req.body.commentContent;
+            let campaignId = req.body.campaignId;
+
+            let comment = {
+                campaignId,
+                author,
+                content
+            };
+
+            options.data.createComment(comment)
+                .then(() => {
+                    res.redirect(`/campaigns/campaign/${campaignId}`);
+                });
         }
     };
 };
