@@ -2,7 +2,7 @@
 
 var Grid = require('gridfs');
 
-module.exports = function (options) {
+module.exports = function(options) {
     return {
         getUserDetails(req, res) {
             const data = options.data;
@@ -24,7 +24,8 @@ module.exports = function (options) {
         getSettings(req, res) {
             res.status(200).render('user/settings', {
                 avatar: req.user.avatar,
-                user: req.user
+                user: req.user,
+                username: req.user.username
             });
         },
         updateSettings(req, res) {

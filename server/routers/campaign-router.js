@@ -1,10 +1,8 @@
-const express = require('express');
 const auth = require('../config/auth');
+const router = require('express').Router();
 
 module.exports = function (options) {
     let controller = require('../controllers/campaign-controller')(options);
-
-    let router = new express.Router();
 
     router
         .get('/', controller.getAll)
@@ -16,6 +14,25 @@ module.exports = function (options) {
         .get('/campaign/picture/:id', controller.getPicture)
         .get('/campaign/category/:name', controller.getByCategory)
         .post('/donate', auth.isAuthenticated, controller.donate);
+
+    options.app.use((req, res, next) => {
+        let avatar = '';
+        let username = '';
+        let user = '';
+
+        if (req.user) {
+            avatar = req.user.avatar;
+            username = req.user.username;
+            user = req.user;
+        }
+
+        res.locals = {
+            avatar,
+            user,
+            username
+        };
+        next();
+    });
 
     options.app.use('/campaigns', router);
 };
