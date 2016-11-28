@@ -10,7 +10,7 @@ module.exports = function (options) {
         .post('/create', auth.isAuthenticated, options.upload.single('avatar'), controller.create)
         .get('/campaign/:id', controller.getById)
         .post('/campaign/:id', auth.isAuthenticated, controller.createComment)
-        .post('/campaign/upvote/:id', auth.isAuthenticated, controller.upVote)
+        .put('/campaign/vote/:id', auth.isAuthenticated, controller.vote)
         .get('/campaign/picture/:id', controller.getPicture)
         .get('/campaign/category/:name', controller.getByCategory)
         .post('/donate', auth.isAuthenticated, controller.donate);

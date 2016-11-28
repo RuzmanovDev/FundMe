@@ -2,7 +2,7 @@
 
 var Grid = require('gridfs');
 
-module.exports = function(options) {
+module.exports = function (options) {
     return {
         getUserDetails(req, res) {
             const data = options.data;

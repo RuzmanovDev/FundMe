@@ -17,7 +17,12 @@ block content
         span#target  / #{campaign.target}
     p votes 
         span#votes-count #{campaign.upVotes}
-        a#upvote-btn.btn.btn-sm Like
+        if campaign.loggedUser.loggedIn
+            input(type="hidden", value= campaign.loggedUser.userId)
+            if campaign.loggedUser.alredayLiked
+                a#upvote-btn.btn.btn-sm Dislike
+            else
+                a#upvote-btn.btn.btn-sm Like
     .comments
         each comment in campaign.comments
                 p #{comment.commentContent}

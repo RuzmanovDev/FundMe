@@ -22,6 +22,17 @@ module.exports = function (options) {
                         return res.status(404)
                             .redirect('/error');
                     }
+
+                    campaign['loggedUser'] = {};
+                    if (req.user) {
+                        campaign.loggedUser['loggedIn'] = true;
+                        if (campaign.likedBy.indexOf(req.user.username) >= 0) {
+                            campaign.loggedUser['alredayLiked'] = true;
+                        }
+                    } else {
+                        campaign.loggedUser['loggedIn'] = false;
+                    }
+
                     return res.status(200).render('campaigns/campaign-details', {
                         campaign
                     });
@@ -92,10 +103,10 @@ module.exports = function (options) {
                 res.end();
             });
         },
-        upVote(req, res) {
+        vote(req, res) {
             let campaignId = req.body.campaignId;
-            let userLikedCampaign = req.body;
-            options.data.upVoteCampaign(campaignId, userLikedCampaign)
+            let userLikedCampaign = req.user.username;
+            options.data.voteCampaign(campaignId, userLikedCampaign)
                 .then(() => {
                     res.status(201);
                 });
