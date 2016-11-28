@@ -31,7 +31,7 @@ block content
                 span Posted by: #{comment.commentAuthor}
     form(method='POST', action="/campaigns/campaign/:id")
         input(type="hidden", name="campaignId", value= campaign._id )
-        textarea(id="comment-content", name="commentContent")
+        textarea(id="comment-content", name="commentContent", required="true")
         input(id="add-comment", type="submit", value="AddComment")
 block scripts
     script(src="/public/js/campaign-details.js")
