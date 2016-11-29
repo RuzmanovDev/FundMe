@@ -12,7 +12,7 @@ block content
             input(id="donation-value", type="text", name="donationValue" required)
             input(id="donate-btn", type="submit", value="Donate")
     p Created by
-        a(href="/user/" + campaign.creator.id)  #{campaign.creator.username}
+        a(href="/user/profile/" + campaign.creator.id)  #{campaign.creator.username}
         on  #{campaign.createdOn}
     p
         span funds
@@ -35,10 +35,12 @@ block content
         each comment in pagedComments
             li #{comment.commentContent}
                 span Posted by: #{comment.commentAuthor}
+
     if campaign.loggedUser.loggedIn            
         form(method='POST', action="/campaigns/campaign/:id")
             input(type="hidden", name="campaignId", value= campaign._id )
             textarea(id="comment-content", name="commentContent")
             input(id="add-comment", type="submit", value="AddComment")
+
 block scripts
     script(src="/public/js/campaign-details.js")
