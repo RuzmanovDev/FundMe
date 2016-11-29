@@ -2,32 +2,33 @@ include ../mixins/navigation
 
 doctype html
 html(lang="en")
-head
-    meta(charset="UTF-8")
-    title Document
-    script(src="/public/js/requester.js")
-    link(href='/public/bower_components/bootstrap/dist/css/bootstrap.css' rel='stylesheet' media='all')
-    link(href='/public/bower_components/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' media='all')
-    link(href='http://www.w3schools.com/lib/w3.css' rel='stylesheet' media='all')
-    link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' media='all')
-    link(href='/public/css/theme-css/themify-icons.css' rel='stylesheet' media='all')
-    link(href='/public/css/theme-css/flexslider.css' rel='stylesheet' media='all')
-    link(href='/public/css/theme-css/theme.css' rel='stylesheet' media='all')
-    link(href='/public/css/theme-css/font-awesome.min.css' rel='stylesheet' media='all')
-    link(href='/public/css/main.css' rel='stylesheet' media='all')
-    link(href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css')
+    head
+        meta(charset="UTF-8")
+        title Document
+        script( src="https://code.jquery.com/jquery-3.1.1.min.js",integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous")
+        script(src="/public/js/requester.js")
+        link(href='/public/bower_components/bootstrap/dist/css/bootstrap.css' rel='stylesheet' media='all')
+        link(href='/public/bower_components/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' media='all')
+        link(href='http://www.w3schools.com/lib/w3.css' rel='stylesheet' media='all')
+        link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' media='all')
+        link(href='/public/css/theme-css/themify-icons.css' rel='stylesheet' media='all')
+        link(href='/public/css/theme-css/flexslider.css' rel='stylesheet' media='all')
+        link(href='/public/css/theme-css/theme.css' rel='stylesheet' media='all')
+        link(href='/public/css/theme-css/font-awesome.min.css' rel='stylesheet' media='all')
+        link(href='/public/css/main.css' rel='stylesheet' media='all')
+        link(href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css')
     block styles
 
-body
-    header
-        +main-navigation
+    body
+        header
+            +main-navigation
 
-        block content
-        script(src='/public/js/theme-js/jquery.min.js')
-        script(src='/public/js/theme-js/bootstrap.min.js')
-        script(src='/public/js/theme-js/flexslider.min.js')
-        script(src='/public/js/theme-js/smooth-scroll.min.js')
-        script(src='/public/js/theme-js/scripts.js')
+            block content
+            script(src='/public/js/theme-js/jquery.min.js')
+            script(src='/public/js/theme-js/bootstrap.min.js')
+            script(src='/public/js/theme-js/flexslider.min.js')
+            script(src='/public/js/theme-js/smooth-scroll.min.js')
+            script(src='/public/js/theme-js/scripts.js')
 
-        block scripts
+            block scripts
 
