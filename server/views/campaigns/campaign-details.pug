@@ -7,7 +7,7 @@ block content
                     .post-snippet.mb64
                         img.mb24(alt='Post Image', src="/campaigns/campaign/picture/" + campaign.image)
                         .post-title
-                            span.label #{campaign.createdOn}
+                            span.label Created on #{moment(campaign.createdOn).format('MMMM Do YYYY, h:mm')}
                             h4.inline-block #{campaign.title}
                         ul.post-meta
                             li
@@ -17,7 +17,7 @@ block content
                             li
                                 i.ti-tag
                                     span Category
-                                        a(href='#') Lifestyle
+                                        a(href='/campaigns/campaign/category/' + campaign.category) Lifestyle
                             li
                                 i.ti-thumb-up
                                     span#votes-count #{campaign.upVotes}
@@ -32,15 +32,17 @@ block content
                                 a#upvote-btn.btn.btn-lg.btn-filled Like
                         .foundry_modal.text-center
                             h3.uppercase Donate to this cause
-                            p.lead.mb48 Something...
                             if campaign.loggedUser.loggedIn
-                                form(method='POST', action='/campaigns/donate')
+                                p.lead.mb48 Please fill the form to procceed with the donation
+                                form(method='POST', action='/campaigns/donate' id='donation-form')
                                     input.mb0(id="campaign-id", type="hidden", name="campaignId", value= campaign._id )
                                     label(for="credit-card") Credit card number
                                     input(id="credit-card", type="text", name="creditCardNumber" required)
-                                    label(for="donation-value") Donation value
-                                    input(id="donation-value", type="text", name="donationValue" required)
+                                    label() Donation value
+                                    input(id="donation", type="text", name="donationValue" required)
                                     button.btn-white.mb0(id="donate-btn", type='submit') Donate
+                            else
+                                p.lead.mb48 Please log in in order to donate
                 hr
                 .comments
                     p 3 Comments

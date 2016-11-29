@@ -1,4 +1,4 @@
-/* globals $ requester document */
+/* globals $ requester document toastr*/
 $(function () {
     function updateFunds(funds) {
         var $initialVal = $('#funds');
@@ -6,23 +6,28 @@ $(function () {
         $initialVal.text(updatedVal);
     }
 
-    $('#donate-btn').on('click', function (ev) {
-        console.log("tuk");
-        var donationValue = $('#donation-value').val();
+    $('#donation-form').on('click', '#donation-btn', function (ev) {
+        var donationValue = $('#donation').val();
+        var creditcard = $('#creditcard').val();
         var campaignId = $('#campaign-id').val();
+
+        console.log('donation value' + donationValue);
+        console.log('credi card value' + creditcard);
         var body = {
             campaignId,
             donationValue
         };
 
-        requester.postJSON('/campaigns/donate', body, '')
-            .then((res) => {
-                updateFunds(donationValue);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        // requester.postJSON('/campaigns/donate', body, '')
+        //     .then((res) => {
+        //         updateFunds(donationValue);
+        //         // toastr.success(res);
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     });
         ev.preventDefault();
+        return false;
     });
 
     $('#upvote-btn').on('click', function (ev) {

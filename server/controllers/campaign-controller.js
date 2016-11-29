@@ -8,11 +8,22 @@ module.exports = function (options) {
 
         },
         getAll(req, res) {
-            options.data.getAllCampaigns()
+            let pageNumber = +req.query.pageNumber || 0;
+            let pageSize = +req.query.pageSize || 5;
+            options.data.getAllCampaigns(pageNumber, pageSize)
                 .then(campaigns => {
                     res.status(200).render('campaigns/all-campaigns', {
                         result: campaigns
                     });
+                });
+        },
+
+        getJson(req, res) {
+            let pageNumber = +req.query.pageNumber || 0;
+            let pageSize = +req.query.pageSize || 5;
+             options.data.getAllCampaigns(pageNumber, pageSize)
+                .then(campaigns => {
+                    res.status(200).send(campaigns);
                 });
         },
         getById(req, res) {
@@ -116,7 +127,9 @@ module.exports = function (options) {
             let valueToDonate = +req.body.donationValue;
             options.data.fundCampaign(campaignId, valueToDonate)
                 .then(() => {
-                    res.send('Campaign Funded');
+                    res.json({
+                        massage: 'campaign funded'
+                    });
                 });
         },
         getPicture(req, res) {
