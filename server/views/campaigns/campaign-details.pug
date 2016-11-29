@@ -16,8 +16,8 @@ block content
                                         a(href="/user/profile/" + campaign.creator.id) #{campaign.creator.username}
                             li
                                 i.ti-tag
-                                    span Category
-                                        a(href='/campaigns/campaign/category/' + campaign.category) Lifestyle
+                                    span Category 
+                                        a(href='/campaigns/campaign/category/' + campaign.category) #{campaign.category}
                             li
                                 i.ti-thumb-up
                                     span#votes-count #{campaign.upVotes}
