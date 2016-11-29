@@ -60,46 +60,6 @@ block content
                                 input(type="hidden", name="campaignId", value= campaign._id )
                                 textarea(rows='3', id="comment-content", name="commentContent", placeholder='Comment')
                                 input(id="add-comment", type="submit", value="AddComment")
+    script(src="/public/js/campaign-details.js")
     block scripts
-        script(src="/public/js/campaign-details.js")
-
-
-
-
-
-
-
-
-
-
-
-
-//-     
-//-     p
-//-         span funds
-//-         span#funds  #{campaign.funded}
-//-         span#target  / #{campaign.target}
-//-     p votes
-//-         span#votes-count #{campaign.upVotes}
-//-         if campaign.loggedUser.loggedIn
-//-             if campaign.loggedUser.alredayLiked
-//-                 a#upvote-btn.btn.btn-sm Dislike
-//-             else
-//-                 a#upvote-btn.btn.btn-sm Like
-//-     .comments
-//-         ul.pagination
-//-             each page in totalPages
-//-                 li 
-//-                     a(href="/campaigns/campaign/" + campaign._id + "?pageNumber=" + page) #{page}
-            
-//-         ul
-//-         each comment in pagedComments
-//-             li #{comment.commentContent}
-//-                 span Posted by: #{comment.commentAuthor}
-
-//-     if campaign.loggedUser.loggedIn            
-//-         form(method='POST', action="/campaigns/campaign/:id")
-//-             input(type="hidden", name="campaignId", value= campaign._id )
-//-             textarea(id="comment-content", name="commentContent")
-//-             input(id="add-comment", type="submit", value="AddComment")
-
+    

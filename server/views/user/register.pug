@@ -8,12 +8,15 @@ block content
                     div.feature.bordered.text-center
                         h4.uppercase Register Here
                         form.text-left(id="register-form" action='/auth/register' method='POST')
+                            .alert
+                                span.closebtn  x
+                                |  Username can be only characters and digits!
                             input(type='text', name='username', id="username", placeholder='Username' required)
-                            input(type='text', name='email', id="email" placeholder='Email Address' required)
+                            input(type='email', name='email', id="email" placeholder='Email Address' required)
                             input(type='password', name='password', id="password" placeholder='Password' required)
                             input(type='password', name ='confirmedPassword', id="confirmedPassword" placeholder='Confirm Password' required)
                             p.mb3.hidden.text-center(id="error")
                             input(type='submit', value='Register')
-
+     
 block scripts
     script(src="/public/js/register.js")
