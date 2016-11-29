@@ -1,21 +1,12 @@
 extends ../shared/_layout
 
+block styles
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.css', rel='stylesheet')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid-theme.min.css', rel='stylesheet')
+
 block content
-    div.container
-        each user in users
-            div.col-md12
-                div.media(data-id="" + user._id)
-                    a.pull-left(href="#")
-                        img.media-object.img-circle(src="/user/avatar/" + user.avatar style="width: 100px;height:100px;")
-                    div.media-body
-                        h6.media-heading #{user.username}
-                    a.btn.btn-danger.censor-avatar Make admin
-                    //- div.dropdown.open
-                    //-     button.btn.btn-secondary.dropdown-toggle(type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
-                    //-         | Roles
-                    //-     div.dropdown-menu(aria-labelledby="dropdownMenuButton")
-                    //-         a.dropdown-item(href="#") Admin
-                    //-         a.dropdown-item(href="#") Moderator
-                    //-         a.dropdown-item(href="#") Standart
+  div#all-users
+
 block scripts
-    script(src="/public/js/admin.js")
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.js')
+  script(src='/js/admin.js')
