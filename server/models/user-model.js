@@ -58,11 +58,14 @@ const userSchema = new mongoose.Schema({
     roles: [String]
 });
 
-userSchema
-    .virtual('fullname')
-    .get(function() {
-        return this.firstname + ' ' + this.lastname;
-    });
+userSchema.virtual('fullname').get(function() {
+    let fullname = `${this.firstname} ${this.lastname}`;
+    return fullname;
+});
+
+userSchema.virtual('isAdmin').get(function() {
+    return this.roles.indexOf('Admin') >= 0;
+});
 
 userSchema.method({
     authenticate: function(password) {
