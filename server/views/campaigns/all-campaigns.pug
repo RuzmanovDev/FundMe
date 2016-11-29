@@ -5,7 +5,7 @@ block content
         .container
             .row
                 each campaign in result
-                    .col-md-8.col-sm-10.col-sm-offset-1.col-md-offset-2
+                    .col-sm-12.col-md-10.col-md-offset-1.mb16
                         .horizontal-tile
                             .tile-left
                                 a(href='/campaigns/campaign/' + campaign._id)
@@ -14,9 +14,9 @@ block content
                             .tile-right.bg-dark
                                 .description
                                     h4.mb8 #{campaign.title}
-                                    h6.uppercase Category here?
                                     p Short description here?
                                     .progress-bars
-                                        .progress.progress-1
-                                            .progress-bar(data-progress='70.56123123123456')
-                                                span #{campaign.funded} $ / GOAL $
+                                        .progress.progress-2
+                                            span #{campaign.funded} / #{campaign.target} $
+                                            .bar-holder
+                                                .progress-bar(data-progress= campaign.percentage)
