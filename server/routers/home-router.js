@@ -8,7 +8,6 @@ module.exports = function (options) {
     router
         .get('/', homeController.getHome);
 
-
     options.app.use((req, res, next) => {
         let avatar = '';
         let username = '';

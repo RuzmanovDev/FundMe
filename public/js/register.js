@@ -3,18 +3,18 @@
 $('#register-form').on('submit', function (e) {
     e.preventDefault();
 
-    let username = $('#username').val();
-    let email = $('#email').val();
-    let password = $('#password').val();
-    let confirmedPassword = $('#confirmedPassword').val();
-    let body = {
+    var username = $('#username').val();
+    var email = $('#email').val();
+    var password = $('#password').val();
+    var confirmedPassword = $('#confirmedPassword').val();
+    var body = {
         username,
         email,
         password,
         confirmedPassword
     };
 
-    let $error = $('#error');
+    var $error = $('#error');
 
     if (password !== confirmedPassword) {
         $error
@@ -27,7 +27,7 @@ $('#register-form').on('submit', function (e) {
         .then((response) => {
             window.location = response.redirect;
         }).catch((err) => {
-            let responseText = JSON.parse(err.responseText);
+            var responseText = JSON.parse(err.responseText);
 
             $error
                 .removeClass('hidden')
