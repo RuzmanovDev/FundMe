@@ -116,7 +116,9 @@ module.exports = function (options) {
             let valueToDonate = +req.body.donationValue;
             options.data.fundCampaign(campaignId, valueToDonate)
                 .then(() => {
-                    res.send('Campaign Funded');
+                    res.json({
+                        massage: 'campaign funded'
+                    });
                 });
         },
         getPicture(req, res) {
