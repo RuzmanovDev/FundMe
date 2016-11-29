@@ -20,7 +20,7 @@ block content
                                         a(href='#') Lifestyle
                             li
                                 i.ti-thumb-up
-                                    span#votes-count Likes: #{campaign.upVotes}
+                                    span#votes-count #{campaign.upVotes}
                         hr
                         p.lead #{campaign.description}
                     .modal-container
@@ -47,7 +47,7 @@ block content
                         hr
                         ul.comments-list
                             each comment in pagedComments
-                                li 
+                                li.comments-list
                                     .avatar
                                         img(alt='Avatar', src="http://mms.businesswire.com/bwapps/mediaserver/ViewMedia?mgid=106864&vid=4&download=1")
                                     .comment

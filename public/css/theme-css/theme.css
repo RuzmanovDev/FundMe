@@ -4178,6 +4178,9 @@ video {
 .comments-list p:last-of-type {
   margin: 0;
 }
+.comments-list p {
+  word-wrap: break-word;
+}
 .comments-list .avatar,
 .comments-list .comment {
   display: inline-block;
