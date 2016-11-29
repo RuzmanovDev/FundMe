@@ -35,8 +35,6 @@ module.exports = function (data) {
 
             Promise.all([data.getByUsername(user.username), data.getByEmail(user.email)])
                 .then(([username, email]) => {
-                    console.log(username);
-                    console.log(email);
 
                     if (username) {
                         res.status(409).json({

@@ -11,7 +11,7 @@ module.exports = (config, app) => {
 
     app.use(cookieParser());
     app.use(session({
-        secret: 'djagascript', cookie: { maxAge: 60000 },
+        secret: 'djagascript', cookie: { maxAge: 60 * 60 * 60 * 1000 },
         rolling: true, resave: true, saveUninitialized: false
     }));
 
