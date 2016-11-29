@@ -1,6 +1,6 @@
 /*globals */
 
-module.exports = function(models) {
+module.exports = function (models) {
     let Campaign = models.Campaign;
 
     return {
@@ -26,15 +26,13 @@ module.exports = function(models) {
                 });
             });
         },
-        getAllCampaigns() {
+        getAllCampaigns(pageNumber, pageSize) {
             return new Promise((resolve, reject) => {
-                Campaign.find({},(err, campaigns) => {
-                    if (err) {
-                        return reject(err);
-                    }
+                var query = Campaign.find({})
+                    .skip(pageNumber * pageSize)
+                    .limit(pageSize);
 
-                    return resolve(campaigns);
-                });
+                    resolve(query);
             });
         },
         findCampaignsByCategory(category) {
