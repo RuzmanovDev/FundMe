@@ -1,33 +1,22 @@
 extends ../shared/_layout
 include ../mixins/non-detailed-campaign.pug
 block content
-    div.container
-        div.row
-            each campaign in result
-                div.col-lg-4.col-sm-6                   
-                    div(class="w3-card-12" style = "height:400px; margin:5px")
-                        div(style="height: 250px")
-                            a(href="/campaigns/campaign/" + campaign._id)
-                                img(class="card-img-top" src="/campaigns/campaign/picture/" + campaign.image width="100%" height= "50%")
-                        div(class="card-block")
-                            h4(class="card-title text-center" style="height:45px") #{campaign.title}
-                            span.text-primary FUNDED  #{campaign.percentage} %    
-                            span.text-primary PLEDGED  #{campaign.funded} $
-                
-
-//- <div class="group-fee clearfix">
-//-               <div class="fee-item">
-//-                   <p class="rs lbl">Funded</p>
-//-                   <span class="val">0%</span>
-//-               </div>
-
-//-               <div class="fee-item">
-//-                   <p class="rs lbl">Pledged</p>
-//-                   <span class="val">$0</span>
-//-               </div>
-
-//-               <div class="fee-item">
-//-                   <p class="rs lbl">Time Left</p>
-//-                   <span class="val">88 days</span>
-//-               </div>
-//-           </div>
+    section
+        .container
+            .row
+                each campaign in result
+                    .col-md-8.col-sm-10.col-sm-offset-1.col-md-offset-2
+                        .horizontal-tile
+                            .tile-left
+                                a(href='/campaigns/campaign/' + campaign._id)
+                                    .background-image-holder
+                                        img.background-image(alt='image', src='/campaigns/campaign/picture/' + campaign.image)
+                            .tile-right.bg-dark
+                                .description
+                                    h4.mb8 #{campaign.title}
+                                    h6.uppercase Category here?
+                                    p Short description here?
+                                    .progress-bars
+                                        .progress.progress-1
+                                            .progress-bar(data-progress='70.56123123123456')
+                                                span #{campaign.funded} $ / GOAL $
