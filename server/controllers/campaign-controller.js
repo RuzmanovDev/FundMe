@@ -2,7 +2,7 @@
 
 var Grid = require('gridfs');
 
-module.exports = function(options) {
+module.exports = function (options) {
     return {
         filterCategories(filter) {
 
@@ -16,12 +16,33 @@ module.exports = function(options) {
                 });
         },
         getById(req, res) {
+            let pageNumber = +req.query.pageNumber || 0;
+            let pageSize = +req.query.pageSize || 5;
+
+            if (pageNumber < 0) {
+                pageNumber = 0;
+            }
+
+            if (pageSize < 0) {
+                pageSize = 5;
+            }
+
+            if (pageSize > 50) {
+                pageSize = 50;
+            }
+
             options.data.getCampaignById(req.params.id)
                 .then(campaign => {
                     if (campaign === null) {
                         return res.status(404)
                             .redirect('/error');
                     }
+
+                    let totalPages = [];
+                    campaign.comments.map((_, i) => totalPages.push(i + 1));
+                    let pagedComments = campaign.comments
+                        .splice(pageNumber * pageSize, pageSize);
+                    // campaign.comments = pagedComments;
 
                     campaign['loggedUser'] = {};
                     if (req.user) {
@@ -34,7 +55,7 @@ module.exports = function(options) {
                     }
 
                     return res.status(200).render('campaigns/campaign-details', {
-                        campaign
+                        campaign, pagedComments, totalPages
                     });
                 });
         },
