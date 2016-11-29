@@ -20,3 +20,6 @@ block content
                                             span #{campaign.funded} / #{campaign.target} $
                                             .bar-holder
                                                 .progress-bar(data-progress= campaign.percentage)
+
+block scripts
+    script(src="/public/js/infinite-scroll.js")
