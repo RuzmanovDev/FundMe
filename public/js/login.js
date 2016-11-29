@@ -3,10 +3,10 @@
 $('#login-form').on('submit', function (e) {
     e.preventDefault();
 
-    let username = $('#username').val();
-    let password = $('#password').val();
+    var username = $('#username').val();
+    var password = $('#password').val();
 
-    let body = {
+    var body = {
         username: username,
         password: password
     };

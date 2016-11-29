@@ -1,7 +1,7 @@
 /* globals $ */
 'use strict';
 
-let requester = (function () {
+var requester = (function () {
     function get(url) {
         return new Promise(function (resolve, reject) {
             $.ajax({

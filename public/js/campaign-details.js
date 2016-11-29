@@ -1,17 +1,17 @@
 /* globals $ requester document */
 
 function updateFunds(funds) {
-    let $initialVal = $('#funds');
-    let updatedVal = +$initialVal.text() + +funds;
+    var $initialVal = $('#funds');
+    var updatedVal = +$initialVal.text() + +funds;
     $initialVal.text(updatedVal);
 }
 
 $('#donate-btn').on('click', function (ev) {
     ev.preventDefault();
 
-    let donationValue = $('#donation-value').val();
-    let campaignId = $('#campaign-id').val();
-    let body = {
+    var donationValue = $('#donation-value').val();
+    var campaignId = $('#campaign-id').val();
+    var body = {
         campaignId,
         donationValue
     };
@@ -26,10 +26,10 @@ $('#donate-btn').on('click', function (ev) {
 });
 
 $('#upvote-btn').on('click', function (ev) {
-    let $this = $(this);
+    var $this = $(this);
 
     ev.preventDefault();
-    let $votesContainer = $('#votes-count');
+    var $votesContainer = $('#votes-count');
 
     if ($this.text() === 'Like') {
         $votesContainer.text(+$votesContainer.text() + 1);
@@ -39,9 +39,9 @@ $('#upvote-btn').on('click', function (ev) {
         $this.text('Like');
     }
 
-    let campaignId = $('#campaign-id').val();
+    var campaignId = $('#campaign-id').val();
 
-    let body = {
+    var body = {
         campaignId
     };
 

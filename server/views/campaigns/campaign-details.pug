@@ -1,46 +1,105 @@
 extends ../shared/_layout
 block content
-    h1 #{campaign.title}
-    img(class="settings-avatar" src="/campaigns/campaign/picture/" + campaign.image)
-    p #{campaign.description}
-    if campaign.loggedUser.loggedIn
-        form(method='POST', action='/campaigns/donate')
-            input(id="campaign-id", type="hidden", name="campaignId", value= campaign._id )
-            label(for="credit-card") Credit card number
-            input(id="credit-card", type="text", name="creditCardNumber" required)
-            label(for="donation-value") Donation value
-            input(id="donation-value", type="text", name="donationValue" required)
-            input(id="donate-btn", type="submit", value="Donate")
-    p Created by
-        a(href="/user/profile/" + campaign.creator.id)  #{campaign.creator.username}
-        on  #{campaign.createdOn}
-    p
-        span funds
-        span#funds  #{campaign.funded}
-        span#target  / #{campaign.target}
-    p votes
-        span#votes-count #{campaign.upVotes}
-        if campaign.loggedUser.loggedIn
-            if campaign.loggedUser.alredayLiked
-                a#upvote-btn.btn.btn-sm Dislike
-            else
-                a#upvote-btn.btn.btn-sm Like
-    .comments
-        ul.pagination
-            each page in totalPages
-                li 
-                    a(href="/campaigns/campaign/" + campaign._id + "?pageNumber=" + page) #{page}
+    section
+        .container
+            .row
+                .col-sm-10.col-sm-offset-1
+                    .post-snippet.mb64
+                        img.mb24(alt='Post Image', src="/campaigns/campaign/picture/" + campaign.image)
+                        .post-title
+                            span.label #{campaign.createdOn}
+                            h4.inline-block #{campaign.title}
+                        ul.post-meta
+                            li
+                                i.ti-user
+                                    span Created by
+                                        a(href="/user/profile/" + campaign.creator.id) #{campaign.creator.username}
+                            li
+                                i.ti-tag
+                                    span Category
+                                        a(href='#') Lifestyle
+                            li
+                                i.ti-thumb-up
+                                    span#votes-count Likes: #{campaign.upVotes}
+                        hr
+                        p.lead #{campaign.description}
+                    .modal-container
+                        a.btn.btn-lg.btn-modal(href='#') Donate
+                        if campaign.loggedUser.loggedIn
+                            if campaign.loggedUser.alredayLiked
+                                a#upvote-btn.btn.btn-lg.btn-filled Dislike
+                            else
+                                a#upvote-btn.btn.btn-lg.btn-filled Like
+                        .foundry_modal.text-center
+                            h3.uppercase Donate to this cause
+                            p.lead.mb48 Something...
+                            if campaign.loggedUser.loggedIn
+                                form(method='POST', action='/campaigns/donate')
+                                    input.mb0(id="campaign-id", type="hidden", name="campaignId", value= campaign._id )
+                                    label(for="credit-card") Credit card number
+                                    input(id="credit-card", type="text", name="creditCardNumber" required)
+                                    label(for="donation-value") Donation value
+                                    input(id="donation-value", type="text", name="donationValue" required)
+                                    button.btn-white.mb0(id="donate-btn", type='submit') Donate
+                hr
+                .comments
+                    p 3 Comments
+                        hr
+                        ul.comments-list
+                            each comment in pagedComments
+                                li 
+                                    .avatar
+                                        img(alt='Avatar', src="http://mms.businesswire.com/bwapps/mediaserver/ViewMedia?mgid=106864&vid=4&download=1")
+                                    .comment
+                                        span.uppercase.author Posted by: #{comment.commentAuthor}
+                                        p #{comment.commentContent}
+                                hr
+                        h5.uppercase Leave A Comment
+                        if campaign.loggedUser.loggedIn            
+                            form(method='POST', action="/campaigns/campaign/:id")
+                                input(type="hidden", name="campaignId", value= campaign._id )
+                                textarea(rows='3', id="comment-content", name="commentContent", placeholder='Comment')
+                                input(id="add-comment", type="submit", value="AddComment")
+    block scripts
+        script(src="/public/js/campaign-details.js")
+
+
+
+
+
+
+
+
+
+
+
+
+//-     
+//-     p
+//-         span funds
+//-         span#funds  #{campaign.funded}
+//-         span#target  / #{campaign.target}
+//-     p votes
+//-         span#votes-count #{campaign.upVotes}
+//-         if campaign.loggedUser.loggedIn
+//-             if campaign.loggedUser.alredayLiked
+//-                 a#upvote-btn.btn.btn-sm Dislike
+//-             else
+//-                 a#upvote-btn.btn.btn-sm Like
+//-     .comments
+//-         ul.pagination
+//-             each page in totalPages
+//-                 li 
+//-                     a(href="/campaigns/campaign/" + campaign._id + "?pageNumber=" + page) #{page}
             
-        ul
-        each comment in pagedComments
-            li #{comment.commentContent}
-                span Posted by: #{comment.commentAuthor}
+//-         ul
+//-         each comment in pagedComments
+//-             li #{comment.commentContent}
+//-                 span Posted by: #{comment.commentAuthor}
 
-    if campaign.loggedUser.loggedIn            
-        form(method='POST', action="/campaigns/campaign/:id")
-            input(type="hidden", name="campaignId", value= campaign._id )
-            textarea(id="comment-content", name="commentContent")
-            input(id="add-comment", type="submit", value="AddComment")
+//-     if campaign.loggedUser.loggedIn            
+//-         form(method='POST', action="/campaigns/campaign/:id")
+//-             input(type="hidden", name="campaignId", value= campaign._id )
+//-             textarea(id="comment-content", name="commentContent")
+//-             input(id="add-comment", type="submit", value="AddComment")
 
-block scripts
-    script(src="/public/js/campaign-details.js")
