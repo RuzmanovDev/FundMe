@@ -63,6 +63,10 @@ userSchema.virtual('fullname').get(function() {
     return fullname;
 });
 
+userSchema.virtual('isAdmin').get(function() {
+    return this.roles.indexOf('Admin') >= 0;
+});
+
 userSchema.method({
     authenticate: function(password) {
         let inputHashedPassword = encryption.generateHashedPassword(this.salt, password);
