@@ -3,11 +3,21 @@
 
 const validator = require('./utils/validator');
 
-
 module.exports = (models) => {
     const { User } = models;
 
     return {
+        getAllUsers() {
+            return new Promise((resolve, reject) => {
+                User.find({}, (err, users) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(users);
+                    }
+                });
+            });
+        },
         getById(userId) {
             return new Promise((resolve, reject) => {
                 User.findOne({ _id: userId }, (err, user) => {
@@ -66,12 +76,12 @@ module.exports = (models) => {
         updateUser(id, info) {
             return Promise.resolve(
                 this.getById(id)
-                    .then((foundUser) => {
-                        foundUser.avatar = info.avatar || foundUser.avatar;
-                        foundUser.firstname = info.firstname || foundUser.firstname;
-                        foundUser.lastname = info.lastname || foundUser.lastname;
-                        foundUser.save();
-                    })
+                .then((foundUser) => {
+                    foundUser.avatar = info.avatar || foundUser.avatar;
+                    foundUser.firstname = info.firstname || foundUser.firstname;
+                    foundUser.lastname = info.lastname || foundUser.lastname;
+                    foundUser.save();
+                })
             );
         }
     };
