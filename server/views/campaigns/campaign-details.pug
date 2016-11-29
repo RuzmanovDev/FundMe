@@ -44,15 +44,16 @@ block content
                 hr
                 .comments
                     p 3 Comments
-                        ul.comments-list
-                        each comment in pagedComments
-                            li #{comment.commentContent}
-                                .avatar
-                                    img(alt='Avatar', src="http://mms.businesswire.com/bwapps/mediaserver/ViewMedia?mgid=106864&vid=4&download=1")
-                                .comment
-                                    span.uppercase.author Posted by: #{comment.commentAuthor}
-                                    p #{comment.commentContent}
                         hr
+                        ul.comments-list
+                            each comment in pagedComments
+                                li 
+                                    .avatar
+                                        img(alt='Avatar', src="http://mms.businesswire.com/bwapps/mediaserver/ViewMedia?mgid=106864&vid=4&download=1")
+                                    .comment
+                                        span.uppercase.author Posted by: #{comment.commentAuthor}
+                                        p #{comment.commentContent}
+                                hr
                         h5.uppercase Leave A Comment
                         if campaign.loggedUser.loggedIn            
                             form(method='POST', action="/campaigns/campaign/:id")
