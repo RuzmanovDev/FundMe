@@ -10,7 +10,8 @@ const MinUsernameLength = 3;
 const MaxUsernameLength = 20;
 
 function hasRole(user, role) {
-    return user.roles.indexOf(role) >= 0;
+    console.log(user.roles.indexOf(role.toLowerCase()) >= 0);
+    return user.roles.indexOf(role.toLowerCase()) >= 0;
 }
 
 const userSchema = new mongoose.Schema({
@@ -60,8 +61,8 @@ const userSchema = new mongoose.Schema({
         default: ''
     },
     roles: [String],
-    isDeleted: [Boolean],
-    isBlocked: [Boolean]
+    isDeleted: Boolean,
+    isBlocked: Boolean
 });
 
 userSchema.virtual('fullname').get(function() {
@@ -70,7 +71,7 @@ userSchema.virtual('fullname').get(function() {
 });
 
 userSchema.virtual('isAdmin').get(function() {
-    return this.roles.indexOf('Admin') >= 0;
+    return hasRole(this, 'admin');
 });
 
 userSchema.method({
@@ -97,8 +98,10 @@ userSchema.method({
 userSchema.method({
     removeRole: function(role) {
         let roleToLower = role.toLowerCase();
+        console.log('OUT');
         if (hasRole(this, roleToLower)) {
             this.roles.splice(this.roles.indexOf(roleToLower), 1);
+            console.log('IN');
         }
     }
 });
