@@ -10,18 +10,24 @@ module.exports = (data) => {
                 .then((users) => {
                     const result = users.map((user) => {
                         return {
+                            userId: user.id,
                             username: user.username,
+                            email: user.email,
                             firstname: user.firstname,
                             lastname: user.lastname,
-                            isAdmin: user.isAdmin
+                            isAdmin: user.isAdmin,
+                            isBlocked: user.isBlocked
                         }
                     });
                     res.status(200).json(result);
                 });
         },
         updateUser(req, res) {
-            console.log(req.data);
-            res.status(200);
+            let userInfo = req.body;
+            data.updateUser(userInfo.userId, userInfo)
+                .then((updatedUser) => {
+                    res.status(200).json(updatedUser);
+                })
         }
     };
 };
