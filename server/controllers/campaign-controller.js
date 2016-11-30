@@ -8,8 +8,8 @@ module.exports = function (options) {
 
         },
         getAll(req, res) {
-            let pageNumber = +req.query.pageNumber || 0;
-            let pageSize = +req.query.pageSize || 5;
+            let pageNumber = 0;
+            let pageSize =  5;
             options.data.getAllCampaigns(pageNumber, pageSize)
                 .then(campaigns => {
                     res.status(200).render('campaigns/all-campaigns', {
