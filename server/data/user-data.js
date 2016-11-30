@@ -73,9 +73,10 @@ module.exports = (models) => {
                 });
             });
         },
-        updateUser(id, info) {
+        updateUser(userId, info) {
+            console.log(info);
             return new Promise((resolve, reject) => {
-                this.getById(id)
+                this.getById(userId)
                     .then((foundUser) => {
                         foundUser.avatar = info.avatar || foundUser.avatar;
                         foundUser.firstname = info.firstname || foundUser.firstname;
@@ -86,7 +87,7 @@ module.exports = (models) => {
                         if (info.isAdmin) {
                             foundUser.assignRole('admin');
                         } else {
-                            info.removeRole('admin');
+                            foundUser.removeRole('admin');
                         }
 
                         foundUser.save();
