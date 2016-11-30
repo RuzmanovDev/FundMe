@@ -16,8 +16,8 @@ block content
                                         a(href="/user/profile/" + campaign.creator.id) #{campaign.creator.username}
                             li
                                 i.ti-tag
-                                    span Category
-                                        a(href='/campaigns/campaign/category/' + campaign.category) Lifestyle
+                                    span Category 
+                                        a(href='/campaigns/campaign/category/' + campaign.category) #{campaign.category}
                             li
                                 i.ti-thumb-up
                                     span#votes-count #{campaign.upVotes}
@@ -45,7 +45,7 @@ block content
                                 p.lead.mb48 Please log in in order to donate
                 hr
                 .comments
-                    p 3 Comments
+                    p #{campaign.comments.length} comments
                         hr
                         ul.comments-list
                             each comment in pagedComments
@@ -56,8 +56,8 @@ block content
                                         span.uppercase.author Posted by: #{comment.commentAuthor}
                                         p #{comment.commentContent}
                                 hr
-                        h5.uppercase Leave A Comment
                         if campaign.loggedUser.loggedIn            
+                        h5.uppercase Leave A Comment
                             form(method='POST', action="/campaigns/campaign/:id")
                                 input(type="hidden", name="campaignId", value= campaign._id )
                                 textarea(rows='3', id="comment-content", name="commentContent", placeholder='Comment')

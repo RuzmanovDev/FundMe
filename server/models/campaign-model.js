@@ -54,9 +54,9 @@ let campaignSchema = new Schema({
     }
 });
 campaignSchema.virtual('percentage').get(function () {
- let onePercent=  this.target/100;
- let result = this.funded/onePercent;
-  return Math.round(result);
+    let onePercent = this.target / 100;
+    let result = this.funded / onePercent;
+    return Math.round(result);
 });
 
 mongoose.model('Campaign', campaignSchema);

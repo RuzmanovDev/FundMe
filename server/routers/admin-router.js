@@ -9,8 +9,8 @@ module.exports = function(options) {
 
     router
         .get('/profiles', /*auth.isAuthenticated, auth.isInRole('Admin'), */ adminController.getProfiles)
-        .get('/users', /* auth.isAuthenticated, auth.isInRole('Admin'), */ adminController.getUsersData)
-        .put('/users', /* auth.isAuthenticated, auth.isInRole('Admin'), */ adminController.updateUser);
+        .put('/users', /* auth.isAuthenticated, auth.isInRole('Admin'), */ adminController.updateUser)
+        .get('/users', /* auth.isAuthenticated, auth.isInRole('Admin'), */ adminController.getUsersData);
     // .get('/users', auth.isAuthenticated, /*auth.isInRole('Admin'), */ adminController.getAllUsers);
 
     options.app.use('/admin', router);
