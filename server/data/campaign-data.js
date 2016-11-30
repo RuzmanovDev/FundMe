@@ -32,18 +32,16 @@ module.exports = function (models) {
                     .skip(pageNumber * pageSize)
                     .limit(pageSize);
 
-                    resolve(query);
+                resolve(query);
             });
         },
-        findCampaignsByCategory(category) {
+        findCampaignsByCategory(category, pageNumber, pageSize) {
             return new Promise((resolve, reject) => {
-                Campaign.find({ category }, (err, campaigns) => {
-                    if (err) {
-                        return reject(err);
-                    }
+                var query = Campaign.find({ category })
+                    .skip(pageNumber * pageSize)
+                    .limit(pageSize);
 
-                    return resolve(campaigns);
-                });
+                resolve(query);
             });
         },
         getCampaignById(id) {
