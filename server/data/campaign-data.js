@@ -2,7 +2,6 @@
 
 module.exports = function (models) {
     let Campaign = models.Campaign;
-
     return {
         getUserCampaigns(userId) {
             return new Promise((resolve, reject) => {
@@ -12,6 +11,7 @@ module.exports = function (models) {
                     } else {
                         return resolve(campaigns);
                     }
+
                 });
             });
         },
@@ -114,6 +114,18 @@ module.exports = function (models) {
                     campaign.comments.push(newComment);
                     campaign.save();
                 });
+        },
+        searchByPattern(pattern) {
+            return new Promise((resolve, reject) => {
+                Campaign.find({ 'title': new RegExp(pattern, 'ig') }, (err, campaigns) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(campaigns);
+                    }
+
+                });
+            });
         }
     };
 };

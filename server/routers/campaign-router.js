@@ -14,7 +14,8 @@ module.exports = function (options) {
         .get('/campaign/picture/:id', controller.getPicture)
         .get('/campaign/category/:name', controller.getByCategory)
         .post('/donate', auth.isAuthenticated, controller.donate)
-        .get('/api',controller.getJson);
+        .get('/search', controller.search)
+        .get('/api', controller.getJson);
 
     options.app.use((req, res, next) => {
         let avatar = '';
