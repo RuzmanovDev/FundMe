@@ -1,0 +1,13 @@
+extends ../shared/_layout
+
+block styles
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.css', rel='stylesheet')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid-theme.min.css', rel='stylesheet')
+
+block content
+    .container
+        div#all-users
+
+block scripts
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.js')
+  script(src='/public/js/admin.js')
