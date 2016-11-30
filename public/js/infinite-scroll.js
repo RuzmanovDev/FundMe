@@ -87,11 +87,14 @@ $(window).endlessScroll({
     inflowPixels: 300,
     callback: function () {
         var page = $('.col-sm-12.col-md-10.col-md-offset-1.mb16').length / 5;
-        requester.getJSON('/campaigns/api?pageNumber=' + page, {})
+        var url = window.location.href;
+        var startIndex = 'category/';
+        var category = url.substring(url.indexOf(startIndex)+startIndex.length, url.length);
+        requester.getJSON('/campaigns/api?pageNumber=' + page+'&category='+category, {})
             .then(campaigns => {
                 campaigns.forEach(campaign => {
                     $('.row').append(buildCampaign(campaign));
-                })
+                });
             });
     }
 });

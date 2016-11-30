@@ -8,8 +8,8 @@ module.exports = function (options) {
 
         },
         getAll(req, res) {
-            let pageNumber = +req.query.pageNumber || 0;
-            let pageSize = +req.query.pageSize || 5;
+            let pageNumber = 0;
+            let pageSize = 5;
             options.data.getAllCampaigns(pageNumber, pageSize)
                 .then(campaigns => {
                     res.status(200).render('campaigns/all-campaigns', {
@@ -21,10 +21,19 @@ module.exports = function (options) {
         getJson(req, res) {
             let pageNumber = +req.query.pageNumber || 0;
             let pageSize = +req.query.pageSize || 5;
-             options.data.getAllCampaigns(pageNumber, pageSize)
-                .then(campaigns => {
-                    res.status(200).send(campaigns);
-                });
+            let category = req.query.category;
+            if (category) {
+                options.data.getAllCampaigns(pageNumber, pageSize)
+                    .then(campaigns => {
+                        res.status(200).send(campaigns);
+                    });
+            } else {
+                options.data.findCampaignsByCategory(category, pageNumber, pageSize)
+                    .then(campaigns => {
+                        res.status(200).send(campaigns);
+                    });
+            }
+
         },
         getById(req, res) {
             let pageNumber = +req.query.pageNumber || 0;
@@ -115,7 +124,9 @@ module.exports = function (options) {
         },
         getByCategory(req, res) {
             let category = req.params.name;
-            options.data.findCampaignsByCategory(category)
+            let pageNumber = 0;
+            let pageSize = 5;
+            options.data.findCampaignsByCategory(category, pageNumber, pageSize)
                 .then((campaigns) =>
                     res.render('campaigns/all-campaigns', {
                         result: campaigns
