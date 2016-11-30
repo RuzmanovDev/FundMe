@@ -9,4 +9,4 @@ module.exports = {
 
         return min <= value.length && value.length <= max;
     }
-}
+};

@@ -26,14 +26,14 @@ mixin main-navigation
                             .function
                                 form.search-form
                                     input(type='text', placeholder='Type Here')
-                        if(user)
+                        if(loggedUser)
                             .module.left.no-padding
                                 form#sign-out-form(action='/auth/logout' method='POST')
                                     ul.menu
                                         li
-                                          a(href="/user/settings/")
-                                            img(class="profile-pic-small" src="/user/avatar/" + avatar)
-                                            = username
+                                            a(href="/user/settings/")
+                                                img(class="profile-pic-small" src="/user/avatar/" + avatar)
+                                                = username
                                         li
                                         .module.widget-handle.left
                                             a.btn.signout-button(href="javascript:document.getElementById('sign-out-form').submit()") SIGN OUT

@@ -16,21 +16,22 @@ module.exports = function (options) {
         .post('/donate', auth.isAuthenticated, controller.donate);
 
     options.app.use((req, res, next) => {
-        let avatar = '';
-        let username = '';
-        let user = '';
+        let avatar = false;
+        let username = false;
+        let loggedUser = false;
 
         if (req.user) {
             avatar = req.user.avatar;
             username = req.user.username;
-            user = req.user;
+            loggedUser = req.user;
         }
 
         res.locals = {
             avatar,
-            user,
+            loggedUser,
             username
         };
+
         next();
     });
 
