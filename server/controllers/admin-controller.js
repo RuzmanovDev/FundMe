@@ -29,12 +29,5 @@ module.exports = (data) => {
                     res.status(200).json(updatedUser);
                 })
         }
-        // deleteUser(req, res) {
-        //     let userInfo = req.body;
-        //     data.updateUser(userInfo.userId, userInfo)
-        //         .then((updatedUser) => {
-        //             res.status(200).json(updatedUser);
-        //         })
-        // }
     };
 };
