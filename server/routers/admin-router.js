@@ -8,7 +8,10 @@ module.exports = function(options) {
     const adminController = require('../controllers/admin-controller')(options.data);
 
     router
-        .get('/all-users', auth.isAuthenticated, /*auth.isInRole('Admin'), */ adminController.getAllUsers);
+        .get('/profiles', /*auth.isAuthenticated, auth.isInRole('Admin'), */ adminController.getProfiles)
+        .put('/users', /* auth.isAuthenticated, auth.isInRole('Admin'), */ adminController.updateUser)
+        .get('/users', /* auth.isAuthenticated, auth.isInRole('Admin'), */ adminController.getUsersData);
+    // .get('/users', auth.isAuthenticated, /*auth.isInRole('Admin'), */ adminController.getAllUsers);
 
     options.app.use('/admin', router);
 };

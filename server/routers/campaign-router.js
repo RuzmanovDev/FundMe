@@ -13,7 +13,9 @@ module.exports = function (options) {
         .put('/campaign/vote/:id', auth.isAuthenticated, controller.vote)
         .get('/campaign/picture/:id', controller.getPicture)
         .get('/campaign/category/:name', controller.getByCategory)
-        .post('/donate', auth.isAuthenticated, controller.donate);
+        .post('/donate', auth.isAuthenticated, controller.donate)
+        .get('/search', controller.search)
+        .get('/api', controller.getJson);
 
     options.app.use((req, res, next) => {
         let avatar = false;

@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 module.exports = (config, app) => {
+    app.locals.moment = require('moment');
     app.set('view engine', 'pug');
     app.set('views', config.rootPath + 'server/views');
     app.use('/public', express.static(config.rootPath + '/public'));

@@ -5,8 +5,9 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         title Document
-        script( src="https://code.jquery.com/jquery-3.1.1.min.js",integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous")
-        script(src="/public/js/requester.js")
+        //- script( src="https://code.jquery.com/jquery-3.1.1.min.js",integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous")
+        script(src="/public/bower_components/jquery/dist/jquery.min.js")        
+        script(src="/public/js/requester.js") 
         link(href='/public/bower_components/bootstrap/dist/css/bootstrap.css' rel='stylesheet' media='all')
         link(href='/public/bower_components/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' media='all')
         link(href='http://www.w3schools.com/lib/w3.css' rel='stylesheet' media='all')
@@ -17,6 +18,10 @@ html(lang="en")
         link(href='/public/css/theme-css/font-awesome.min.css' rel='stylesheet' media='all')
         link(href='/public/css/main.css' rel='stylesheet' media='all')
         link(href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css')
+    block styles
+        //- toastr
+        //- script(src='/public/bower_components/toastr/toastr.min.js')
+        //- link(href='/public/bower_components/toastr/toastr.min.css')
 
     body
         header
@@ -28,6 +33,7 @@ html(lang="en")
             script(src='/public/js/theme-js/flexslider.min.js')
             script(src='/public/js/theme-js/smooth-scroll.min.js')
             script(src='/public/js/theme-js/scripts.js')
+            script(src="/public/js/search.js")       
 
             block scripts
 

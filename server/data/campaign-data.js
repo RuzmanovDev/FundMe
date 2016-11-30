@@ -1,8 +1,7 @@
 /*globals */
 
-module.exports = function(models) {
+module.exports = function (models) {
     let Campaign = models.Campaign;
-
     return {
         getUserCampaigns(userId) {
             return new Promise((resolve, reject) => {
@@ -12,6 +11,7 @@ module.exports = function(models) {
                     } else {
                         return resolve(campaigns);
                     }
+
                 });
             });
         },
@@ -26,26 +26,22 @@ module.exports = function(models) {
                 });
             });
         },
-        getAllCampaigns() {
+        getAllCampaigns(pageNumber, pageSize) {
             return new Promise((resolve, reject) => {
-                Campaign.find({},(err, campaigns) => {
-                    if (err) {
-                        return reject(err);
-                    }
+                var query = Campaign.find({})
+                    .skip(pageNumber * pageSize)
+                    .limit(pageSize);
 
-                    return resolve(campaigns);
-                });
+                resolve(query);
             });
         },
-        findCampaignsByCategory(category) {
+        findCampaignsByCategory(category, pageNumber, pageSize) {
             return new Promise((resolve, reject) => {
-                Campaign.find({ category }, (err, campaigns) => {
-                    if (err) {
-                        return reject(err);
-                    }
+                var query = Campaign.find({ category })
+                    .skip(pageNumber * pageSize)
+                    .limit(pageSize);
 
-                    return resolve(campaigns);
-                });
+                resolve(query);
             });
         },
         getCampaignById(id) {
@@ -118,6 +114,18 @@ module.exports = function(models) {
                     campaign.comments.push(newComment);
                     campaign.save();
                 });
+        },
+        searchByPattern(pattern) {
+            return new Promise((resolve, reject) => {
+                Campaign.find({ 'title': new RegExp(pattern, 'ig') }, (err, campaigns) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        return resolve(campaigns);
+                    }
+
+                });
+            });
         }
     };
 };

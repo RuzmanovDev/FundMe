@@ -9,6 +9,11 @@ const fieldsValidator = require('./utils/validator');
 const MinUsernameLength = 3;
 const MaxUsernameLength = 20;
 
+function hasRole(user, role) {
+    console.log(user.roles.indexOf(role.toLowerCase()) >= 0);
+    return user.roles.indexOf(role.toLowerCase()) >= 0;
+}
+
 const userSchema = new mongoose.Schema({
     firstname: {
         type: String,
@@ -55,14 +60,19 @@ const userSchema = new mongoose.Schema({
         //TO DO - set dafault imageID
         default: ''
     },
-    roles: [String]
+    roles: [String],
+    isDeleted: Boolean,
+    isBlocked: Boolean
 });
 
-userSchema
-    .virtual('fullname')
-    .get(function() {
-        return this.firstname + ' ' + this.lastname;
-    });
+userSchema.virtual('fullname').get(function() {
+    let fullname = `${this.firstname} ${this.lastname}`;
+    return fullname;
+});
+
+userSchema.virtual('isAdmin').get(function() {
+    return hasRole(this, 'admin');
+});
 
 userSchema.method({
     authenticate: function(password) {
@@ -73,6 +83,26 @@ userSchema.method({
         }
 
         return false;
+    }
+});
+
+userSchema.method({
+    assignRole: function(role) {
+        let roleToLower = role.toLowerCase();
+        if (!hasRole(this, roleToLower)) {
+            this.roles.push(roleToLower);
+        }
+    }
+});
+
+userSchema.method({
+    removeRole: function(role) {
+        let roleToLower = role.toLowerCase();
+        console.log('OUT');
+        if (hasRole(this, roleToLower)) {
+            this.roles.splice(this.roles.indexOf(roleToLower), 1);
+            console.log('IN');
+        }
     }
 });
 

@@ -8,12 +8,32 @@ module.exports = function (options) {
 
         },
         getAll(req, res) {
-            options.data.getAllCampaigns()
+            let pageNumber = 0;
+            let pageSize = 5;
+            options.data.getAllCampaigns(pageNumber, pageSize)
                 .then(campaigns => {
                     res.status(200).render('campaigns/all-campaigns', {
                         result: campaigns
                     });
                 });
+        },
+
+        getJson(req, res) {
+            let pageNumber = +req.query.pageNumber || 0;
+            let pageSize = +req.query.pageSize || 5;
+            let category = req.query.category;
+            if (category) {
+                options.data.getAllCampaigns(pageNumber, pageSize)
+                    .then(campaigns => {
+                        res.status(200).send(campaigns);
+                    });
+            } else {
+                options.data.findCampaignsByCategory(category, pageNumber, pageSize)
+                    .then(campaigns => {
+                        res.status(200).send(campaigns);
+                    });
+            }
+
         },
         getById(req, res) {
             let pageNumber = +req.query.pageNumber || 0;
@@ -104,7 +124,9 @@ module.exports = function (options) {
         },
         getByCategory(req, res) {
             let category = req.params.name;
-            options.data.findCampaignsByCategory(category)
+            let pageNumber = 0;
+            let pageSize = 5;
+            options.data.findCampaignsByCategory(category, pageNumber, pageSize)
                 .then((campaigns) =>
                     res.render('campaigns/all-campaigns', {
                         result: campaigns
@@ -116,7 +138,9 @@ module.exports = function (options) {
             let valueToDonate = +req.body.donationValue;
             options.data.fundCampaign(campaignId, valueToDonate)
                 .then(() => {
-                    res.send('Campaign Funded');
+                    res.json({
+                        massage: 'campaign funded'
+                    });
                 });
         },
         getPicture(req, res) {
@@ -149,6 +173,15 @@ module.exports = function (options) {
             options.data.createComment(comment)
                 .then(() => {
                     res.redirect(`/campaigns/campaign/${campaignId}`);
+                });
+        },
+        search(req, res){
+            var pattern = req.query.q;
+             options.data.searchByPattern(pattern)
+                .then(campaigns => {
+                    res.status(200).render('campaigns/all-campaigns', {
+                        result: campaigns
+                    });
                 });
         }
     };
