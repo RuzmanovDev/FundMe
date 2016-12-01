@@ -10,7 +10,10 @@ module.exports = function (options) {
             options.data.getAllCampaigns(pageNumber, pageSize)
                 .then(campaigns => {
                     res.status(200).render('campaigns/all-campaigns', {
-                        result: campaigns
+                        result: {
+                            campaigns,
+                            search:true
+                        }
                     });
                 });
         },
@@ -117,7 +120,10 @@ module.exports = function (options) {
             options.data.findCampaignsByCategory(category, pageNumber, pageSize)
                 .then((campaigns) =>
                     res.render('campaigns/all-campaigns', {
-                        result: campaigns
+                        result: {
+                            campaigns,
+                            search:true
+                        }
                     })
                 );
         },
@@ -167,7 +173,10 @@ module.exports = function (options) {
             options.data.searchByPattern(pattern)
                 .then(campaigns => {
                     res.status(200).render('campaigns/all-campaigns', {
-                        result: campaigns
+                        result:{
+                            campaigns,
+                            search:false
+                        }
                     });
                 });
         }

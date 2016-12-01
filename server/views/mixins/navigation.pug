@@ -31,7 +31,7 @@ mixin main-navigation
                                 form#sign-out-form(action='/auth/logout' method='POST')
                                     ul.menu
                                         li
-                                          a(href="/user/settings/")
+                                          a(href="/user/profile/" + loggedUser.id)
                                             img(class="profile-pic-small" src="/user/avatar/" + avatar)
                                             = username
                                         li
