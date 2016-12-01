@@ -18,6 +18,15 @@ module.exports = function (options) {
                 });
         },
         getJson(req, res) {
+            var sessionKey = req.headers['x-auth'];
+            if (!sessionKey) {
+                res.status(400)
+                    .json({
+                        errCode: 'ERR_INV_AUTH',
+                        message: 'Requires authentication'
+                    });
+                return;
+            }
             let pageNumber = +req.query.pageNumber || 0;
             let pageSize = +req.query.pageSize || 5;
             let category = req.query.category;
