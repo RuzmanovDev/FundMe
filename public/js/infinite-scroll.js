@@ -94,6 +94,7 @@ $(window).endlessScroll({
         var url = window.location.href;
         var startIndex = 'category/';
         var category = url.substring(url.indexOf(startIndex) + startIndex.length, url.length);
+        
         requester.getJSON('/campaigns/api?pageNumber=' + page + '&category=' + category, {headers})
             .then(campaigns => {
                 campaigns.forEach(campaign => {

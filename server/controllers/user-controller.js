@@ -1,16 +1,14 @@
 'use strict';
 
-var Grid = require('gridfs');
 
-module.exports = function(options) {
+module.exports = function ({grid, data, database}) {
     return {
         getUserDetails(req, res) {
-            const data = options.data;
             let userId = req.params.id;
             Promise.all([
-                    data.getById(userId),
-                    data.getUserCampaigns(userId)
-                ])
+                data.getById(userId),
+                data.getUserCampaigns(userId)
+            ])
                 .then((result) => {
                     let user = result[0];
                     let campaigns = result[1];
@@ -29,9 +27,9 @@ module.exports = function(options) {
             });
         },
         updateSettings(req, res) {
-            var gfs = Grid(options.database.connection.db, options.database.mongo);
-            let data = options.data;
+            let gfs = grid(database.connection.db, database.mongo);
             let user = req.user;
+            console.log(req.body);
             let infoToUpdate = {
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
@@ -57,7 +55,7 @@ module.exports = function(options) {
             });
         },
         getAvatar(req, res) {
-            var gfs = Grid(options.database.connection.db, options.database.mongo);
+            var gfs = grid(database.connection.db, database.mongo);
             var id = req.params.id;
 
             gfs.readFile({ _id: id }, (_, data) => {

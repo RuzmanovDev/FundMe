@@ -54,7 +54,10 @@ ul li{
     height: 30px;
     font-size: 12px;
 }
-
+.settings-profile-pic{
+    width:200px;
+    border-radius: 10px;
+}
 /* The close button */
 .closebtn {
     color: white;
