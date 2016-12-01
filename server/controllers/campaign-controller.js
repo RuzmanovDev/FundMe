@@ -4,9 +4,6 @@ var Grid = require('gridfs');
 
 module.exports = function (options) {
     return {
-        filterCategories(filter) {
-
-        },
         getAll(req, res) {
             let pageNumber = 0;
             let pageSize = 5;
@@ -41,7 +38,6 @@ module.exports = function (options) {
                         res.status(200).send(campaigns);
                     });
             }
-
         },
         getById(req, res) {
             const defaultCommentsCount = 5;
@@ -113,7 +109,6 @@ module.exports = function (options) {
                         res.redirect('/campaigns');
                     });
             });
-
         },
         getByCategory(req, res) {
             let category = req.params.name;
