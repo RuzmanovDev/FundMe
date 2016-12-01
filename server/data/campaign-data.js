@@ -126,6 +126,20 @@ module.exports = function (models) {
 
                 });
             });
+        },
+        getComments(id, pageNumber) {
+            const pageSize = 5;
+            return new Promise((resolve, reject) => {
+                Campaign.find({ _id: id }, 'comments', (err, campaign) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        let pagedComments = campaign[0].comments.splice(pageNumber * pageSize, pageSize);
+                        console.log(pagedComments);
+                        resolve(pagedComments);
+                    }
+                });
+            });
         }
     };
 };

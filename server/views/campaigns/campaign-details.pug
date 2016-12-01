@@ -44,8 +44,14 @@ block content
                             else
                                 p.lead.mb48 Please log in in order to donate
                 hr
+                if campaign.loggedUser.loggedIn            
+                        h5.uppercase Leave A Comment
+                            form(method='POST', action="/campaigns/campaign/" + campaign._id)
+                                //- input(type="hidden", name="campaignId", value= campaign._id )
+                                textarea(rows='3', id="comment-content", name="commentContent", placeholder='Comment')
+                                input(id="add-comment", type="submit", value="AddComment")
                 .comments
-                    p #{campaign.comments.length} comments
+                    p #{campaign.comments.length + 5 } comments
                         hr
                         ul.comments-list
                             each comment in pagedComments
@@ -56,12 +62,6 @@ block content
                                         span.uppercase.author Posted by: #{comment.commentAuthor}
                                         p #{comment.commentContent}
                                 hr
-                        if campaign.loggedUser.loggedIn            
-                        h5.uppercase Leave A Comment
-                            form(method='POST', action="/campaigns/campaign/" + campaign._id)
-                                //- input(type="hidden", name="campaignId", value= campaign._id )
-                                textarea(rows='3', id="comment-content", name="commentContent", placeholder='Comment')
-                                input(id="add-comment", type="submit", value="AddComment")
     script(src="/public/js/campaign-details.js")
     block scripts
     

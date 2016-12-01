@@ -17,7 +17,6 @@ module.exports = function (options) {
                     });
                 });
         },
-
         getJson(req, res) {
             let pageNumber = +req.query.pageNumber || 0;
             let pageSize = +req.query.pageSize || 5;
@@ -36,20 +35,8 @@ module.exports = function (options) {
 
         },
         getById(req, res) {
-            let pageNumber = +req.query.pageNumber || 0;
-            let pageSize = +req.query.pageSize || 5;
-
-            if (pageNumber < 0) {
-                pageNumber = 0;
-            }
-
-            if (pageSize < 0) {
-                pageSize = 5;
-            }
-
-            if (pageSize > 50) {
-                pageSize = 50;
-            }
+            const defaultCommentsCount = 5;
+            const startPage = 0;
 
             options.data.getCampaignById(req.params.id)
                 .then(campaign => {
@@ -58,11 +45,8 @@ module.exports = function (options) {
                             .redirect('/error');
                     }
 
-                    let totalPages = [];
-                    campaign.comments.map((_, i) => totalPages.push(i + 1));
                     let pagedComments = campaign.comments
-                        .splice(pageNumber * pageSize, pageSize);
-                    // campaign.comments = pagedComments;
+                        .splice(startPage, defaultCommentsCount);
 
                     campaign['loggedUser'] = {};
                     if (req.user) {
@@ -75,7 +59,7 @@ module.exports = function (options) {
                     }
 
                     return res.status(200).render('campaigns/campaign-details', {
-                        campaign, pagedComments, totalPages
+                        campaign, pagedComments
                     });
                 });
         },
@@ -139,7 +123,6 @@ module.exports = function (options) {
             options.data.fundCampaign(campaignId, valueToDonate)
                 .then(() => {
                     res.status(201).redirect(`/campaigns/campaign/${campaignId}`);
-                    console.log(campaignId);
                 });
         },
         getPicture(req, res) {
@@ -152,7 +135,6 @@ module.exports = function (options) {
         },
         vote(req, res) {
             let campaignId = req.params.id;
-            console.log(req.params.id);
             let userLikedCampaign = req.user.username;
 
             options.data.voteCampaign(campaignId, userLikedCampaign)
@@ -163,7 +145,7 @@ module.exports = function (options) {
         createComment(req, res) {
             let author = req.user.username;
             let content = req.body.commentContent;
-            let campaignId = req.body.campaignId;
+            let campaignId = req.params.id;
 
             let comment = {
                 campaignId,
@@ -176,9 +158,9 @@ module.exports = function (options) {
                     res.redirect(`/campaigns/campaign/${campaignId}`);
                 });
         },
-        search(req, res){
+        search(req, res) {
             var pattern = req.query.q;
-             options.data.searchByPattern(pattern)
+            options.data.searchByPattern(pattern)
                 .then(campaigns => {
                     res.status(200).render('campaigns/all-campaigns', {
                         result: campaigns
