@@ -1,0 +1,26 @@
+extends ../shared/_layout
+block content
+    .container
+        h1 Messages
+        .row
+            .col-md-8
+                .panel.panel-success
+                    .panel-heading
+                        h3 Messages
+                .panel-body
+                    div(id="MessageBody")
+                        div(id="sendButton", class="bgSuccessDarker pull-right", style="width: 100px")
+                            p Send
+                        div(id="messageContainer")
+                            textarea(id="messageToSend")
+            .col-md-4
+                .panel.panel-success
+                    .panel-heading
+                        h3 Conversations
+                    .panel-body
+                        div(id="friendsContainer")
+                            each conversation in result
+                                .bgSuccessDark(data-userid= conversation.user.id, data-username= conversation.user.username)
+                                    img(src="/user/avatar/" + conversation.user.avatar alt="" style="width: 28px;" class="img-thumbnail")
+                                    .friendName
+                                        span #{conversation.user.username}
