@@ -117,7 +117,7 @@ module.exports = function (models) {
         },
         searchByPattern(pattern) {
             return new Promise((resolve, reject) => {
-                Campaign.find({ 'title': new RegExp(pattern, 'ig') }, (err, campaigns) => {
+                Campaign.find({ $or: [{ 'title': new RegExp(pattern, 'ig') }, { 'creator.username': new RegExp(pattern, 'ig') }] }, (err, campaigns) => {
                     if (err) {
                         return reject(err);
                     } else {
