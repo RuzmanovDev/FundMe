@@ -8,28 +8,18 @@ block content
             img.settings-avatar.mb8(src="/user/avatar/" + avatar, style='width:200px')
             input(type="file" id="avatar" name="avatar")
             hr
-          .col-sm-4
-            label Registered Username
-            input(type='text', placeholder='{avatar.username}')
-            label Registered Email
-            input(type='text', placeholder='{avatar.email}')
-          .col-sm-4
+          .col-sm-6
             label Registered First Name
             input(type='text', placeholder='{avatar.firstname}', name='firstname', id='firstname')
             label Registered Last Name
             input(type='text', placeholder='{avatar.lastname}', name='lastname', id='lastname')
-          .col-sm-4
-            .modal-container
-              a.btn.btn-lg.btn-modal.btn-warning(href='#') Change Password
-              .foundry_modal.text-center
-                .form-group.col-md-8
-                  label Enter Old Password
-                  input.form-control(type='password')
-                  label Enter New Password
-                  input.form-control(type='password')
-                  label Confirm New Password
-                  input.form-control(type='password')
-                  br
-                  a.btn.btn-warning(href='#') Save new password
+          .col-sm-6
+            .form-group
+              label Enter Old Password
+              input.form-control(type='password')
+              label Enter New Password
+              input.form-control(type='password')
+              label Confirm New Password
+              input.form-control(type='password')
         hr
         input(type="submit" value="update")

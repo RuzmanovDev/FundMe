@@ -76,6 +76,7 @@ module.exports = function (options) {
             return res.status(200).render('campaigns/create-campaign');
         },
         create(req, res) {
+            console.log(req.body);
             let title = req.body.title;
             let description = req.body.description;
             let createdOn = new Date();
