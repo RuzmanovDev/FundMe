@@ -116,7 +116,7 @@ $(function () {
     $(window).endlessScroll({
         inflowPixels: 300,
         callback: function () {
-            var page = $('.comments-list').length / 5 | 0;
+            var page = ($('.comments-list').length / 5 + 1) | 0;
             var url = window.location.href;
 
             var fullUrl = ($(location).attr('href'));
