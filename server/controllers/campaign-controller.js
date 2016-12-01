@@ -134,13 +134,12 @@ module.exports = function (options) {
                 );
         },
         donate(req, res) {
-            let campaignId = req.body.campaignId;
             let valueToDonate = +req.body.donationValue;
+            let campaignId = req.params.id;
             options.data.fundCampaign(campaignId, valueToDonate)
                 .then(() => {
-                    res.json({
-                        massage: 'campaign funded'
-                    });
+                    res.status(201).redirect(`/campaigns/campaign/${campaignId}`);
+                    console.log(campaignId);
                 });
         },
         getPicture(req, res) {
@@ -152,11 +151,13 @@ module.exports = function (options) {
             });
         },
         vote(req, res) {
-            let campaignId = req.body.campaignId;
+            let campaignId = req.params.id;
+            console.log(req.params.id);
             let userLikedCampaign = req.user.username;
+
             options.data.voteCampaign(campaignId, userLikedCampaign)
                 .then(() => {
-                    res.status(201);
+                    res.status(201).json({ vote: 'voted' });
                 });
         },
         createComment(req, res) {

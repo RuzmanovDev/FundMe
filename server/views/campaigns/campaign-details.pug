@@ -34,8 +34,8 @@ block content
                             h3.uppercase Donate to this cause
                             if campaign.loggedUser.loggedIn
                                 p.lead.mb48 Please fill the form to procceed with the donation
-                                form(method='POST', action='/campaigns/donate' id='donation-form')
-                                    input.mb0(id="campaign-id", type="hidden", name="campaignId", value= campaign._id )
+                                form(method='POST', action='/campaigns/donate/'+ campaign._id, id='donation-form')
+                                    //- input.mb0(id="campaign-id", type="hidden", name="campaignId", value= campaign._id )
                                     label(for="credit-card") Credit card number
                                     input(id="credit-card", type="text", name="creditCardNumber" required)
                                     label() Donation value
@@ -58,8 +58,8 @@ block content
                                 hr
                         if campaign.loggedUser.loggedIn            
                         h5.uppercase Leave A Comment
-                            form(method='POST', action="/campaigns/campaign/:id")
-                                input(type="hidden", name="campaignId", value= campaign._id )
+                            form(method='POST', action="/campaigns/campaign/" + campaign._id)
+                                //- input(type="hidden", name="campaignId", value= campaign._id )
                                 textarea(rows='3', id="comment-content", name="commentContent", placeholder='Comment')
                                 input(id="add-comment", type="submit", value="AddComment")
     script(src="/public/js/campaign-details.js")

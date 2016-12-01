@@ -1,39 +1,8 @@
-/* globals $ requester document toastr*/
+/* globals $ requester document toastr location*/
 $(function () {
-    function updateFunds(funds) {
-        var $initialVal = $('#funds');
-        var updatedVal = +$initialVal.text() + +funds;
-        $initialVal.text(updatedVal);
-    }
-
-    $('#donation-form').on('click', '#donation-btn', function (ev) {
-        var donationValue = $('#donation').val();
-        var creditcard = $('#creditcard').val();
-        var campaignId = $('#campaign-id').val();
-
-        console.log('donation value' + donationValue);
-        console.log('credi card value' + creditcard);
-        var body = {
-            campaignId,
-            donationValue
-        };
-
-        // requester.postJSON('/campaigns/donate', body, '')
-        //     .then((res) => {
-        //         updateFunds(donationValue);
-        //         // toastr.success(res);
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     });
-        ev.preventDefault();
-        return false;
-    });
-
     $('#upvote-btn').on('click', function (ev) {
         var $this = $(this);
 
-        ev.preventDefault();
         var $votesContainer = $('#votes-count');
 
         if ($this.text() === 'Like') {
@@ -44,14 +13,19 @@ $(function () {
             $this.text('Like');
         }
 
-        var campaignId = $('#campaign-id').val();
+        // TODO check query params
+        var fullUrl = ($(location).attr('href'));
+        var url = fullUrl.substring(fullUrl.lastIndexOf('/') + 1);
 
-        var body = {
-            campaignId
-        };
+        $this.attr('disabled', 'disabled');
 
-        requester.putJSON(`/campaigns/campaign/vote/${campaignId}`, body, '')
-            .then(() => console.log("done"))
+        requester.putJSON(`/campaigns/campaign/vote/${url}`)
+            .then(() => {
+                $this.removeAttr('disabled');
+            })
             .catch(err => console.log(err));
+
+        ev.preventDefault();
+        return false;
     });
 });
