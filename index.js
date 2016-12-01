@@ -11,7 +11,7 @@ let multer = require('multer');
 let storage = multer.memoryStorage();
 
 let upload = multer({ storage: storage });
-let controllers
+
 let options = {
     app,
     data,
@@ -20,7 +20,7 @@ let options = {
 };
 
 require('./server/config/express')(config, app);
-require('./server/routers')(options,controllers);
+require('./server/routers')(options);
 
 app.listen(config.port, () => console.log('Server running at port : ' + config.port));
 
