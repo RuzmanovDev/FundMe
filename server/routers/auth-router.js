@@ -4,8 +4,8 @@
 const passport = require('passport');
 const router = require('express').Router();
 
-module.exports = function (options) {
-    const authController = require('../controllers/auth-controller')(options.data);
+module.exports = function ({data, app}) {
+    const authController = require('../controllers/auth-controller')({ data });
 
     router
         .get('/login', authController.getLogin)
@@ -15,5 +15,5 @@ module.exports = function (options) {
         .post('/register', authController.register)
         .post('/logout', authController.logout);
 
-    options.app.use('/auth', router);
+    app.use('/auth', router);
 };

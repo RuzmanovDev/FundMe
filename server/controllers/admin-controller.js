@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (data) => {
+module.exports = function ({data}) {
     return {
         getProfiles(req, res) {
             res.status(200).render('administration/profiles');
@@ -17,7 +17,7 @@ module.exports = (data) => {
                             lastname: user.lastname,
                             isAdmin: user.isAdmin,
                             isBlocked: user.isBlocked
-                        }
+                        };
                     });
                     res.status(200).json(result);
                 });
@@ -27,7 +27,7 @@ module.exports = (data) => {
             data.updateUser(userInfo.userId, userInfo)
                 .then((updatedUser) => {
                     res.status(200).json(updatedUser);
-                })
+                });
         }
     };
 };
