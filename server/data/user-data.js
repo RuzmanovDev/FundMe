@@ -74,17 +74,19 @@ module.exports = (models) => {
             });
         },
         updateUser(userId, info) {
-            console.log(info);
             return new Promise((resolve, reject) => {
                 this.getById(userId)
                     .then((foundUser) => {
+
                         foundUser.avatar = info.avatar || foundUser.avatar;
                         foundUser.firstname = info.firstname || foundUser.firstname;
                         foundUser.lastname = info.lastname || foundUser.lastname;
                         foundUser.email = info.email || foundUser.email;
                         foundUser.isBlocked = info.isBlocked || foundUser.isBlocked;
 
-                        if (info.isAdmin) {
+                        let isAdmin = !info.isAdmin;
+                        if (isAdmin) {
+                            console.log('IN IF');
                             foundUser.assignRole('admin');
                         } else {
                             foundUser.removeRole('admin');

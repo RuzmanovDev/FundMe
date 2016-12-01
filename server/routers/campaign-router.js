@@ -13,26 +13,27 @@ module.exports = function (options) {
         .put('/campaign/vote/:id', auth.isAuthenticated, controller.vote)
         .get('/campaign/picture/:id', controller.getPicture)
         .get('/campaign/category/:name', controller.getByCategory)
-        .post('/donate', auth.isAuthenticated, controller.donate)
-        .get('/search', controller.search)
-        .get('/api', controller.getJson);
+        .post('/donate/:id', auth.isAuthenticated, controller.donate)
+        .get('/api',controller.getJson)
+        .get('/search', controller.search);
 
     options.app.use((req, res, next) => {
-        let avatar = '';
-        let username = '';
-        let user = '';
+        let avatar = false;
+        let username = false;
+        let loggedUser = false;
 
         if (req.user) {
             avatar = req.user.avatar;
             username = req.user.username;
-            user = req.user;
+            loggedUser = req.user;
         }
 
         res.locals = {
             avatar,
-            user,
+            loggedUser,
             username
         };
+
         next();
     });
 

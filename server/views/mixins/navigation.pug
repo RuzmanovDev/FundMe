@@ -26,7 +26,7 @@ mixin main-navigation
                             .function
                                 .search-form
                                     input(type='text', placeholder='Type Here', id='search-input')  
-                        if(user)
+                        if(loggedUser)
                             .module.left.no-padding
                                 form#sign-out-form(action='/auth/logout' method='POST')
                                     ul.menu
