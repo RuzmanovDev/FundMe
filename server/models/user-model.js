@@ -10,7 +10,6 @@ const MinUsernameLength = 3;
 const MaxUsernameLength = 20;
 
 function hasRole(user, role) {
-    console.log(user.roles.indexOf(role.toLowerCase()) >= 0);
     return user.roles.indexOf(role.toLowerCase()) >= 0;
 }
 
@@ -98,10 +97,8 @@ userSchema.method({
 userSchema.method({
     removeRole: function(role) {
         let roleToLower = role.toLowerCase();
-        console.log('OUT');
         if (hasRole(this, roleToLower)) {
             this.roles.splice(this.roles.indexOf(roleToLower), 1);
-            console.log('IN');
         }
     }
 });
