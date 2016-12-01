@@ -29,6 +29,7 @@ module.exports = function ({grid, data, database}) {
         updateSettings(req, res) {
             let gfs = grid(database.connection.db, database.mongo);
             let user = req.user;
+            console.log(req.body);
             let infoToUpdate = {
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,

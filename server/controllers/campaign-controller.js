@@ -1,7 +1,7 @@
 /*globals*/
+'use strict';
 
-
-module.exports = function ({grid, data, database}) {
+module.exports = function({grid, data, database}) {
     return {
         getAll(req, res) {
             let pageNumber = 0;
@@ -152,13 +152,17 @@ module.exports = function ({grid, data, database}) {
         },
         createComment(req, res) {
             let author = req.user.username;
+            let authorAvatarId = req.user.avatar;
+            let authorId = req.user._id;
             let content = req.body.commentContent;
             let campaignId = req.params.id;
 
             let comment = {
+                authorId,
                 campaignId,
                 author,
-                content
+                content,
+                authorAvatarId
             };
 
             data.createComment(comment)

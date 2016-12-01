@@ -110,7 +110,10 @@ module.exports = function (models) {
                 .then((campaign) => {
                     let commentContent = comment.content;
                     let commentAuthor = comment.author;
-                    let newComment = { commentContent, commentAuthor };
+                    let commentAuthorImage = comment.authorAvatarId;
+                    let commentAuthorId = comment.authorId;
+
+                    let newComment = { commentContent, commentAuthor, commentAuthorImage, commentAuthorId };
                     campaign.comments.push(newComment);
                     campaign.save();
                 });
