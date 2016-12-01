@@ -1,4 +1,4 @@
-/* globals $ requester window */
+/* globals $ requester window jQuery */
 
 (function ($) {
 
@@ -75,7 +75,7 @@
                         }
                     }
 
-                    $("div#endless_scroll_loader").remove();
+                    $('div#endless_scroll_loader').remove();
                 }
             });
         }
@@ -86,11 +86,15 @@
 $(window).endlessScroll({
     inflowPixels: 300,
     callback: function () {
+        var auth = 'f1349b73e54adfd27c56412d83694c52';
+        var headers = {
+            'x-auth': auth
+        };
         var page = $('.col-sm-12.col-md-10.col-md-offset-1.mb16').length / 5;
         var url = window.location.href;
         var startIndex = 'category/';
-        var category = url.substring(url.indexOf(startIndex)+startIndex.length, url.length);
-        requester.getJSON('/campaigns/api?pageNumber=' + page+'&category='+category, {})
+        var category = url.substring(url.indexOf(startIndex) + startIndex.length, url.length);
+        requester.getJSON('/campaigns/api?pageNumber=' + page + '&category=' + category, {headers})
             .then(campaigns => {
                 campaigns.forEach(campaign => {
                     $('.row').append(buildCampaign(campaign));

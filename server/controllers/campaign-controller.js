@@ -19,6 +19,15 @@ module.exports = function (options) {
         },
 
         getJson(req, res) {
+            var sessionKey = req.headers['x-auth'];
+            if (!sessionKey) {
+                res.status(400)
+                    .json({
+                        errCode: 'ERR_INV_AUTH',
+                        message: 'Requires authentication'
+                    });
+                return;
+            }
             let pageNumber = +req.query.pageNumber || 0;
             let pageSize = +req.query.pageSize || 5;
             let category = req.query.category;
@@ -175,9 +184,9 @@ module.exports = function (options) {
                     res.redirect(`/campaigns/campaign/${campaignId}`);
                 });
         },
-        search(req, res){
+        search(req, res) {
             var pattern = req.query.q;
-             options.data.searchByPattern(pattern)
+            options.data.searchByPattern(pattern)
                 .then(campaigns => {
                     res.status(200).render('campaigns/all-campaigns', {
                         result: campaigns
