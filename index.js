@@ -9,7 +9,7 @@ let database = require('./server/config/database')(config);
 let data = require('./server/data')();
 let multer = require('multer');
 let storage = multer.memoryStorage();
-let auth = require('../config/auth');
+let auth = require('./server/config/auth');
 let grid = require('gridfs');
 let upload = multer({ storage: storage });
 

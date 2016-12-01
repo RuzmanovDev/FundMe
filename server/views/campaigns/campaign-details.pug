@@ -7,7 +7,7 @@ block content
                     .post-snippet.mb64
                         img.mb24(alt='Post Image', src="/campaigns/campaign/picture/" + campaign.image)
                         .post-title
-                            span.label Created on #{moment(campaign.createdOn).format('MMMM Do YYYY, h:mm')}
+                            span.label Created on #{moment(campaign.createdOn).format('MMMM Do YYYY, h:mm a')}
                             h4.inline-block #{campaign.title}
                         ul.post-meta
                             li
@@ -43,9 +43,7 @@ block content
                                     button.btn-white.mb0(id="donate-btn", type='submit') Donate
                             else
                                 p.lead.mb48 Please log in in order to donate
-                hr
                 if campaign.loggedUser.loggedIn            
-                        h5.uppercase Leave A Comment
                             form(method='POST', action="/campaigns/campaign/" + campaign._id)
                                 //- input(type="hidden", name="campaignId", value= campaign._id )
                                 textarea(rows='3', id="comment-content", name="commentContent", placeholder='Comment')
