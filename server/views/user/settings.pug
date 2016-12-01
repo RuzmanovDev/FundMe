@@ -8,7 +8,6 @@ block content
             img.settings-avatar.mb8(src="/user/avatar/" + avatar, style='width:200px')
             input(type="file" id="avatar" name="avatar")
             hr
-<<<<<<< HEAD
           .col-sm-6
             label Registered First Name
             input(type='text', placeholder='{avatar.firstname}', name='firstname', id='firstname')
@@ -22,28 +21,5 @@ block content
               input.form-control(type='password')
               label Confirm New Password
               input.form-control(type='password')
-=======
-          .col-sm-4
-            label Email
-            input(type='text', placeholder='New email', name='email')
-          .col-sm-4
-            label First Name
-            input(type='text', placeholder='New first name', name='firstname', id='firstname')
-            label Last Name
-            input(type='text', placeholder='New Last name', name='lastname', id='lastname')
-          .col-sm-4
-            .modal-container
-              a.btn.btn-lg.btn-modal.btn-warning(href='#') Change Password
-              .foundry_modal.text-center
-                .form-group.col-md-8
-                  label Enter Old Password
-                  input.form-control(type='password', name='oldPassowrd')
-                  label Enter New Password
-                  input.form-control(type='password', name='newPassword')
-                  label Confirm New Password
-                  input.form-control(type='password', name='repeatedNewPassword')
-                  br
-                  a.btn.btn-warning(href='#') Save new password
->>>>>>> c9bf2d1e6219a060111d8c9c1f0b838f7f3787f6
         hr
         input(type="submit" value="update")
