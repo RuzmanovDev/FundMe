@@ -16,6 +16,10 @@ let messageSchema = new Schema({
     },
     texts: {
         type: [{}]
+    },
+    identification:{
+        type:String,
+        required:true
     }
 });
 

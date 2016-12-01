@@ -20,7 +20,7 @@ block content
                     .panel-body
                         div(id="friendsContainer")
                             each conversation in result
-                                .bgSuccessDark(data-userid= conversation.user.id, data-username= conversation.user.username)
+                                .bgSuccessDark(data-userid=conversation.user.id, data-username=conversation.user.username)
                                     img(src="/user/avatar/" + conversation.user.avatar alt="" style="width: 28px;" class="img-thumbnail")
                                     .friendName
                                         span #{conversation.user.username}
