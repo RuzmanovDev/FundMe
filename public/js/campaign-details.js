@@ -1,7 +1,8 @@
 /* globals $ requester document toastr location*/
-$(function () {
 
+$(function () {
     $('#upvote-btn').on('click', function (ev) {
+
         var $this = $(this);
 
         var $votesContainer = $('#votes-count');
