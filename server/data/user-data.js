@@ -77,12 +77,12 @@ module.exports = (models) => {
             return new Promise((resolve, reject) => {
                 this.getById(userId)
                     .then((foundUser) => {
-
                         foundUser.avatar = info.avatar || foundUser.avatar;
                         foundUser.firstname = info.firstname || foundUser.firstname;
                         foundUser.lastname = info.lastname || foundUser.lastname;
                         foundUser.email = info.email || foundUser.email;
                         foundUser.isBlocked = info.isBlocked || foundUser.isBlocked;
+                        foundUser.passHash = info.passHash || foundUser.passHash;
 
                         let isAdmin = !info.isAdmin;
                         if (isAdmin) {
@@ -99,6 +99,7 @@ module.exports = (models) => {
                             email: foundUser.email,
                             firstname: foundUser.firstname,
                             lastname: foundUser.lastname,
+                            passHash: foundUser.passHash,
                             isAdmin: foundUser.isAdmin,
                             isBlocked: foundUser.isBlocked
                         });

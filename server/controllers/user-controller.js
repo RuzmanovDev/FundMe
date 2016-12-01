@@ -1,7 +1,6 @@
 'use strict';
 
-
-module.exports = function ({grid, data, database}) {
+module.exports = function ({grid, data, database, encryption}) {
     return {
         getUserDetails(req, res) {
             let userId = req.params.id;
@@ -29,10 +28,32 @@ module.exports = function ({grid, data, database}) {
         updateSettings(req, res) {
             let gfs = grid(database.connection.db, database.mongo);
             let user = req.user;
-            console.log(req.body);
+            let userSalt = req.user.salt;
+            let oldPassword = req.body.oldPassword;
+            let userHash = req.user.passHash;
+            let newUserHash;
+
+            if (oldPassword) {
+                let hashedEnteredPassword = encryption.generateHashedPassword(userSalt, oldPassword);
+                if (userHash !== hashedEnteredPassword) {
+                    res.status(401).json({ msg: 'You have entered wrong passowrd!' });
+                    return;
+                }
+
+                if (req.body.newPassword !== req.body.confirmedNewPassword) {
+
+                    res.status(401).json({ msg: 'Password do not match' });
+                    return;
+                } else if (req.body.newPassword === req.body.confirmedNewPassword && req.body.newPassword !== '') {
+                    newUserHash = encryption.generateHashedPassword(userSalt, req.body.newPassword);
+                }
+            }
+
+
             let infoToUpdate = {
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
+                passHash: newUserHash,
                 avatar: user.avatar
             };
             let file = req.file;
@@ -50,7 +71,10 @@ module.exports = function ({grid, data, database}) {
 
                 data.updateUser(user._id, infoToUpdate)
                     .then(() => {
-                        res.redirect('/user/settings');
+                        res.status(201).json({
+                            success: true,
+                            redirect: '/user/settings'
+                        });
                     });
             });
         },
