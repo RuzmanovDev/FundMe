@@ -1,23 +1,21 @@
 /*globals*/
+'use strict';
 
-var Grid = require('gridfs');
-
-module.exports = function (options) {
+module.exports = function({grid, data, database}) {
     return {
-        filterCategories(filter) {
-
-        },
         getAll(req, res) {
             let pageNumber = 0;
             let pageSize = 5;
-            options.data.getAllCampaigns(pageNumber, pageSize)
+            data.getAllCampaigns(pageNumber, pageSize)
                 .then(campaigns => {
                     res.status(200).render('campaigns/all-campaigns', {
-                        result: campaigns
+                        result: {
+                            campaigns,
+                            search: true
+                        }
                     });
                 });
         },
-
         getJson(req, res) {
             var sessionKey = req.headers['x-auth'];
             if (!sessionKey) {
@@ -32,46 +30,30 @@ module.exports = function (options) {
             let pageSize = +req.query.pageSize || 5;
             let category = req.query.category;
             if (category) {
-                options.data.getAllCampaigns(pageNumber, pageSize)
+                data.getAllCampaigns(pageNumber, pageSize)
                     .then(campaigns => {
                         res.status(200).send(campaigns);
                     });
             } else {
-                options.data.findCampaignsByCategory(category, pageNumber, pageSize)
+                data.findCampaignsByCategory(category, pageNumber, pageSize)
                     .then(campaigns => {
                         res.status(200).send(campaigns);
                     });
             }
-
         },
         getById(req, res) {
-            let pageNumber = +req.query.pageNumber || 0;
-            let pageSize = +req.query.pageSize || 5;
+            const defaultCommentsCount = 5;
+            const startPage = 0;
 
-            if (pageNumber < 0) {
-                pageNumber = 0;
-            }
-
-            if (pageSize < 0) {
-                pageSize = 5;
-            }
-
-            if (pageSize > 50) {
-                pageSize = 50;
-            }
-
-            options.data.getCampaignById(req.params.id)
+            data.getCampaignById(req.params.id)
                 .then(campaign => {
                     if (campaign === null) {
                         return res.status(404)
                             .redirect('/error');
                     }
 
-                    let totalPages = [];
-                    campaign.comments.map((_, i) => totalPages.push(i + 1));
                     let pagedComments = campaign.comments
-                        .splice(pageNumber * pageSize, pageSize);
-                    // campaign.comments = pagedComments;
+                        .splice(startPage, defaultCommentsCount);
 
                     campaign['loggedUser'] = {};
                     if (req.user) {
@@ -84,7 +66,7 @@ module.exports = function (options) {
                     }
 
                     return res.status(200).render('campaigns/campaign-details', {
-                        campaign, pagedComments, totalPages
+                        campaign, pagedComments
                     });
                 });
         },
@@ -92,6 +74,7 @@ module.exports = function (options) {
             return res.status(200).render('campaigns/create-campaign');
         },
         create(req, res) {
+            console.log(req.body);
             let title = req.body.title;
             let description = req.body.description;
             let createdOn = new Date();
@@ -106,8 +89,7 @@ module.exports = function (options) {
             let funded = 0;
             let category = req.body.category;
 
-            let gfs = Grid(options.database.connection.db, options.database.mongo);
-            let data = options.data;
+            let gfs = grid(database.connection.db, database.mongo);
 
             gfs.writeFile({}, req.file.buffer, (_, file) => {
                 let image = file._id;
@@ -129,30 +111,31 @@ module.exports = function (options) {
                         res.redirect('/campaigns');
                     });
             });
-
         },
         getByCategory(req, res) {
             let category = req.params.name;
             let pageNumber = 0;
             let pageSize = 5;
-            options.data.findCampaignsByCategory(category, pageNumber, pageSize)
+            data.findCampaignsByCategory(category, pageNumber, pageSize)
                 .then((campaigns) =>
                     res.render('campaigns/all-campaigns', {
-                        result: campaigns
+                        result: {
+                            campaigns,
+                            search: true
+                        }
                     })
                 );
         },
         donate(req, res) {
             let valueToDonate = +req.body.donationValue;
             let campaignId = req.params.id;
-            options.data.fundCampaign(campaignId, valueToDonate)
+            data.fundCampaign(campaignId, valueToDonate)
                 .then(() => {
                     res.status(201).redirect(`/campaigns/campaign/${campaignId}`);
-                    console.log(campaignId);
                 });
         },
         getPicture(req, res) {
-            var gfs = Grid(options.database.connection.db, options.database.mongo);
+            var gfs = grid(database.connection.db, database.mongo);
             var id = req.params.id;
             gfs.readFile({ _id: id }, (_, data) => {
                 res.write(data);
@@ -161,36 +144,42 @@ module.exports = function (options) {
         },
         vote(req, res) {
             let campaignId = req.params.id;
-            console.log(req.params.id);
             let userLikedCampaign = req.user.username;
 
-            options.data.voteCampaign(campaignId, userLikedCampaign)
+            data.voteCampaign(campaignId, userLikedCampaign)
                 .then(() => {
                     res.status(201).json({ vote: 'voted' });
                 });
         },
         createComment(req, res) {
             let author = req.user.username;
+            let authorAvatarId = req.user.avatar;
+            let authorId = req.user._id;
             let content = req.body.commentContent;
-            let campaignId = req.body.campaignId;
+            let campaignId = req.params.id;
 
             let comment = {
+                authorId,
                 campaignId,
                 author,
-                content
+                content,
+                authorAvatarId
             };
 
-            options.data.createComment(comment)
+            data.createComment(comment)
                 .then(() => {
                     res.redirect(`/campaigns/campaign/${campaignId}`);
                 });
         },
         search(req, res) {
             var pattern = req.query.q;
-            options.data.searchByPattern(pattern)
+            data.searchByPattern(pattern)
                 .then(campaigns => {
                     res.status(200).render('campaigns/all-campaigns', {
-                        result: campaigns
+                        result: {
+                            campaigns,
+                            search: false
+                        }
                     });
                 });
         }

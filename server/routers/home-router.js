@@ -2,13 +2,13 @@
 
 const router = require('express').Router();
 
-module.exports = function (options) {
-    const homeController = require('../controllers/home-controller')(options.data);
+module.exports = function ({data, app}) {
+    const homeController = require('../controllers/home-controller')({ data });
 
     router
         .get('/', homeController.getHome);
 
-  options.app.use((req, res, next) => {
+    app.use((req, res, next) => {
         let avatar = false;
         let username = false;
         let loggedUser = false;
@@ -28,5 +28,5 @@ module.exports = function (options) {
         next();
     });
 
-    options.app.use('/home', router);
+    app.use('/home', router);
 };

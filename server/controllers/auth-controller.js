@@ -1,7 +1,7 @@
 'use strict';
 const encryption = require('../utilities/encryption');
 
-module.exports = function (data) {
+module.exports = function ({data}) {
     return {
         login(req, res) {
             let userFromTheRequest = req.body;

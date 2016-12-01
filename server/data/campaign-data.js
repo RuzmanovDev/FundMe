@@ -110,20 +110,37 @@ module.exports = function (models) {
                 .then((campaign) => {
                     let commentContent = comment.content;
                     let commentAuthor = comment.author;
-                    let newComment = { commentContent, commentAuthor };
+                    let commentAuthorImage = comment.authorAvatarId;
+                    let commentAuthorId = comment.authorId;
+
+                    let newComment = { commentContent, commentAuthor, commentAuthorImage, commentAuthorId };
                     campaign.comments.push(newComment);
                     campaign.save();
                 });
         },
         searchByPattern(pattern) {
             return new Promise((resolve, reject) => {
-                Campaign.find({ 'title': new RegExp(pattern, 'ig') }, (err, campaigns) => {
+                Campaign.find({ $or: [{ 'title': new RegExp(pattern, 'ig') }, { 'creator.username': new RegExp(pattern, 'ig') }] }, (err, campaigns) => {
                     if (err) {
                         return reject(err);
                     } else {
                         return resolve(campaigns);
                     }
 
+                });
+            });
+        },
+        getComments(id, pageNumber) {
+            const pageSize = 5;
+            return new Promise((resolve, reject) => {
+                Campaign.find({ _id: id }, 'comments', (err, campaign) => {
+                    if (err) {
+                        return reject(err);
+                    } else {
+                        let pagedComments = campaign[0].comments.splice(pageNumber * pageSize, pageSize);
+                        console.log(pagedComments);
+                        resolve(pagedComments);
+                    }
                 });
             });
         }

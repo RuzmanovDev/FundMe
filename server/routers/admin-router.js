@@ -2,10 +2,9 @@
 
 const router = require('express').Router();
 
-const auth = require('../config/auth');
 
-module.exports = function(options) {
-    const adminController = require('../controllers/admin-controller')(options.data);
+module.exports = function ({data, app, auth}) {
+    const adminController = require('../controllers/admin-controller')({ data });
 
     router
         .get('/profiles', /*auth.isAuthenticated, auth.isInRole('Admin'), */ adminController.getProfiles)
@@ -13,5 +12,5 @@ module.exports = function(options) {
         .get('/users', /* auth.isAuthenticated, auth.isInRole('Admin'), */ adminController.getUsersData);
     // .get('/users', auth.isAuthenticated, /*auth.isInRole('Admin'), */ adminController.getAllUsers);
 
-    options.app.use('/admin', router);
+    app.use('/admin', router);
 };

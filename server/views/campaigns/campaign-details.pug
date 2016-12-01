@@ -35,33 +35,28 @@ block content
                             if campaign.loggedUser.loggedIn
                                 p.lead.mb48 Please fill the form to procceed with the donation
                                 form(method='POST', action='/campaigns/donate/'+ campaign._id, id='donation-form')
-                                    //- input.mb0(id="campaign-id", type="hidden", name="campaignId", value= campaign._id )
                                     label(for="credit-card") Credit card number
                                     input(id="credit-card", type="text", name="creditCardNumber" required)
-                                    label() Donation value
+                                    label(for="donation") Donation value
                                     input(id="donation", type="text", name="donationValue" required)
                                     button.btn-white.mb0(id="donate-btn", type='submit') Donate
                             else
                                 p.lead.mb48 Please log in in order to donate
-                hr
+                if campaign.loggedUser.loggedIn            
+                            form(method='POST', action="/campaigns/campaign/" + campaign._id)
+                                textarea(rows='3', id="comment-content", name="commentContent", placeholder='Comment')
+                                input(id="add-comment", type="submit", value="AddComment")
                 .comments
-                    p #{campaign.comments.length} comments
-                        hr
                         ul.comments-list
                             each comment in pagedComments
                                 li.comments-list
                                     .avatar
-                                        img(alt='Avatar', src="http://mms.businesswire.com/bwapps/mediaserver/ViewMedia?mgid=106864&vid=4&download=1")
+                                        a(href="/user/profile/" + comment.commentAuthorId)
+                                            img(alt='Avatar', src="/user/avatar/" + comment.commentAuthorImage)
                                     .comment
                                         span.uppercase.author Posted by: #{comment.commentAuthor}
                                         p #{comment.commentContent}
                                 hr
-                        if campaign.loggedUser.loggedIn            
-                        h5.uppercase Leave A Comment
-                            form(method='POST', action="/campaigns/campaign/" + campaign._id)
-                                //- input(type="hidden", name="campaignId", value= campaign._id )
-                                textarea(rows='3', id="comment-content", name="commentContent", placeholder='Comment')
-                                input(id="add-comment", type="submit", value="AddComment")
     script(src="/public/js/campaign-details.js")
     block scripts
     
