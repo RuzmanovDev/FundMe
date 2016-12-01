@@ -24,9 +24,9 @@ mixin main-navigation
                                 i.fa.fa-search
                                 span.title | Search Campaign
                             .function
-                                form.search-form
-                                    input(type='text', placeholder='Type Here')
-                        if(user)
+                                .search-form
+                                    input(type='text', placeholder='Type Here', id='search-input')  
+                        if(loggedUser)
                             .module.left.no-padding
                                 form#sign-out-form(action='/auth/logout' method='POST')
                                     ul.menu

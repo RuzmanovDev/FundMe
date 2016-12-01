@@ -13,7 +13,7 @@ $(function() {
         autoload: true,
         pageSize: 10,
         pageButtonCount: 3,
-        deleteConfirm: 'Do you really want to delete a user?',
+        deleteButton: false,
         controller: {
             loadData: function(filter) {
                 return $.ajax({
@@ -29,13 +29,6 @@ $(function() {
                     data: item
                 });
             },
-            deleteItem: function(item) {
-                return $.ajax({
-                    type: 'DELETE',
-                    url: '/admin/users',
-                    data: item
-                });
-            }
         },
         fields: [
             { name: 'userId', type: 'text', visible: false },

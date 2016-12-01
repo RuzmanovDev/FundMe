@@ -175,6 +175,15 @@ module.exports = function (options) {
                 .then(() => {
                     res.redirect(`/campaigns/campaign/${campaignId}`);
                 });
+        },
+        search(req, res){
+            var pattern = req.query.q;
+             options.data.searchByPattern(pattern)
+                .then(campaigns => {
+                    res.status(200).render('campaigns/all-campaigns', {
+                        result: campaigns
+                    });
+                });
         }
     };
 };
