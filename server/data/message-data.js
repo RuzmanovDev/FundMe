@@ -36,7 +36,7 @@ module.exports = function (models) {
 
         findByIdentification(identification) {
             return new Promise((resolve, reject) => {
-                Message.find({ 'identification': identification }, (err, message) => {
+                Message.findOne({ 'identification': identification }, (err, message) => {
                     if (err) {
                         return reject(err);
                     } else {

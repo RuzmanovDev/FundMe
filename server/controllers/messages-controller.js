@@ -1,7 +1,8 @@
 module.exports = function ({data}) {
     return {
         getMessageForm(req, res) {
-            data.loadCurrentConversations(req.user._id)
+            let userId = JSON.stringify(req.user._id);
+            data.loadCurrentConversations(userId.substring(1,userId.length-1))
                 .then(messages => {
                     res.status(200).render('messages/messages', {
                         result: parseMessages(messages, req.user._id)
@@ -9,10 +10,10 @@ module.exports = function ({data}) {
                 });
         },
         initializeMessage(req, res) {
-            var id = req.user._id;
+            var id = JSON.stringify(req.user._id);
             let firstUser = {
                 username: req.user.username,
-                id: id,
+                id: id.substring(1,id.length-1),
                 avatar: req.user.avatar
             };
 
@@ -50,7 +51,7 @@ function parseMessages(messages, id) {
     let result = [];
     messages.forEach(message => {
         let user;
-        if (message.firstUser.id === id) {
+        if (message.firstUser.id != id) {
             user = message.firstUser;
         } else {
             user = message.secondUser;

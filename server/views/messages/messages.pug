@@ -20,7 +20,11 @@ block content
                     .panel-body
                         div(id="friendsContainer")
                             each conversation in result
-                                .bgSuccessDark(data-userid=conversation.user.id, data-username=conversation.user.username)
-                                    img(src="/user/avatar/" + conversation.user.avatar alt="" style="width: 28px;" class="img-thumbnail")
-                                    .friendName
-                                        span #{conversation.user.username}
+                                a(href="#" class="open-conversation" data-userid=conversation.user.id, data-username=conversation.user.username)
+                                    bgSuccessDark
+                                        img(src="/user/avatar/" + conversation.user.avatar alt="" style="width: 38px;" class="img-thumbnail")
+                                        .friendName
+                                            span #{conversation.user.username}
+
+block scripts
+    script(src="/public/js/texts.js")
