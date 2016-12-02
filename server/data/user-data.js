@@ -1,21 +1,25 @@
 /* globals module, require */
 'use strict';
 
-const validator = require('./utils/validator');
-
 module.exports = (models) => {
     const { User } = models;
 
     return {
-        getAllUsers() {
+        filterUsers(filter, page, perPage) {
+            filter = filter | {};
+            page = page | 0;
+            perPage = perPage | 0;
             return new Promise((resolve, reject) => {
-                User.find({}, (err, users) => {
-                    if (err) {
-                        return reject(err);
-                    } else {
-                        return resolve(users);
-                    }
-                });
+                User.find(filter)
+                    .skip(page * perPage)
+                    .limit(perPage)
+                    .exec((err, users) => {
+                        if (err) {
+                            return reject(err);
+                        } else {
+                            return resolve(users);
+                        }
+                    })
             });
         },
         getById(userId) {
@@ -98,9 +102,9 @@ module.exports = (models) => {
                             email: foundUser.email,
                             firstname: foundUser.firstname,
                             lastname: foundUser.lastname,
-                            passHash: foundUser.passHash,
                             isAdmin: foundUser.isAdmin,
-                            isBlocked: foundUser.isBlocked
+                            isBlocked: foundUser.isBlocked,
+                            passHash: foundUser.passHash
                         });
                     });
             });
