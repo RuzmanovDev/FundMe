@@ -88,8 +88,7 @@ module.exports = (models) => {
                         foundUser.isBlocked = info.isBlocked || foundUser.isBlocked;
                         foundUser.passHash = info.passHash || foundUser.passHash;
 
-                        let isAdmin = !info.isAdmin;
-                        if (isAdmin) {
+                        if (info.isAdmin === 'true') {
                             foundUser.assignRole('admin');
                         } else {
                             foundUser.removeRole('admin');
