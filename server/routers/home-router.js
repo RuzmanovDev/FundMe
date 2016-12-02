@@ -7,7 +7,8 @@ module.exports = function({ data, app, userMiddleware }) {
 
     router
         .get('/', homeController.getHome)
-        .get('/about', homeController.getAbout);
+        .get('/about', homeController.getAbout)
+        .get('/error', homeController.showError);
 
     app.use(userMiddleware.hasLoggedUser);
     app.use('/home', router);

@@ -7,6 +7,9 @@ module.exports = (data) => {
         },
         getAbout(req, res) {
             res.render('home/about');
+        },
+        showError(req, res) {
+            res.render('home/error');
         }
 
     };
