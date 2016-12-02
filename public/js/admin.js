@@ -11,11 +11,12 @@ $(function() {
         sorting: true,
         paging: true,
         autoload: true,
-        pageSize: 10,
+        pageSize: 3,
+        // pageLoading: true,
         pageButtonCount: 3,
-        deleteButton: false,
         controller: {
             loadData: function(filter) {
+                console.log(filter)
                 return $.ajax({
                     type: 'GET',
                     url: '/admin/users',
@@ -38,7 +39,7 @@ $(function() {
             { name: 'lastname', type: 'text', title: 'Last Name', width: '15%', filtering: true, sorting: true },
             { name: 'isAdmin', type: 'checkbox', title: 'Is Admin', filtering: true },
             { name: 'isBlocked', type: 'checkbox', title: 'Is Blocked', filtering: true },
-            { type: 'control' }
+            { type: 'control', deleteButton: false }
         ]
     });
 
