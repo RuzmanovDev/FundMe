@@ -19,13 +19,23 @@ mixin main-navigation
                                 li
                                     a(href='/home/about')
                                         | About Us
+                                if(loggedUser && loggedUser.isAdmin)
+                                    li.has-dropdown
+                                        | Admin
+                                        ul
+                                            li
+                                                a(href='/admin/profiles/')
+                                                    | Users Profiles
+                                            li
+                                                a(href='#')
+                                                    | Users Campaigns
                         .module.widget-handle.search-widget-handle.left
                             .search
                                 i.fa.fa-search
                                 span.title | Search Campaign
                             .function
                                 .search-form
-                                    input(type='text', placeholder='Type Here', id='search-input')  
+                                    input(type='text', placeholder='Type Here', id='search-input')
                         if(loggedUser)
                             .module.left.no-padding
                                 form#sign-out-form(action='/auth/logout' method='POST')
@@ -34,16 +44,6 @@ mixin main-navigation
                                           a(href="/user/profile/" + loggedUser.id)
                                             img(class="profile-pic-small" src="/user/avatar/" + avatar)
                                             = username
-                                        li.has-dropdown
-                                            a(href='#')
-                                                | Admin
-                                            ul
-                                                li
-                                                    a(href='#')
-                                                        | User
-                                                li
-                                                    a(href='#')
-                                                        | Not user
                                         li
                                         .module.widget-handle.left
                                             a.btn.signout-button(href="javascript:document.getElementById('sign-out-form').submit()") SIGN OUT

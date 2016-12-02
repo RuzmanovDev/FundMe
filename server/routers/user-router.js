@@ -2,7 +2,7 @@
 
 const router = require('express').Router();
 
-module.exports = function ({upload, auth, app, grid, data, database, encryption }) {
+module.exports = function({ upload, auth, app, grid, data, database, encryption, userMiddleware }) {
 
     const userController = require('../controllers/user-controller')({ grid, data, database, encryption });
 
@@ -12,5 +12,6 @@ module.exports = function ({upload, auth, app, grid, data, database, encryption 
         .post('/settings/update', upload.single('avatar'), userController.updateSettings)
         .get('/avatar/:id', userController.getAvatar);
 
+    app.use(userMiddleware.hasLoggedUser);
     app.use('/user', router);
 };

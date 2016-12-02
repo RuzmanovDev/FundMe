@@ -1,7 +1,7 @@
 const auth = require('../config/auth');
 const router = require('express').Router();
 
-module.exports = function ({upload, app, grid, data, database }) {
+module.exports = function({ upload, app, grid, data, database, userMiddleware }) {
     let controller = require('../controllers/campaign-controller')({ grid, data, database });
 
     router
@@ -18,25 +18,6 @@ module.exports = function ({upload, app, grid, data, database }) {
         .get('/search', controller.search);
     // .get('/api/comments/:id', controller.getCommentsJson);
 
-    app.use((req, res, next) => {
-        let avatar = false;
-        let username = false;
-        let loggedUser = false;
-
-        if (req.user) {
-            avatar = req.user.avatar;
-            username = req.user.username;
-            loggedUser = req.user;
-        }
-
-        res.locals = {
-            avatar,
-            loggedUser,
-            username
-        };
-
-        next();
-    });
-
+    app.use(userMiddleware.hasLoggedUser);
     app.use('/campaigns', router);
 };
