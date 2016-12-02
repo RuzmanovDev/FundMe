@@ -1,8 +1,6 @@
 /* globals module, require */
 'use strict';
 
-const validator = require('./utils/validator');
-
 module.exports = (models) => {
     const { User } = models;
 
@@ -22,17 +20,6 @@ module.exports = (models) => {
                             return resolve(users);
                         }
                     })
-            });
-        },
-        getAllUsers() {
-            return new Promise((resolve, reject) => {
-                User.find({}, (err, users) => {
-                    if (err) {
-                        return reject(err);
-                    } else {
-                        return resolve(users);
-                    }
-                });
             });
         },
         getById(userId) {
