@@ -16,10 +16,10 @@ module.exports = (models) => {
                     .exec((err, users) => {
                         if (err) {
                             return reject(err);
-                        } else {
-                            return resolve(users);
                         }
-                    })
+
+                        return resolve(users);
+                    });
             });
         },
         getById(userId) {
