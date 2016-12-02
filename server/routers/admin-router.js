@@ -2,7 +2,6 @@
 
 const router = require('express').Router();
 
-
 module.exports = function ({data, app, auth}) {
     const adminController = require('../controllers/admin-controller')({ data });
 

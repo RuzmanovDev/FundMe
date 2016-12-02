@@ -86,10 +86,7 @@ module.exports = (models) => {
                         dbUser.lastname = userData.lastname || dbUser.lastname;
                         dbUser.email = userData.email || dbUser.email;
                         dbUser.isBlocked = userData.isBlocked || dbUser.isBlocked;
-
-                        if (userData.isAdmin === 'true') {
-                            dbUser.assignRole('admin');
-                        } else {
+                            foundUser.assignRole('admin');                        } else {
                             dbUser.removeRole('admin');
                         }
 

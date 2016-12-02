@@ -12,16 +12,10 @@ let storage = multer.memoryStorage();
 let auth = require('./server/config/auth');
 let grid = require('gridfs');
 let upload = multer({ storage: storage });
-
-// let options = {
-//     app,
-//     data,
-//     database,
-//     upload
-// };
+let encryption = require('./server/utilities/encryption');
 
 require('./server/config/express')(config, app);
-require('./server/routers')({ app, data, database, upload, auth, grid });
+require('./server/routers')({ app, data, database, upload, auth, grid, encryption });
 
 app.listen(config.port, () => console.log('Server running at port : ' + config.port));
 

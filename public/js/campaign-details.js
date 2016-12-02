@@ -116,7 +116,10 @@ $(function () {
     $(window).endlessScroll({
         inflowPixels: 300,
         callback: function () {
-            var page = ($('.comments-list').length / 5 + 1) | 0;
+            var page = $('.comments-list').length / 5 | 0;
+            if (page === 0) {
+                page += 1;
+            }
             var url = window.location.href;
 
             var fullUrl = ($(location).attr('href'));
@@ -125,6 +128,7 @@ $(function () {
             console.log(url);
             requester.getJSON(url, {})
                 .then(comments => {
+                    console.log(comments);
                     comments.forEach(comment => {
                         $('ul.comments-list').append(buildComments(comment));
                     });
