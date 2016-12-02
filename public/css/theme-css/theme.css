@@ -2453,6 +2453,7 @@ button[type="submit"] .form-loading {
   background: #47b475;
   box-shadow: none !important;
 }
+
 .bg-primary .progress-bar {
   background: #63c18b;
 }
@@ -2505,7 +2506,7 @@ button[type="submit"] .form-loading {
   border: 1px solid #47b475;
 }
 .bg-primary .progress-2 .bar-holder {
-  border-color: #71c795;
+  border-color: gray;
 }
 /*!---------- 15. STATS ----------*/
 .stat-2 h1 {
