@@ -4,7 +4,7 @@
 const passport = require('passport');
 const router = require('express').Router();
 
-module.exports = function ({data, app, encryption}) {
+module.exports = function({ data, app, encryption, userMiddleware }) {
     const authController = require('../controllers/auth-controller')({ data, encryption });
 
     router
@@ -14,5 +14,6 @@ module.exports = function ({data, app, encryption}) {
         .post('/register', authController.register)
         .post('/logout', authController.logout);
 
+    app.use(userMiddleware.hasLoggedUser);
     app.use('/auth', router);
 };

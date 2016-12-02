@@ -1,7 +1,7 @@
 const auth = require('../config/auth');
 const router = require('express').Router();
 
-module.exports = function (options) {
+module.exports = function(options) {
     let controller = require('../controllers/messages-controller')(options);
 
     router
@@ -10,5 +10,6 @@ module.exports = function (options) {
         .put('/', auth.isAuthenticated, controller.addMessage)
         .post('/texts', auth.isAuthenticated, controller.getTexts);
 
+    options.app.use(options.userMiddleware.hasLoggedUser);
     options.app.use('/messages', router);
 };

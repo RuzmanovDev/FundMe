@@ -13,10 +13,9 @@ let auth = require('./server/config/auth');
 let grid = require('gridfs');
 let upload = multer({ storage: storage });
 let encryption = require('./server/utilities/encryption');
+let userMiddleware = require('./server/middlewares/user-middleware');
 
 require('./server/config/express')(config, app);
-require('./server/routers')({ app, data, database, upload, auth, grid, encryption });
+require('./server/routers')({ app, data, database, upload, auth, grid, encryption, userMiddleware });
 
 app.listen(config.port, () => console.log('Server running at port : ' + config.port));
-
-
