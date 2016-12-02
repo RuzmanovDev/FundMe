@@ -1,7 +1,7 @@
 'use strict';
-const encryption = require('../utilities/encryption');
 
-module.exports = function ({data}) {
+
+module.exports = function ({data, encryption}) {
     return {
         login(req, res) {
             let userFromTheRequest = req.body;
@@ -61,10 +61,9 @@ module.exports = function ({data}) {
         },
         logout(req, res) {
             req.logout();
-            res.redirect('/auth/login');
+            res.status(202).redirect('/auth/login');
         },
         getLogin(req, res) {
-            //todo Is this code correct?
             res.status(200).render('user/login');
         },
         getRegister(req, res) {

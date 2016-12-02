@@ -1,7 +1,7 @@
 extends ../shared/_layout
 block content 
  
-    form.mt24(action="/user/settings/update", method="POST", enctype="multipart/form-data")
+    form.mt24(id="settings-form" action="/user/settings/update", method="POST", enctype="multipart/form-data")
       .container.text-center
         .row.mb16
           .col-sm-12
@@ -10,16 +10,21 @@ block content
             hr
           .col-sm-6
             label Registered First Name
-            input(type='text', placeholder='{avatar.firstname}', name='firstname', id='firstname')
+            input(type='text', placeholder='First name', name='firstname', id='firstname')
             label Registered Last Name
-            input(type='text', placeholder='{avatar.lastname}', name='lastname', id='lastname')
+            input(type='text', placeholder='Last name', name='lastname', id='lastname')
           .col-sm-6
             .form-group
               label Enter Old Password
-              input.form-control(type='password')
+              input.form-control(type='password', name="oldPassword", id="oldPassword")
+              if wrongPassword
+                p.mb0(id="wrong-password") You have entered wrong password!
               label Enter New Password
-              input.form-control(type='password')
+              input.form-control(type='password', name="newPassword", id="newPassword")
               label Confirm New Password
-              input.form-control(type='password')
+              input.form-control(type='password', name="confirmedNewPassword", id="confirmedNewPassword")
+              if passwordsDoNotMatch
+                p.mb0(id="wrong-repeated-password") Password do not match!
         hr
-        input(type="submit" value="update")
+        input(type="submit", value="update", id="update-info")
+        script(src="/public/js/user-settings.js")

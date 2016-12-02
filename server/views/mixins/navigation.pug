@@ -17,7 +17,7 @@ mixin main-navigation
                                     a(href='/campaigns')
                                         | Campaigns
                                 li
-                                    a(href='/about')
+                                    a(href='/home/about')
                                         | About Us
                         .module.widget-handle.search-widget-handle.left
                             .search
@@ -34,6 +34,16 @@ mixin main-navigation
                                           a(href="/user/profile/" + loggedUser.id)
                                             img(class="profile-pic-small" src="/user/avatar/" + avatar)
                                             = username
+                                        li.has-dropdown
+                                            a(href='#')
+                                                | Admin
+                                            ul
+                                                li
+                                                    a(href='#')
+                                                        | User
+                                                li
+                                                    a(href='#')
+                                                        | Not user
                                         li
                                         .module.widget-handle.left
                                             a.btn.signout-button(href="javascript:document.getElementById('sign-out-form').submit()") SIGN OUT

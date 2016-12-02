@@ -1,21 +1,25 @@
 /* globals module, require */
 'use strict';
 
-const validator = require('./utils/validator');
-
 module.exports = (models) => {
     const { User } = models;
 
     return {
-        getAllUsers() {
+        filterUsers(filter, page, perPage) {
+            filter = filter | {};
+            page = page | 0;
+            perPage = perPage | 0;
             return new Promise((resolve, reject) => {
-                User.find({}, (err, users) => {
-                    if (err) {
-                        return reject(err);
-                    } else {
-                        return resolve(users);
-                    }
-                });
+                User.find(filter)
+                    .skip(page * perPage)
+                    .limit(perPage)
+                    .exec((err, users) => {
+                        if (err) {
+                            return reject(err);
+                        } else {
+                            return resolve(users);
+                        }
+                    })
             });
         },
         getById(userId) {
@@ -77,16 +81,15 @@ module.exports = (models) => {
             return new Promise((resolve, reject) => {
                 this.getById(userId)
                     .then((foundUser) => {
-
                         foundUser.avatar = info.avatar || foundUser.avatar;
                         foundUser.firstname = info.firstname || foundUser.firstname;
                         foundUser.lastname = info.lastname || foundUser.lastname;
                         foundUser.email = info.email || foundUser.email;
                         foundUser.isBlocked = info.isBlocked || foundUser.isBlocked;
+                        foundUser.passHash = info.passHash || foundUser.passHash;
 
                         let isAdmin = !info.isAdmin;
                         if (isAdmin) {
-                            console.log('IN IF');
                             foundUser.assignRole('admin');
                         } else {
                             foundUser.removeRole('admin');
@@ -95,12 +98,14 @@ module.exports = (models) => {
                         foundUser.save();
                         resolve({
                             userId: foundUser.id,
+                            avatar: foundUser.avatar,
                             username: foundUser.username,
                             email: foundUser.email,
                             firstname: foundUser.firstname,
                             lastname: foundUser.lastname,
                             isAdmin: foundUser.isAdmin,
-                            isBlocked: foundUser.isBlocked
+                            isBlocked: foundUser.isBlocked,
+                            passHash: foundUser.passHash
                         });
                     });
             });

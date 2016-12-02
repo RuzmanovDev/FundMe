@@ -6,7 +6,8 @@ module.exports = function ({data, app}) {
     const homeController = require('../controllers/home-controller')({ data });
 
     router
-        .get('/', homeController.getHome);
+        .get('/', homeController.getHome)
+        .get('/about', homeController.getAbout);
 
     app.use((req, res, next) => {
         let avatar = false;

@@ -6,9 +6,9 @@ block content
             .row
                 .col-sm-6
                     h4.uppercase.mb16 Title
-                    input#title(type='text', name='title', placeholder='Add title', required='')
+                    input#title(type='text', name='title', placeholder='Add title', required)
                     h4.uppercase.mb16 Target
-                    input#target(type='text', name='target', placeholder='Sum', required='')
+                    input#target(type='number', name='target', style='width: 100%', required)
                     h4.uppercase.mb16 Category
                     .select-option
                         i.ti-angle-down
@@ -20,12 +20,12 @@ block content
                             option#medical.category-option(value='Medical') Medical
                             option#travel.category-option(value='Travel') Travel
                             option#education.category-option(value='Education') Education
-                    textarea(name='description', rows='3', required='')
+                    textarea(name='description', rows='3', placeholder="Description..." required)
                 .col-sm-6
                     h4.uppercase.mb16 Insert image
                     label(for='avatar')
                         input#avatar(type='file', name='avatar')
-                    //- img(src='../img/agency1.jpg', alt='Image')
+                    img(src='/public/img/default-campaign.png', alt='Image')
                 input#create-campaign.mt8(type='submit', value='Create')
 
 
