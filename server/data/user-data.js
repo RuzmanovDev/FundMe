@@ -1,21 +1,25 @@
 /* globals module, require */
 'use strict';
 
-const validator = require('./utils/validator');
-
 module.exports = (models) => {
     const { User } = models;
 
     return {
-        getAllUsers() {
+        filterUsers(filter, page, perPage) {
+            filter = filter | {};
+            page = page | 0;
+            perPage = perPage | 0;
             return new Promise((resolve, reject) => {
-                User.find({}, (err, users) => {
-                    if (err) {
-                        return reject(err);
-                    } else {
-                        return resolve(users);
-                    }
-                });
+                User.find(filter)
+                    .skip(page * perPage)
+                    .limit(perPage)
+                    .exec((err, users) => {
+                        if (err) {
+                            return reject(err);
+                        } else {
+                            return resolve(users);
+                        }
+                    })
             });
         },
         getById(userId) {
@@ -73,35 +77,28 @@ module.exports = (models) => {
                 });
             });
         },
-        updateUser(userId, info) {
+        updateUser(userId, userData) {
             return new Promise((resolve, reject) => {
                 this.getById(userId)
-                    .then((foundUser) => {
-                        foundUser.avatar = info.avatar || foundUser.avatar;
-                        foundUser.firstname = info.firstname || foundUser.firstname;
-                        foundUser.lastname = info.lastname || foundUser.lastname;
-                        foundUser.email = info.email || foundUser.email;
-                        foundUser.isBlocked = info.isBlocked || foundUser.isBlocked;
-                        foundUser.passHash = info.passHash || foundUser.passHash;
-
-                        let isAdmin = !info.isAdmin;
-                        if (isAdmin) {
-                            console.log('IN IF');
-                            foundUser.assignRole('admin');
-                        } else {
-                            foundUser.removeRole('admin');
+                    .then((dbUser) => {
+                        dbUser.avatar = userData.avatar || dbUser.avatar;
+                        dbUser.firstname = userData.firstname || dbUser.firstname;
+                        dbUser.lastname = userData.lastname || dbUser.lastname;
+                        dbUser.email = userData.email || dbUser.email;
+                        dbUser.isBlocked = userData.isBlocked || dbUser.isBlocked;
+                            foundUser.assignRole('admin');                        } else {
+                            dbUser.removeRole('admin');
                         }
 
-                        foundUser.save();
+                        dbUser.save();
                         resolve({
-                            userId: foundUser.id,
-                            username: foundUser.username,
-                            email: foundUser.email,
-                            firstname: foundUser.firstname,
-                            lastname: foundUser.lastname,
-                            passHash: foundUser.passHash,
-                            isAdmin: foundUser.isAdmin,
-                            isBlocked: foundUser.isBlocked
+                            userId: dbUser.id,
+                            username: dbUser.username,
+                            email: dbUser.email,
+                            firstname: dbUser.firstname,
+                            lastname: dbUser.lastname,
+                            isAdmin: dbUser.isAdmin,
+                            isBlocked: dbUser.isBlocked
                         });
                     });
             });
