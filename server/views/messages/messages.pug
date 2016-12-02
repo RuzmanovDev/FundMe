@@ -9,9 +9,9 @@ block content
                         h3 Messages
                 .panel-body
                     div(id="MessageBody")
-                        ul(id="messages-list")
-                        div(id="sendButton", class="bgSuccessDarker pull-right", style="width: 100px")
-                            p(id="send-message") Send
+                        ul(id="messages-list"  style="height:200px; overflow-y:scroll")
+                        div(id="sendButton", class="bg-success pull-right", style="width: 100px")
+                            p(id="send-message" class="center") Send
                         div(id="messageContainer")
                             textarea(id="messageToSend")
             .col-md-4
@@ -19,7 +19,7 @@ block content
                     .panel-heading
                         h3 Conversations
                     .panel-body
-                        div(id="friendsContainer")
+                        div(id="friendsContainer" style="height:350px; overflow-y:scroll")
                             each conversation in result
                                 img(src="/user/avatar/" + conversation.user.avatar alt="" style="width: 38px;" class="img-thumbnail")                            
                                 a(href="#" class="open-conversation" data-userid=conversation.user.id, data-username=conversation.user.username identification= conversation.identification)
