@@ -1,4 +1,4 @@
-/* globals it describe beforeEach afterEach*/
+/* globals it describe beforeEach afterEach */
 
 const chai = require('chai');
 const sinonModule = require('sinon');
@@ -162,7 +162,7 @@ describe('User data tests', () => {
             email: 'nqkakuvemailtam',
             isBlocked: false,
             passHash: 'heshiranaparola',
-            roles: ['admin']
+            roles: []
         };
 
         let dummyUser = {
