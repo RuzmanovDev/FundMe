@@ -43,7 +43,8 @@ let campaignSchema = new Schema({
         required: true
     },
     image: {
-        type: String
+        type: String,
+        default: '5841a39980a5674214d8e162'
     },
     target: {
         type: Number,

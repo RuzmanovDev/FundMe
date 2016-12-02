@@ -56,8 +56,7 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        //TO DO - set dafault imageID
-        default: '583c7e9045b03411f840df1a'
+        default: '5841a227d2a87a12f08ee425'
     },
     roles: [String],
     isDeleted: Boolean,
