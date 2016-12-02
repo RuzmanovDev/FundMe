@@ -85,7 +85,8 @@ module.exports = (models) => {
                         foundUser.firstname = info.firstname || foundUser.firstname;
                         foundUser.lastname = info.lastname || foundUser.lastname;
                         foundUser.email = info.email || foundUser.email;
-                        foundUser.isBlocked = info.isBlocked || foundUser.isBlocked;
+                        //foundUser.isBlocked = info.isBlocked || foundUser.isBlocked;
+                        foundUser.isBlocked = info.isBlocked;
                         foundUser.passHash = info.passHash || foundUser.passHash;
 
                         if (info.isAdmin === 'true') {
