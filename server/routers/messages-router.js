@@ -7,7 +7,8 @@ module.exports = function (options) {
     router
         .get('/', auth.isAuthenticated, controller.getMessageForm)
         .post('/', auth.isAuthenticated, controller.initializeMessage)
-        //.get('/texts', auth.isAuthenticated,controller.getTexts);
+        .put('/', auth.isAuthenticated, controller.addMessage)
+        .post('/texts', auth.isAuthenticated, controller.getTexts);
 
     options.app.use('/messages', router);
 };

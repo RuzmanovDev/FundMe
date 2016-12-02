@@ -15,14 +15,14 @@ module.exports = function (models) {
             });
         },
         createConversation(args) {
-            
+
             let message = new Message({
                 firstUser: args.firstUser,
                 secondUser: args.secondUser,
                 identification: args.identification
             });
 
-             return new Promise((resolve, reject) => {
+            return new Promise((resolve, reject) => {
                 message.save((err) => {
                     if (err) {
                         return reject(err);
@@ -43,6 +43,21 @@ module.exports = function (models) {
                         return resolve(message);
                     }
                 });
+            });
+        },
+        addMessage(identification, text, owner, date) {
+
+            return new Promise((resolve, reject) => {
+                this.findByIdentification(identification)
+                    .then(message => {
+                        message.texts.push({
+                            text,
+                            owner,
+                            date
+                        });
+
+                        resolve(message.save());
+                    });
             });
         }
     };
