@@ -22,27 +22,30 @@ module.exports = function ({grid, data, database, encryption}) {
             res.status(200).render('user/settings', {
                 avatar: req.user.avatar,
                 user: req.user,
-                username: req.user.username
+                username: req.user.username,
+                wrongPassword: false,
+                passwordsDoNotMatch: false
             });
         },
         updateSettings(req, res) {
             let gfs = grid(database.connection.db, database.mongo);
+
             let user = req.user;
             let userSalt = req.user.salt;
             let oldPassword = req.body.oldPassword;
             let userHash = req.user.passHash;
             let newUserHash;
+            console.log(req.body);
 
             if (oldPassword) {
                 let hashedEnteredPassword = encryption.generateHashedPassword(userSalt, oldPassword);
                 if (userHash !== hashedEnteredPassword) {
-                    res.status(401).json({ msg: 'You have entered wrong passowrd!' });
+                    res.status(401).render('user/settings', { wrongPassword: true });
                     return;
                 }
 
                 if (req.body.newPassword !== req.body.confirmedNewPassword) {
-
-                    res.status(401).json({ msg: 'Password do not match' });
+                    res.status(401).render('user/settings', { passwordsDoNotMatch: true });
                     return;
                 } else if (req.body.newPassword === req.body.confirmedNewPassword && req.body.newPassword !== '') {
                     newUserHash = encryption.generateHashedPassword(userSalt, req.body.newPassword);
@@ -56,8 +59,8 @@ module.exports = function ({grid, data, database, encryption}) {
                 passHash: newUserHash,
                 avatar: user.avatar
             };
-            let file = req.file;
 
+            let file = req.file;
             if (file) {
                 file.buffer = req.file.buffer;
             } else {
@@ -71,10 +74,7 @@ module.exports = function ({grid, data, database, encryption}) {
 
                 data.updateUser(user._id, infoToUpdate)
                     .then(() => {
-                        res.status(201).json({
-                            success: true,
-                            redirect: '/user/settings'
-                        });
+                        res.status(201).render('user/settings', { wrongPassword: false, passwordsDoNotMatch: false });
                     });
             });
         },

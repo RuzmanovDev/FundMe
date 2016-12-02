@@ -17,12 +17,14 @@ block content
             .form-group
               label Enter Old Password
               input.form-control(type='password', name="oldPassword", id="oldPassword")
-              p.mb0.hidden(id="wrong-password") You have entered wrong password!
+              if wrongPassword
+                p.mb0(id="wrong-password") You have entered wrong password!
               label Enter New Password
               input.form-control(type='password', name="newPassword", id="newPassword")
               label Confirm New Password
               input.form-control(type='password', name="confirmedNewPassword", id="confirmedNewPassword")
-              p.mb0.hidden(id="wrong-repeated-password") Password do not match!
+              if passwordsDoNotMatch
+                p.mb0(id="wrong-repeated-password") Password do not match!
         hr
         input(type="submit", value="update", id="update-info")
         script(src="/public/js/user-settings.js")

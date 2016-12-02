@@ -1,51 +1,65 @@
 $(function () {
+    // var image = '';
 
-    $('#update-info').on('click', function (ev) {
-        ev.preventDefault();
+    // $('#avatar').on('change', function () {
+    //     console.log(this.files[0]);
+    //     if (this.files && this.files[0]) {
+    //         var imageReader = new FileReader();
+    //         imageReader.onload = function (e) {
+    //             image = '' + e.target.result;
+    //         }
+    //         imageReader.readAsDataURL(this.files[0]);
+    //     }
 
-        var firstname = $('#firstname').val();
-        var lastname = $('#lastname').val();
-        var oldPassword = $('#oldPassword').val();
-        var newPassword = $('#newPassword').val();
-        var confirmedNewPassword = $('#confirmedNewPassword').val()
+    //     $('#update-info').on('click', function (ev) {
+    //         //
+    //         var avatar = $('#avatar');
+    //         var firstname = $('#firstname').val();
+    //         var lastname = $('#lastname').val();
+    //         var oldPassword = $('#oldPassword').val();
+    //         var newPassword = $('#newPassword').val();
+    //         var confirmedNewPassword = $('#confirmedNewPassword').val()
 
-        var body = {
-            firstname,
-            lastname,
-            oldPassword,
-            newPassword,
-            confirmedNewPassword
-        }
+    //         if (confirmedNewPassword !== newPassword) {
+    //             $('#wrong-repeated-password')
+    //                 .removeClass('hidden')
+    //                 .fadeIn(200)
+    //                 .fadeOut(200)
+    //                 .fadeIn(200)
+    //                 .fadeOut(200)
+    //                 .fadeIn(200);
+    //             return;
+    //         }
 
-        if (confirmedNewPassword !== newPassword) {
-            $('#wrong-repeated-password')
-                .removeClass('hidden')
-                .fadeIn(200)
-                .fadeOut(200)
-                .fadeIn(200)
-                .fadeOut(200)
-                .fadeIn(200);
-            return;
-        }
+    //         if (image1 !== '') {
+    //             ev.preventDefault();
 
-        var url = '/user/settings/update';
-        requester.postJSON(url, body)
-            .then((response) => {
-                window.location = response.redirect;
-            })
-            .catch(err => {
-                $('#wrong-password')
-                    .removeClass('hidden')
-                    .fadeIn(200)
-                    .fadeOut(200)
-                    .fadeIn(200)
-                    .fadeOut(200)
-                    .fadeIn(200)
-                console.log(err);
-            });
+    //             var url = '/user/settings/update';
+    //             var body = {
+    //                 firstname,
+    //                 lastname,
+    //                 oldPassword,
+    //                 newPassword,
+    //                 confirmedNewPassword,
+    //             }
 
-        return false;
-    })
+    //             requester.postJSON(url, body)
+    //                 .then((response) => {
+    //                     window.location = response.redirect;
+    //                 })
+    //                 .catch(err => {
+    //                     $('#wrong-password')
+    //                         .removeClass('hidden')
+    //                         .fadeIn(200)
+    //                         .fadeOut(200)
+    //                         .fadeIn(200)
+    //                         .fadeOut(200)
+    //                         .fadeIn(200)
+    //                     console.log(err);
+    //                 });
 
-
+    //             return false;
+    //         }
+    //     })
+    // });
 });

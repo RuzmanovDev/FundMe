@@ -98,6 +98,7 @@ module.exports = (models) => {
                         foundUser.save();
                         resolve({
                             userId: foundUser.id,
+                            avatar: foundUser.avatar,
                             username: foundUser.username,
                             email: foundUser.email,
                             firstname: foundUser.firstname,
