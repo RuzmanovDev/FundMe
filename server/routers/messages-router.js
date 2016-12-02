@@ -5,8 +5,10 @@ module.exports = function (options) {
     let controller = require('../controllers/messages-controller')(options);
 
     router
-    .get('/', auth.isAuthenticated, controller.getMessageForm)
-    //.get('/:id',auth.isAuthenticated,controller.exactMessage);
+        .get('/', auth.isAuthenticated, controller.getMessageForm)
+        .post('/', auth.isAuthenticated, controller.initializeMessage)
+        .put('/', auth.isAuthenticated, controller.addMessage)
+        .post('/texts', auth.isAuthenticated, controller.getTexts);
 
     options.app.use('/messages', router);
 };

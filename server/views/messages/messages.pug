@@ -9,8 +9,9 @@ block content
                         h3 Messages
                 .panel-body
                     div(id="MessageBody")
+                        ul(id="messages-list")
                         div(id="sendButton", class="bgSuccessDarker pull-right", style="width: 100px")
-                            p Send
+                            p(id="send-message") Send
                         div(id="messageContainer")
                             textarea(id="messageToSend")
             .col-md-4
@@ -20,7 +21,11 @@ block content
                     .panel-body
                         div(id="friendsContainer")
                             each conversation in result
-                                .bgSuccessDark(data-userid= conversation.user.id, data-username= conversation.user.username)
-                                    img(src="/user/avatar/" + conversation.user.avatar alt="" style="width: 28px;" class="img-thumbnail")
-                                    .friendName
-                                        span #{conversation.user.username}
+                                img(src="/user/avatar/" + conversation.user.avatar alt="" style="width: 38px;" class="img-thumbnail")                            
+                                a(href="#" class="open-conversation" data-userid=conversation.user.id, data-username=conversation.user.username identification= conversation.identification)
+                                    bgSuccessDark
+                                        .friendName
+                                            span #{conversation.user.username}
+
+block scripts
+    script(src="/public/js/texts.js")

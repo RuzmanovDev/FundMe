@@ -8,7 +8,8 @@ module.exports = function () {
 
     let Campaign = require('../models/campaign-model');
     let User = require('../models/user-model');
-    let models = { Campaign, User };
+    let Message = require('../models/message-model');
+    let models = { Campaign, User, Message };
     let data = {};
 
     fs.readdirSync(__dirname)

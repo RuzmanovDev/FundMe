@@ -35,16 +35,14 @@ block content
                             if campaign.loggedUser.loggedIn
                                 p.lead.mb48 Please fill the form to procceed with the donation
                                 form(method='POST', action='/campaigns/donate/'+ campaign._id, id='donation-form')
-                                    label(for="credit-card") Credit card number
-                                    input(id="credit-card", type="text", name="creditCardNumber" required)
-                                    label(for="donation") Donation value
-                                    input(id="donation", type="text", name="donationValue" required)
+                                    input.display-block(style='width: 100%' id="credit-card", type="number", name="creditCardNumber" placeholder='Enter credit card number' required)
+                                    input.display-block(style='width: 100%' id="donation", type="number", name="donationValue" placeholder='Enter donation value' required)
                                     button.btn-white.mb0(id="donate-btn", type='submit') Donate
                             else
                                 p.lead.mb48 Please log in in order to donate
                 if campaign.loggedUser.loggedIn            
                             form(method='POST', action="/campaigns/campaign/" + campaign._id)
-                                textarea(rows='3', id="comment-content", name="commentContent", placeholder='Comment')
+                                textarea(rows='3', id="comment-content", name="commentContent", placeholder='Comment', required)
                                 input(id="add-comment", type="submit", value="AddComment")
                 .comments
                         ul.comments-list
