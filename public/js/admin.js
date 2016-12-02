@@ -1,22 +1,20 @@
 /* globals $ */
+
 'use strict';
 
 $(function() {
-
     $('#all-users').jsGrid({
-        height: '700px',
+        height: '100%',
         width: '100%',
         filtering: true,
         editing: true,
         sorting: true,
         paging: true,
         autoload: true,
-        pageSize: 3,
-        // pageLoading: true,
+        pageSize: 5,
         pageButtonCount: 3,
         controller: {
             loadData: function(filter) {
-                console.log(filter)
                 return $.ajax({
                     type: 'GET',
                     url: '/admin/users',
@@ -42,5 +40,4 @@ $(function() {
             { type: 'control', deleteButton: false }
         ]
     });
-
 });

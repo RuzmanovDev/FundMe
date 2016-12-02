@@ -33,10 +33,6 @@ module.exports = function({ data }) {
                             isBlocked: user.isBlocked
                         };
                     });
-                    // res.status(200).json({
-                    //     data: result,
-                    //     itemsCount: result.length
-                    // });
 
                     res.status(200).json(result);
                 });
