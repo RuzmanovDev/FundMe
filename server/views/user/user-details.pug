@@ -11,18 +11,24 @@ block content
             div.author-action
             
             if (user.id != loggedUser.id)
-                a.btn.btn-red(href="#") Send a Message
+                a.btn.btn-red(id="send-message" user-id =user.id user-avatar=user.avatar user-username=user.username ) Send a Message
             else
                 a.btn.btn-lg.btn-warning(href='/user/settings') Update profile
+                a.btn.btn-lg.btn-red(href='/messages') Messages
             br
             hr
     div.container
         div.row
             each campaign in campaigns
-                div.col-lg-4.col-sm-6
+                div.col-md-4.col-sm-6.mb16
                     a(href="/campaigns/campaign/" + campaign.id)
-                        div.w3-card-4
-                            img(class="card-img-top" src="/campaigns/campaign/picture/" + campaign.image)
-                            div.card-block
-                                h4.card-title #{campaign.title}
-                                p.card-text #{campaign.description}
+                        div.w3-card-12.bg-dark
+                            img(class="card-img-top" src="/campaigns/campaign/picture/" + campaign.image style='width: 100%; height: 270px')
+                            div.w3-container
+                                h4.mt8 #{campaign.title}
+                                span Raised #{campaign.funded} $
+                                span.module.right #{campaign.percentage} %
+                                .progress.progress-1
+                                    .progress-bar(data-progress= campaign.percentage)
+block scripts
+     script(src="/public/js/messages.js")

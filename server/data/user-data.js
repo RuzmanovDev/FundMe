@@ -16,10 +16,10 @@ module.exports = (models) => {
                     .exec((err, users) => {
                         if (err) {
                             return reject(err);
-                        } else {
-                            return resolve(users);
                         }
-                    })
+
+                        return resolve(users);
+                    });
             });
         },
         getById(userId) {
@@ -97,6 +97,7 @@ module.exports = (models) => {
                         foundUser.save();
                         resolve({
                             userId: foundUser.id,
+                            avatar: foundUser.avatar,
                             username: foundUser.username,
                             email: foundUser.email,
                             firstname: foundUser.firstname,

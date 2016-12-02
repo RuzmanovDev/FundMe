@@ -6,7 +6,9 @@ module.exports = function(options) {
 
     router
         .get('/', auth.isAuthenticated, controller.getMessageForm)
-        //.get('/:id',auth.isAuthenticated,controller.exactMessage);
+        .post('/', auth.isAuthenticated, controller.initializeMessage)
+        .put('/', auth.isAuthenticated, controller.addMessage)
+        .post('/texts', auth.isAuthenticated, controller.getTexts);
 
     options.app.use(options.userMiddleware.hasLoggedUser);
     options.app.use('/messages', router);

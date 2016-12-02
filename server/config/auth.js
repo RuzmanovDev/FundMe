@@ -6,8 +6,8 @@ module.exports = {
             res.redirect('/auth/login');
         }
     },
-    isInRole: (role) => {
-        return (req, res, next) => {
+    isInRole: (role) =>
+        (req, res, next) => {
             if (req.user && req.user.roles.indexOf(role) > -1) {
                 next();
             } else {
@@ -16,6 +16,6 @@ module.exports = {
                     message: 'Not authorized!'
                 });
             }
-        };
-    }
+        }
+
 };

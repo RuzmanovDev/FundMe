@@ -28,7 +28,7 @@ module.exports = function (models) {
         },
         getAllCampaigns(pageNumber, pageSize) {
             return new Promise((resolve, reject) => {
-                var query = Campaign.find({})
+                let query = Campaign.find({})
                     .skip(pageNumber * pageSize)
                     .limit(pageSize);
 
@@ -37,7 +37,7 @@ module.exports = function (models) {
         },
         findCampaignsByCategory(category, pageNumber, pageSize) {
             return new Promise((resolve, reject) => {
-                var query = Campaign.find({ category })
+                let query = Campaign.find({ category })
                     .skip(pageNumber * pageSize)
                     .limit(pageSize);
 
