@@ -86,7 +86,6 @@ module.exports = (models) => {
 
                         let isAdmin = !info.isAdmin;
                         if (isAdmin) {
-                            console.log('IN IF');
                             foundUser.assignRole('admin');
                         } else {
                             foundUser.removeRole('admin');
