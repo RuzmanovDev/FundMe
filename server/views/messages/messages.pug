@@ -10,10 +10,9 @@ block content
                 .panel-body
                     div(id="MessageBody")
                         ul(id="messages-list"  style="height:200px; overflow-y:scroll")
-                        div(id="sendButton", class="bg-success pull-right", style="width: 100px")
-                            p(id="send-message" class="center") Send
+                        a.btn.btn-filled(id="send-message", href="#") Send
                         div(id="messageContainer")
-                            textarea(id="messageToSend")
+                            textarea(id="messageToSend" required)
             .col-md-4
                 .panel.panel-success
                     .panel-heading

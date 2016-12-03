@@ -11,36 +11,51 @@ $('.open-conversation').on('click', function (e) {
 
     requester.postJSON('/messages/texts', body, '')
         .then((result) => {
-            appendTexts(result.texts)
+            appendTexts(result.texts, result.loggedUser)
         })
 });
 
 //bgSuccessDark(data-userid=conversation.user.id, data-username=conversation.user.username)
 //                        ul(id="messages-list")
 
-function appendTexts(texts) {
+function appendTexts(texts, loggedUser) {
     if (!texts) {
         return;
     }
     var ul = $('#messages-list');
     texts.forEach(text => {
-        ul.append(buildMessage(text.owner, text.date, text.text));
+        ul.append(buildMessage(text.owner, text.date, text.text, loggedUser));
     })
 }
 
-function buildMessage(owner, date, text) {
-    return `<li>
-            <strong>${owner}</strong>
-    <p>
-        <span>${date}</span>
-      
-    </p>
-    <p>
+function buildMessage(owner, date, text, loggedUser) {
+    if (owner === loggedUser) {
+        return `<li class="left display-block bg-light" style="padding: 5px">
+        <p>
+            <strong>Me</strong>
+        <span> on ${date.substring(1,16)} at ${date.substring(18,22)}</span>
+        </P>
+    <p style="white-space: normal; margin: 0px">
        
        ${text}
     </p>
-               
-           </li>`
+           </li>
+           <hr style="margin: 0px">`
+    }
+    else {
+        return `<li class="right display-block" style="padding: 5px; text-align: right; background-color: #dff0d8; color: #3c763d">
+        <p>
+            <strong>${owner}</strong>
+        <span> on ${date.substring(1,16)} at ${date.substring(18,22)}</span>
+        </P>
+    <p style="white-space: normal; margin: 0px">
+       
+       ${text}
+    </p>
+           </li>
+           <hr style="margin: 0px">`
+    }
+
 }
 
 $('#send-message').on('click', function (e) {
@@ -50,14 +65,17 @@ $('#send-message').on('click', function (e) {
     if (!identification) {
         return;
     }
+    if (!text) {
+        return;
+    }
     var body = {
         identification,
         text
     }
 
     requester.putJSON('/messages', body, '')
-        .then((text) => {
-            appendTexts([text])
+        .then((result) => {
+            appendTexts(result.texts, result.loggedUser)
             $('#messageToSend').val('')
         })
 
