@@ -14,7 +14,8 @@ include ../mixins/non-detailed-campaign.pug
                                 .tile-right.bg-dark
                                     .description
                                         h4.mb8 #{campaign.title}
-                                        p Short description here?
+                                        p Campaign by 
+                                            a(href="/user/profile/" + campaign.creator.id) #{campaign.creator.username}
                                         .progress-bars
                                             .progress.progress-2
                                                 span #{campaign.funded} / #{campaign.target} $
