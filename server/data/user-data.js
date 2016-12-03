@@ -6,9 +6,9 @@ module.exports = (models) => {
 
     return {
         filterUsers(filter, page, perPage) {
-            filter = filter | {};
-            page = page | 0;
-            perPage = perPage | 0;
+            filter = filter || {};
+            page = page || 0;
+            perPage = perPage || 0;
             return new Promise((resolve, reject) => {
                 User.find(filter)
                     .skip(page * perPage)
@@ -85,7 +85,6 @@ module.exports = (models) => {
                         foundUser.firstname = info.firstname || foundUser.firstname;
                         foundUser.lastname = info.lastname || foundUser.lastname;
                         foundUser.email = info.email || foundUser.email;
-                        //foundUser.isBlocked = info.isBlocked || foundUser.isBlocked;
                         foundUser.isBlocked = info.isBlocked;
                         foundUser.passHash = info.passHash || foundUser.passHash;
 
