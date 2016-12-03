@@ -49,12 +49,13 @@ module.exports = function({grid, data, database}) {
                 .then(campaign => {
                     if (campaign === null) {
                         return res.status(404)
-                            .redirect('/error');
+                            .redirect('/home/error');
                     }
 
                     let pagedComments = campaign.comments
                         .splice(startPage, defaultCommentsCount);
 
+                       
                     campaign['loggedUser'] = {};
                     if (req.user) {
                         campaign.loggedUser['loggedIn'] = true;
@@ -64,7 +65,7 @@ module.exports = function({grid, data, database}) {
                     } else {
                         campaign.loggedUser['loggedIn'] = false;
                     }
-
+                    
                     return res.status(200).render('campaigns/campaign-details', {
                         campaign, pagedComments
                     });
