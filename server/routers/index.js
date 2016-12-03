@@ -13,6 +13,6 @@ module.exports = function ({ app, data, database, upload, auth, grid, encryption
         });
 
     app.get('*', (req, res) => {
-        res.redirect('home/error');
+        res.redirect('/home/error');
     });
 };

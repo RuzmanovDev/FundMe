@@ -47,11 +47,14 @@ module.exports = function ({data}) {
         getTexts(req, res) {
             let usernames = [req.user.username, req.body.username].sort();
             let identification = usernames[0] + usernames[1];
+            let loggedUsername = req.user.username;
 
             data.findByIdentification(identification)
                 .then(message => {
+                    console.log(message);
                     res.status(200).json({
-                        texts: message.texts
+                        texts: message.texts,
+                        loggedUser: loggedUsername
                     });
                 });
         },
@@ -65,9 +68,12 @@ module.exports = function ({data}) {
             data.addMessage(identification, text, owner, date)
                 .then(() => {
                     res.status(200).json({
-                        text,
-                        owner,
-                        date
+                        texts: [{
+                            date: date,
+                            owner: owner,
+                            text: text
+                        }],
+                        loggedUser: owner
                     });
                 });
 
