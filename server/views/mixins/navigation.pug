@@ -10,16 +10,17 @@ mixin main-navigation
                     .module-group.right
                         .module.left
                             ul.menu
-                                li
-                                    a(href='/campaigns/create')
-                                        | Start a campaign
+                                if(!loggedUser.isBlocked)
+                                    li
+                                        a(href='/campaigns/create')
+                                            | Start a campaign
                                 li
                                     a(href='/campaigns')
                                         | Campaigns
                                 li
                                     a(href='/home/about')
                                         | About Us
-                                if(loggedUser && loggedUser.isAdmin)
+                                if(loggedUser && loggedUser.isAdmin && !loggedUser.isBlocked)
                                     li.has-dropdown
                                         | Admin
                                         ul
