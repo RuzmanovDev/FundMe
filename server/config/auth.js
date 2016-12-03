@@ -11,10 +11,7 @@ module.exports = {
             if (req.user && req.user.roles.indexOf(role) > -1) {
                 next();
             } else {
-                res.status(401).json({
-                    success: false,
-                    message: 'Not authorized!'
-                });
+                res.status(401).redirect('/home/error');
             }
         }
 
