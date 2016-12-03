@@ -6,8 +6,11 @@ class Message {
         this.identification = params.identification;
     }
 
+    save() {}
+
     static find() { }
     static findOne() { }
+
 }
 
 module.exports = Message;
