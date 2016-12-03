@@ -3,14 +3,10 @@
 ## Description
 Teamwork project for TelerikAcademy season 2016, course Web Apps with NodeJS
 
+### Overview
 
-### Models
-- Processor(Manufacturer, Model, Mhz, Price)
-- Videocard(Manufacturer, Mode, Memory, Price)
-- Memorycard(Manufacturer, Mhz, Capacity, Price)
-- Computertype(Type)
-- Manufacturer(Name)
-- Computer(ManufacturerId, ProcessorId, VideocardId, MemorycardId, Price)
+Web application for collecting funds.
+
 
 
 ## Team members
