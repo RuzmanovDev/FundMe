@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-module.exports = function({ app, data, auth, grid, database, userMiddleware }) {
+module.exports = function({ app, data, grid, database, userMiddleware }) {
     let controller = require('../controllers/api-controller')({ grid, database, data });
 
     router

@@ -16,8 +16,8 @@ module.exports = function({ upload, app, grid, data, database, userMiddleware })
         .post('/donate/:id', auth.isAuthenticated, controller.donate)
         .get('/api', controller.getJson)
         .get('/search', controller.search)
-        .put('/campaign/report/:id', controller.reportContent)
-        .delete('/campaign/report/:id', controller.deleteCampaign);
+        .put('/campaign/report/:id', auth.isAuthenticated, controller.reportContent)
+        .delete('/campaign/report/:id', auth.isAuthenticated, controller.deleteCampaign);
 
     app.use(userMiddleware.hasLoggedUser);
     app.use('/campaigns', router);
