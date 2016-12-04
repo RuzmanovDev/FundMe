@@ -49,8 +49,6 @@ module.exports = function({ data }) {
                     isReported: true
                 })
                 .then((campaigns) => {
-                    console.log('Campaigns filtered');
-                    console.log(campaigns);
                     res.status(200).render('administration/reported-campaigns', { campaigns, search: true });
                 });
         }

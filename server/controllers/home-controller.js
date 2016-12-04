@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (data) => {    
+module.exports = function() {
     return {
         getHome(req, res) {
             res.render('home/home');
@@ -11,6 +11,5 @@ module.exports = (data) => {
         showError(req, res) {
             res.render('home/error');
         }
-
     };
 };
