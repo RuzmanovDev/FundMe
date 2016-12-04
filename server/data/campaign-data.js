@@ -5,7 +5,7 @@ module.exports = function(models) {
     return {
         getUserCampaigns(userId) {
             return new Promise((resolve, reject) => {
-                Campaign.find({ 'creator.id': userId }, (err, campaigns) => {
+                Campaign.find({ 'creator.id': userId, isDeleted: false }, (err, campaigns) => {
                     if (err) {
                         return reject(err);
                     } else {
@@ -16,6 +16,8 @@ module.exports = function(models) {
             });
         },
         filterCampaigns(filter) {
+            filter = filter || {};
+            filter.isDeleted = false;
             return new Promise((resolve, reject) => {
                 Campaign.find(filter, (err, campaigns) => {
                     if (err) {
@@ -28,7 +30,7 @@ module.exports = function(models) {
         },
         getAllCampaigns(pageNumber, pageSize) {
             return new Promise((resolve, reject) => {
-                let query = Campaign.find({})
+                let query = Campaign.find({ isDeleted: false })
                     .skip(pageNumber * pageSize)
                     .limit(pageSize);
 
@@ -37,7 +39,7 @@ module.exports = function(models) {
         },
         findCampaignsByCategory(category, pageNumber, pageSize) {
             return new Promise((resolve, reject) => {
-                let query = Campaign.find({ category })
+                let query = Campaign.find({ category, isDeleted: false })
                     .skip(pageNumber * pageSize)
                     .limit(pageSize);
 
@@ -46,7 +48,7 @@ module.exports = function(models) {
         },
         getCampaignById(id) {
             return new Promise((resolve, reject) => {
-                Campaign.findOne({ _id: id }, (err, campaign) => {
+                Campaign.findOne({ _id: id, isDeleted: false }, (err, campaign) => {
                     if (err) {
                         return reject(err);
                     }
@@ -120,7 +122,7 @@ module.exports = function(models) {
         },
         searchByPattern(pattern) {
             return new Promise((resolve, reject) => {
-                Campaign.find({ $or: [{ 'title': new RegExp(pattern, 'ig') }, { 'creator.username': new RegExp(pattern, 'ig') }] }, (err, campaigns) => {
+                Campaign.find({ isDeleted: false, $or: [{ 'title': new RegExp(pattern, 'ig') }, { 'creator.username': new RegExp(pattern, 'ig') }] }, (err, campaigns) => {
                     if (err) {
                         return reject(err);
                     } else {
@@ -144,6 +146,13 @@ module.exports = function(models) {
                 });
             });
         },
+        deleteCampaignById(id) {
+            return this.getCampaignById(id)
+                .then((campaign) => {
+                    campaign.isDeleted = true;
+                    campaign.save();
+                });
+        },
         updateCampaignById(id, newData) {
             return this.getCampaignById(id)
                 .then((campaign) => {
@@ -153,8 +162,15 @@ module.exports = function(models) {
                     campaign.image = newData.image || campaign.image;
                     campaign.category = newData.category || campaign.category;
                     campaign.reporter = newData.reporter || campaign.reporter;
-                    campaign.isBlocked = newData.isBlocked || campaign.isBlocked;
                     campaign.isReported = newData.isReported || campaign.isReported;
+
+                    if (newData.isBlocked !== undefined) {
+                        if (newData.isBlocked) {
+                            campaign.isBlocked = true;
+                        } else {
+                            campaign.isBlocked = false;
+                        }
+                    }
 
                     campaign.save();
                 });
