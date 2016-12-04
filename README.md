@@ -13,7 +13,7 @@ Web application for collecting funds.
 | Name | [Student system](https://telerikacademy.com) username | [Github](https://github.com) username|
 |:----|:-----------------------|:-----------------------------|
 | Kiril Velichkov | Kiril_Velichkov | KirilVelichkov |
-| Stoyan Ruzmanov | RuzmanovDev     | stoyan.ruzmanov |
+| Stoyan Ruzmanov | stoyan.ruzmanov | RuzmanovDev |
 | Boris Radev     | Boriow          | Boriow |
 | Stoyan Uzunov   | suzunov         | sguzunov |
 | Georgi Yankov   | g.yankov951     | gyankov |
