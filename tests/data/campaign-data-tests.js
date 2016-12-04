@@ -7,7 +7,7 @@ let { expect } = chai;
 
 describe('Campaign data tests', () => {
     let sinon;
-    let Campaign = require('./mocks/campaign-data-mocks');
+    let Campaign = require('./mocks/campaign-model-mocks');
     let data = require('../../server/data/campaign-data')({ Campaign });
 
     beforeEach(() => {

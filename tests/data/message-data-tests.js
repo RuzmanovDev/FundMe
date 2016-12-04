@@ -7,7 +7,7 @@ let {expect} = chai;
 
 describe('Message data test', () => {
     let sinon;
-    let Message = require('./mocks/message-data-mocks');
+    let Message = require('./mocks/message-model-mocks');
     let data = require('../../server/data/message-data')({ Message });
 
     beforeEach(() => {

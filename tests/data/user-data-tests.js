@@ -8,7 +8,7 @@ let {expect} = chai;
 
 describe('User data tests', () => {
     let sinon;
-    let User = require('./mocks/user-data-mock');
+    let User = require('./mocks/user-model-mock');
     let data = require('../../server/data/user-data')({ User });
 
     beforeEach(() => {
