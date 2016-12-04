@@ -2,9 +2,9 @@
 
 const router = require('express').Router();
 
-module.exports = function({ upload, auth, app, grid, data, database, encryption, userMiddleware }) {
+module.exports = function ({ upload, auth, app, grid, data, database, userMiddleware }) {
 
-    const userController = require('../controllers/user-controller')({ grid, data, database, encryption });
+    const userController = require('../controllers/user-controller')({ grid, data, database });
 
     router
         .get('/profile/:id', userController.getUserDetails)

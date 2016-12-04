@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function ({grid, data, database, encryption}) {
+module.exports = function ({grid, data, database}) {
     return {
         getUserDetails(req, res) {
             let userId = req.params.id;
@@ -31,14 +31,14 @@ module.exports = function ({grid, data, database, encryption}) {
             let gfs = grid(database.connection.db, database.mongo);
 
             let user = req.user;
-            let userSalt = req.user.salt;
+            // let userSalt = req.user.salt;
             let oldPassword = req.body.oldPassword;
             let userHash = req.user.passHash;
             let newUserHash;
-            console.log(req.body);
+
 
             if (oldPassword) {
-                let hashedEnteredPassword = encryption.generateHashedPassword(userSalt, oldPassword);
+                let hashedEnteredPassword = user.generatePassHash(oldPassword);//encryption.generateHashedPassword(userSalt, oldPassword);
                 if (userHash !== hashedEnteredPassword) {
                     res.status(401).render('user/settings', { wrongPassword: true });
                     return;
@@ -48,7 +48,7 @@ module.exports = function ({grid, data, database, encryption}) {
                     res.status(401).render('user/settings', { passwordsDoNotMatch: true });
                     return;
                 } else if (req.body.newPassword === req.body.confirmedNewPassword && req.body.newPassword !== '') {
-                    newUserHash = encryption.generateHashedPassword(userSalt, req.body.newPassword);
+                    newUserHash = user.generatePassHash(req.body.newPassword);//encryption.generateHashedPassword(userSalt, req.body.newPassword);
                 }
             }
 
@@ -57,7 +57,8 @@ module.exports = function ({grid, data, database, encryption}) {
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
                 passHash: newUserHash,
-                avatar: user.avatar
+                avatar: user.avatar,
+                isAdmin: user.isAdmin
             };
 
             let file = req.file;
