@@ -14,7 +14,7 @@ class User {
     save() { }
     assignRole() { }
     removeRole() { }
-    
+
     static findOne() { }
     static find() { }
 

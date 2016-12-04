@@ -8,7 +8,7 @@
         "accessor-pairs": "error",
         "array-bracket-spacing": "off",
         "array-callback-return": "off",
-        "arrow-body-style": "error",
+        "arrow-body-style": "off",
         "quotes": [
             "warn",
             "single"

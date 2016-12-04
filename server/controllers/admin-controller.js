@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function({ data }) {
+module.exports = function ({ data }) {
     function getClientFilter(query) {
         let filter = {};
         for (let prop in query) {
@@ -46,8 +46,8 @@ module.exports = function({ data }) {
         },
         getReportedCampaigns(req, res) {
             data.filterCampaigns({
-                    isReported: true
-                })
+                isReported: true
+            })
                 .then((campaigns) => {
                     res.status(200).render('administration/reported-campaigns', { campaigns, search: true });
                 });

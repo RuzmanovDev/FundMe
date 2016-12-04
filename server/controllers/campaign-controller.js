@@ -98,13 +98,13 @@ module.exports = function ({ grid, data, database }) {
             } else {
                 file = { buffer: '' };
             }
-            
+
             gfs.writeFile({}, file.buffer, (_, foundFile) => {
                 let image = '58446edc1756cd0a5c6b2eaa';
                 if (file.buffer) {
                     image = foundFile._id;
                 }
-               
+
                 let campaign = {
                     title,
                     description,
@@ -201,7 +201,8 @@ module.exports = function ({ grid, data, database }) {
             let reporter = {
                 username: req.user.username,
                 userId: req.user.id
-            }
+            };
+
             data.updateCampaignById(campaignId, {
                 reporter,
                 isReported: true
@@ -218,7 +219,7 @@ module.exports = function ({ grid, data, database }) {
                 .then(() => {
                     res.status(200).json({
                         redirect: '/home'
-                    })
+                    });
                 });
         }
     };

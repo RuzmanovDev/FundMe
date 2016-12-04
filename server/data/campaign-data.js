@@ -29,7 +29,7 @@ module.exports = function(models) {
             });
         },
         getAllCampaigns(pageNumber, pageSize) {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 let query = Campaign.find({ isDeleted: false })
                     .skip(pageNumber * pageSize)
                     .limit(pageSize);
@@ -38,7 +38,7 @@ module.exports = function(models) {
             });
         },
         findCampaignsByCategory(category, pageNumber, pageSize) {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 let query = Campaign.find({ category, isDeleted: false })
                     .skip(pageNumber * pageSize)
                     .limit(pageSize);
@@ -125,10 +125,8 @@ module.exports = function(models) {
                 Campaign.find({ isDeleted: false, $or: [{ 'title': new RegExp(pattern, 'ig') }, { 'creator.username': new RegExp(pattern, 'ig') }] }, (err, campaigns) => {
                     if (err) {
                         return reject(err);
-                    } else {
-                        return resolve(campaigns);
                     }
-
+                    return resolve(campaigns);
                 });
             });
         },
@@ -138,11 +136,10 @@ module.exports = function(models) {
                 Campaign.find({ _id: id }, 'comments', (err, campaign) => {
                     if (err) {
                         return reject(err);
-                    } else {
-                        let pagedComments = campaign[0].comments.splice(pageNumber * pageSize, pageSize);
-                        console.log(pagedComments);
-                        resolve(pagedComments);
                     }
+                    let pagedComments = campaign[0].comments.splice(pageNumber * pageSize, pageSize);
+                    console.log(pagedComments);
+                    return resolve(pagedComments);
                 });
             });
         },
