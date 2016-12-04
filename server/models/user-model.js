@@ -56,7 +56,7 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        default: '5841a227d2a87a12f08ee425'
+        default: '58446e0a2374e32570d0fb06'
     },
     roles: [String],
     isDeleted: Boolean,
