@@ -25,8 +25,20 @@ module.exports = function ({data, encryption}) {
                 email: req.body.email
             };
 
+
+            if (req.body.password.length < 4) {
+                res.status(401).json({ success: false, message: 'Password too short' });
+                return;
+            }
+
             if (req.body.password !== req.body.confirmedPassword) {
-                res.status(401);
+                res.status(401).json({ success: false, message: 'Passwords do not match' });
+                return;
+            }
+
+            let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!pattern.test(req.body.email)) {
+                res.status(401).json({ success: false, message: 'Email is not valid' });
                 return;
             }
 
