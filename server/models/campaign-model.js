@@ -52,9 +52,15 @@ let campaignSchema = new Schema({
     },
     funded: {
         type: Number
+    },
+    isReported: {
+        type: Boolean
+    },
+    isBlocked: {
+        type: Boolean
     }
 });
-campaignSchema.virtual('percentage').get(function () {
+campaignSchema.virtual('percentage').get(function() {
     let onePercent = this.target / 100;
     let result = this.funded / onePercent;
     return Math.round(result);

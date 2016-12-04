@@ -1,6 +1,6 @@
 /*globals */
 
-module.exports = function (models) {
+module.exports = function(models) {
     let Campaign = models.Campaign;
     return {
         getUserCampaigns(userId) {
@@ -143,6 +143,20 @@ module.exports = function (models) {
                     }
                 });
             });
+        },
+        updateCampaignById(id, newData) {
+            return this.getCampaignById(id)
+                .then((campaign) => {
+                    campaign.title = newData.title || campaign.title;
+                    campaign.description = newData.description || campaign.description;
+                    campaign.target = newData.title || campaign.target;
+                    campaign.image = newData.image || campaign.image;
+                    campaign.category = newData.category || campaign.category;
+                    campaign.isReported = newData.isReported || campaign.isReported;
+                    campaign.isBlocked = newData.isBlocked || campaign.isBlocked;
+
+                    campaign.save();
+                });
         }
     };
 };

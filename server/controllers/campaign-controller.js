@@ -1,7 +1,7 @@
 /*globals*/
 'use strict';
 
-module.exports = function({grid, data, database}) {
+module.exports = function({ grid, data, database }) {
     return {
         getAll(req, res) {
             let pageNumber = 0;
@@ -55,7 +55,7 @@ module.exports = function({grid, data, database}) {
                     let pagedComments = campaign.comments
                         .splice(startPage, defaultCommentsCount);
 
-                       
+
                     campaign['loggedUser'] = {};
                     if (req.user) {
                         campaign.loggedUser['loggedIn'] = true;
@@ -65,9 +65,10 @@ module.exports = function({grid, data, database}) {
                     } else {
                         campaign.loggedUser['loggedIn'] = false;
                     }
-                    
+
                     return res.status(200).render('campaigns/campaign-details', {
-                        campaign, pagedComments
+                        campaign,
+                        pagedComments
                     });
                 });
         },
@@ -181,6 +182,16 @@ module.exports = function({grid, data, database}) {
                             campaigns,
                             search: false
                         }
+                    });
+                });
+        },
+        reportContent(req, res) {
+            let campaignId = req.params.id;
+            console.log('IN CONTROLLER');
+            data.updateCampaignById(campaignId, { isReported: true })
+                .then(() => {
+                    res.status(201).json({
+                        reported: true
                     });
                 });
         }

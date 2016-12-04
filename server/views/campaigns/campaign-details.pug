@@ -36,6 +36,10 @@ block content
                                     a.btn.btn-lg.btn-filled(disabled) Like
                                 else
                                     a#upvote-btn.btn.btn-lg.btn-filled Like
+                            if !campaign.isReported
+                                a#report-btn.reported.btn.btn-lg(alt="Report unexpurgated content." title="Report if unexpurgated content") Report Content
+                            else
+                                span.reported.btn.btn-lg(alt="Reported for unexpurgated content." title="Reported for unexpurgated content.") Reported Content
                         .foundry_modal.text-center
                             h3.uppercase Donate to this cause
                             if campaign.loggedUser.loggedIn
