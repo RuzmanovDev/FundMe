@@ -1,26 +1,28 @@
 extends ../shared/_layout
-include ../mixins/non-detailed-campaign.pug
-    block content
-        section
-            .container
-                .row
-                    each campaign in result.campaigns
-                        .col-sm-12.col-md-10.col-md-offset-1.mb16
-                            .horizontal-tile
-                                .tile-left
-                                    a(href='/campaigns/campaign/' + campaign._id)
-                                        .background-image-holder
-                                            img.background-image(alt='image', src='/campaigns/campaign/picture/' + campaign.image)
-                                .tile-right.bg-dark
-                                    .description
-                                        h4.mb8 #{campaign.title}
-                                        p Campaign by 
-                                            a(href="/user/profile/" + campaign.creator.id) #{campaign.creator.username}
-                                        .progress-bars
-                                            .progress.progress-2
-                                                span #{campaign.funded} / #{campaign.target} $
-                                                .bar-holder
-                                                    .progress-bar(data-progress= campaign.percentage)
-    block scripts
-        if result.search
-            script(src="/public/js/infinite-scroll.js")
+
+block content
+    section
+        .container
+            .row
+                each campaign in result.campaigns
+                    .col-sm-12.col-md-10.col-md-offset-1.mb16
+                        .horizontal-tile
+                            .tile-left
+                                a(href='/campaigns/campaign/' + campaign._id)
+                                    .background-image-holder
+                                        img.background-image(alt='image', src='/campaigns/campaign/picture/' + campaign.image)
+                            .tile-right.bg-dark
+                                .description
+                                    h4.mb8
+                                        a(href='/campaigns/campaign/' + campaign._id)
+                                            |  #{campaign.title}
+                                    p Campaign by
+                                        a(href="/user/profile/" + campaign.creator.id)  #{campaign.creator.username}
+                                    .progress-bars
+                                        .progress.progress-2
+                                            span #{campaign.funded} / #{campaign.target} $
+                                            .bar-holder
+                                                .progress-bar(data-progress= campaign.percentage)
+block scripts
+    if result.search
+        script(src="/public/js/infinite-scroll.js")

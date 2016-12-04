@@ -110,11 +110,19 @@ ul li {
 }
 
 .red {
-    color: red;
+    color: red
 }
 
 .reported {
     border: 0px;
     background-color: #C9302C;
-    color: #fff;
+    color: #fff
+}
+
+.reported:hover {
+    background-color: #C9302C
+}
+
+#delete-campaign-btn {
+    float: right
 }
