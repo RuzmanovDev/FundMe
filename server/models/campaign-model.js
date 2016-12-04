@@ -53,13 +53,19 @@ let campaignSchema = new Schema({
     funded: {
         type: Number
     },
+    reporter: {
+        type: {}
+    },
     isReported: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     isBlocked: {
-        type: Boolean
+        type: Boolean,
+        default: false
     }
 });
+
 campaignSchema.virtual('percentage').get(function() {
     let onePercent = this.target / 100;
     let result = this.funded / onePercent;
@@ -67,5 +73,4 @@ campaignSchema.virtual('percentage').get(function() {
 });
 
 mongoose.model('Campaign', campaignSchema);
-
 module.exports = mongoose.model('Campaign');

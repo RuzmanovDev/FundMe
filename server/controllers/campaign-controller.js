@@ -187,8 +187,15 @@ module.exports = function({ grid, data, database }) {
         },
         reportContent(req, res) {
             let campaignId = req.params.id;
-            console.log('IN CONTROLLER');
-            data.updateCampaignById(campaignId, { isReported: true })
+
+            let reporter = {
+                username: req.user.username,
+                userId: req.user.id
+            }
+            data.updateCampaignById(campaignId, {
+                    reporter,
+                    isReported: true
+                })
                 .then(() => {
                     res.status(201).json({
                         reported: true

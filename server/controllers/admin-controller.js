@@ -43,6 +43,16 @@ module.exports = function({ data }) {
                 .then((updatedUser) => {
                     res.status(200).json(updatedUser);
                 });
+        },
+        getReportedCampaigns(req, res) {
+            data.filterCampaigns({
+                    isReported: true
+                })
+                .then((campaigns) => {
+                    console.log('Campaigns filtered');
+                    console.log(campaigns);
+                    res.status(200).render('administration/reported-campaigns', { campaigns, search: true });
+                });
         }
     };
 };

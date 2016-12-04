@@ -17,7 +17,7 @@ module.exports = function(models) {
         },
         filterCampaigns(filter) {
             return new Promise((resolve, reject) => {
-                Campaign.find({ filter }, (err, campaigns) => {
+                Campaign.find(filter, (err, campaigns) => {
                     if (err) {
                         return reject(err);
                     } else {
@@ -152,8 +152,9 @@ module.exports = function(models) {
                     campaign.target = newData.title || campaign.target;
                     campaign.image = newData.image || campaign.image;
                     campaign.category = newData.category || campaign.category;
-                    campaign.isReported = newData.isReported || campaign.isReported;
+                    campaign.reporter = newData.reporter || campaign.reporter;
                     campaign.isBlocked = newData.isBlocked || campaign.isBlocked;
+                    campaign.isReported = newData.isReported || campaign.isReported;
 
                     campaign.save();
                 });
