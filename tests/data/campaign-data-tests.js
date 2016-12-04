@@ -92,7 +92,8 @@ describe('Campaign data tests', () => {
         beforeEach(() => {
             sinon.stub(Campaign, 'find', (query, cb) => {
                 let foundCampaigns = [];
-                let filter = query['filter'];
+                
+                let filter = query;
                 campaigns.forEach((campaign) => {
                     if (campaign.category.indexOf(filter) !== -1
                         || campaign.creator.indexOf(filter) !== -1

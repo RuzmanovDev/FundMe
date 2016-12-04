@@ -1,6 +1,6 @@
 /*globals */
 
-module.exports = function(models) {
+module.exports = function (models) {
     let Campaign = models.Campaign;
     return {
         getUserCampaigns(userId) {
@@ -8,10 +8,9 @@ module.exports = function(models) {
                 Campaign.find({ 'creator.id': userId, isDeleted: false }, (err, campaigns) => {
                     if (err) {
                         return reject(err);
-                    } else {
-                        return resolve(campaigns);
                     }
 
+                    return resolve(campaigns);
                 });
             });
         },
@@ -22,15 +21,15 @@ module.exports = function(models) {
                 Campaign.find(filter, (err, campaigns) => {
                     if (err) {
                         return reject(err);
-                    } else {
-                        return resolve(campaigns);
                     }
+                    
+                    return resolve(campaigns);
                 });
             });
         },
         getAllCampaigns(pageNumber, pageSize) {
             return new Promise((resolve, reject) => {
-                let query = Campaign.find({ isDeleted: false })
+                let query = Campaign.find({},{ isDeleted: false })
                     .skip(pageNumber * pageSize)
                     .limit(pageSize);
 
