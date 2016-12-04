@@ -112,3 +112,9 @@ ul li {
 .red {
     color: red;
 }
+
+.reported {
+    border: 0px;
+    background-color: #C9302C;
+    color: #fff;
+}

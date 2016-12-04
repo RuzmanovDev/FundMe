@@ -1,10 +1,13 @@
 /* globals $ requester document toastr location*/
 
-$(function () {
-    $('#upvote-btn').on('click', function (ev) {
+$(function() {
+    function getIdFromUrl() {
+        var fullUrl = ($(location).attr('href'));
+        return fullUrl.substring(fullUrl.lastIndexOf('/') + 1);
+    }
 
+    $('#upvote-btn').on('click', function(ev) {
         var $this = $(this);
-
         var $votesContainer = $('#votes-count');
 
         if ($this.text() === 'Like') {
@@ -15,13 +18,11 @@ $(function () {
             $this.text('Like');
         }
 
-        // TODO check query params
-        var fullUrl = ($(location).attr('href'));
-        var url = fullUrl.substring(fullUrl.lastIndexOf('/') + 1);
-
         $this.attr('disabled', 'disabled');
 
-        requester.putJSON(`/campaigns/campaign/vote/${url}`)
+        // TODO check query params
+        var id = getIdFromUrl();
+        requester.putJSON(`/campaigns/campaign/vote/${id}`)
             .then(() => {
                 $this.removeAttr('disabled');
             })
@@ -30,9 +31,29 @@ $(function () {
         ev.preventDefault();
         return false;
     });
-    (function ($) {
 
-        $.fn.endlessScroll = function (options) {
+    $('#report-btn').on('click', function(ev) {
+        var id = getIdFromUrl();
+
+        $this = $(this);
+        requester.putJSON(`/campaigns/campaign/report/${id}`)
+            .then(() => {
+                $reportedContentElement = $('<span />')
+                    .addClass('reported')
+                    .addClass('btn')
+                    .addClass('btn-lg')
+                    .attr('title', 'Reported for unexpurgated content.')
+                    .attr('alt', 'Reported for unexpurgated content.')
+                    .text('Reported Content');
+
+                $this.hide();
+                $this.parent().append($reportedContentElement);
+            }, (err => console.log(err)));
+    });
+
+    (function($) {
+
+        $.fn.endlessScroll = function(options) {
 
             var defaults = {
                 bottomPixels: 50,
@@ -41,9 +62,9 @@ $(function () {
                 loader: "<br />Loading...<br />",
                 data: "",
                 insertAfter: "div:last",
-                resetCounter: function () { return false; },
-                callback: function () { return true; },
-                ceaseFire: function () { return false; }
+                resetCounter: function() { return false; },
+                callback: function() { return true; },
+                ceaseFire: function() { return false; }
             };
 
             var options = $.extend({}, defaults, options);
@@ -57,7 +78,7 @@ $(function () {
             }
 
             if (firing === true) {
-                $(this).scroll(function () {
+                $(this).scroll(function() {
                     if (options.ceaseFire.apply(this) === true) {
                         firing = false;
                         return; // Scroll will still get called, but nothing will happen
@@ -95,12 +116,11 @@ $(function () {
                             if (options.fireDelay !== false || options.fireDelay !== 0) {
                                 $("body").after("<div id=\"endless_scroll_marker\"></div>");
                                 // slight delay for preventing event firing twice
-                                $("div#endless_scroll_marker").fadeTo(options.fireDelay, 1, function () {
+                                $("div#endless_scroll_marker").fadeTo(options.fireDelay, 1, function() {
                                     $(this).remove();
                                     fired = false;
                                 });
-                            }
-                            else {
+                            } else {
                                 fired = false;
                             }
                         }
@@ -115,7 +135,7 @@ $(function () {
 
     $(window).endlessScroll({
         inflowPixels: 300,
-        callback: function () {
+        callback: function() {
             var page = $('.comments-list').length / 5 | 0;
             if (page === 0) {
                 page += 1;
@@ -150,4 +170,3 @@ $(function () {
         <hr>`
     }
 });
-
