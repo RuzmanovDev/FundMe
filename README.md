@@ -1,13 +1,25 @@
 # Team Djagascript
-
-## Description
 Teamwork project for TelerikAcademy season 2016, course Web Apps with NodeJS
 
-### Overview
-
+## Description
 Web application for collecting funds.
+A user posts his idea and the other users donates to his campaign.
 
 
+## Functionality
+- Creating a campaign
+- View all campaigns by post date or by category
+- Comments on each campaign
+- Messages between users
+- Donating to a campaign
+- Update user profile settings (firstname, lastname, password, profile picture)
+- Like a campaign
+- Report a campaign
+- Admin panel
+    - Deleting campaigns
+    - Blocking users
+    - Change users roles
+    - Change users email, firstname, lastname
 
 ## Team members
 | Name | [Student system](https://telerikacademy.com) username | [Github](https://github.com) username|
