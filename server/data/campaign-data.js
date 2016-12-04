@@ -1,6 +1,6 @@
 /*globals */
 
-module.exports = function (models) {
+module.exports = function(models) {
     let Campaign = models.Campaign;
     return {
         getUserCampaigns(userId) {
@@ -17,20 +17,20 @@ module.exports = function (models) {
         filterCampaigns(filter) {
             filter = filter || {};
             filter.isDeleted = false;
-            
+
             return new Promise((resolve, reject) => {
                 Campaign.find(filter, (err, campaigns) => {
                     if (err) {
                         return reject(err);
                     }
-                    
+
                     return resolve(campaigns);
                 });
             });
         },
         getAllCampaigns(pageNumber, pageSize) {
             return new Promise((resolve, reject) => {
-                let query = Campaign.find({},{ isDeleted: false })
+                let query = Campaign.find({ isDeleted: false })
                     .skip(pageNumber * pageSize)
                     .limit(pageSize);
 
