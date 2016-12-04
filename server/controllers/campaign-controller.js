@@ -201,6 +201,15 @@ module.exports = function({ grid, data, database }) {
                         reported: true
                     });
                 });
+        },
+        deleteCampaign(req, res) {
+            let campaignId = req.params.id;
+            data.deleteCampaignById(campaignId)
+                .then(() => {
+                    res.status(200).json({
+                        redirect: '/home'
+                    })
+                });
         }
     };
 };
