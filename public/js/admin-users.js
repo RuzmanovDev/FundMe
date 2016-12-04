@@ -1,5 +1,3 @@
-/* globals $ */
-
 'use strict';
 
 $(function() {
@@ -14,22 +12,10 @@ $(function() {
         pageButtonCount: 3,
         controller: {
             loadData: function(filter) {
-                console.log(filter);
-                return $.ajax({
-                    type: 'GET',
-                    url: '/admin/users',
-                    data: filter,
-                    success: (result) => {
-                        console.log(result);
-                    }
-                });
+                return requester.getJSON('/admin/users', { data: filter });
             },
             updateItem: function(item) {
-                return $.ajax({
-                    type: 'PUT',
-                    url: '/admin/users',
-                    data: item
-                });
+                return requester.putJSON('/admin/users', item);
             },
         },
         fields: [

@@ -51,6 +51,16 @@ $(function() {
             }, (err => console.log(err)));
     });
 
+    $('#delete-campaign-btn').on('click', function(ev) {
+        var id = getIdFromUrl();
+
+        $this = $(this);
+        requester.delete(`/campaigns/campaign/report/${id}`)
+            .then((res) => {
+                location = res.redirect;
+            }, (err => console.log(err)));
+    });
+
     (function($) {
 
         $.fn.endlessScroll = function(options) {

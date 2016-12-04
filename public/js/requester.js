@@ -1,13 +1,13 @@
 /* globals $ */
 'use strict';
 
-var requester = (function () {
+var requester = (function() {
     function get(url) {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function(resolve, reject) {
             $.ajax({
                 url,
                 method: 'GET',
-                success: function (result) {
+                success: function(result) {
                     resolve(result);
                 }
             });
@@ -15,12 +15,14 @@ var requester = (function () {
     }
 
     function getJSON(url, options) {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function(resolve, reject) {
             var headers = options.headers || {};
+            var data = options.data || {};
             $.ajax({
                 url,
                 method: 'GET',
                 headers: headers,
+                data: data,
                 contentType: 'application/json',
                 success(response) {
                     resolve(response);
@@ -30,7 +32,7 @@ var requester = (function () {
     }
 
     function putJSON(url, body, options = {}) {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function(resolve, reject) {
             var headers = options.headers || {};
             $.ajax({
                 url,
@@ -49,7 +51,7 @@ var requester = (function () {
     }
 
     function postJSON(url, body, options = {}) {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function(resolve, reject) {
             var headers = options.headers || {};
 
             $.ajax({
@@ -68,11 +70,24 @@ var requester = (function () {
         });
     }
 
+    function del(url) {
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url,
+                method: 'DELETE',
+                success: function(result) {
+                    resolve(result);
+                }
+            });
+        });
+    }
+
     return {
         get,
         getJSON,
         putJSON,
-        postJSON
+        postJSON,
+        delete: del
     };
 
 }());
