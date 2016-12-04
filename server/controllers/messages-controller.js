@@ -51,7 +51,6 @@ module.exports = function ({data}) {
 
             data.findByIdentification(identification)
                 .then(message => {
-                    console.log(message);
                     res.status(200).json({
                         texts: message.texts,
                         loggedUser: loggedUsername

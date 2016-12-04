@@ -1,7 +1,7 @@
 extends ../shared/_layout
 block content
     section
-        .container 
+        .container
             .row
                 .col-sm-10.col-sm-offset-1
                     .post-snippet.mb64
@@ -13,11 +13,11 @@ block content
                             li
                                 i.ti-user
                                     span Created by
-                                        a(href="/user/profile/" + campaign.creator.id) #{campaign.creator.username}
+                                        a(href="/user/profile/" + campaign.creator.id)  #{campaign.creator.username}
                             li
                                 i.ti-tag
-                                    span Category 
-                                        a(href='/campaigns/campaign/category/' + campaign.category) #{campaign.category}
+                                    span Category
+                                        a(href='/campaigns/campaign/category/' + campaign.category)  #{campaign.category}
                             li
                                 i.ti-thumb-up
                                     span#votes-count #{campaign.upVotes}
@@ -27,9 +27,15 @@ block content
                         a.btn.btn-lg.btn-modal(href='#') Donate
                         if campaign.loggedUser.loggedIn
                             if campaign.loggedUser.alredayLiked
-                                a#upvote-btn.btn.btn-lg.btn-filled Dislike
+                                if loggedUser.isBlocked
+                                    a.btn.btn-lg.btn-filled(disabled) Dislike
+                                else
+                                    a#upvote-btn.btn.btn-lg.btn-filled Dislike
                             else
-                                a#upvote-btn.btn.btn-lg.btn-filled Like
+                                if loggedUser.isBlocked
+                                    a.btn.btn-lg.btn-filled(disabled) Like
+                                else
+                                    a#upvote-btn.btn.btn-lg.btn-filled Like
                         .foundry_modal.text-center
                             h3.uppercase Donate to this cause
                             if campaign.loggedUser.loggedIn
@@ -40,21 +46,20 @@ block content
                                     button.btn-white.mb0(id="donate-btn", type='submit') Donate
                             else
                                 p.lead.mb48 Please log in in order to donate
-                if campaign.loggedUser.loggedIn            
+                if campaign.loggedUser.loggedIn && !loggedUser.isBlocked
                             form(method='POST', action="/campaigns/campaign/" + campaign._id)
                                 textarea(rows='3', id="comment-content", name="commentContent", placeholder='Comment', required)
-                                input(id="add-comment", type="submit", value="AddComment")
+                                input(id="add-comment", type="submit", value="Add Comment")
                 .comments
-                        ul.comments-list
-                            each comment in pagedComments
-                                li.comments-list
-                                    .avatar
-                                        a(href="/user/profile/" + comment.commentAuthorId)
-                                            img(alt='Avatar', src="/user/avatar/" + comment.commentAuthorImage)
-                                    .comment
-                                        span.uppercase.author Posted by: #{comment.commentAuthor}
-                                        p #{comment.commentContent}
-                                hr
+                    ul.comments-list
+                        each comment in pagedComments
+                            li.comments-list
+                                .avatar
+                                    a(href="/user/profile/" + comment.commentAuthorId)
+                                        //- img(alt='Avatar', src="/user/avatar/" + comment.commentAuthorImage)
+                                .comment
+                                    span.uppercase.author Posted by: #{comment.commentAuthor}
+                                    p #{comment.commentContent}
+                            hr
     script(src="/public/js/campaign-details.js")
     block scripts
-    

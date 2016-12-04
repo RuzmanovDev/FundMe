@@ -6,10 +6,10 @@ module.exports = function({ upload, app, grid, data, database, userMiddleware })
 
     router
         .get('/', controller.getAll)
-        .get('/create', auth.isAuthenticated, controller.getCreateForm)
-        .post('/create', auth.isAuthenticated, upload.single('avatar'), controller.create)
+        .get('/create', auth.isAuthenticated, userMiddleware.isBlockedUser, controller.getCreateForm)
+        .post('/create', auth.isAuthenticated, userMiddleware.isBlockedUser, upload.single('avatar'), controller.create)
         .get('/campaign/:id', controller.getById)
-        .post('/campaign/:id', auth.isAuthenticated, controller.createComment)
+        .post('/campaign/:id', auth.isAuthenticated, userMiddleware.isBlockedUser, controller.createComment)
         .put('/campaign/vote/:id', auth.isAuthenticated, controller.vote)
         .get('/campaign/picture/:id', controller.getPicture)
         .get('/campaign/category/:name', controller.getByCategory)

@@ -117,12 +117,14 @@ function buildCampaign(campaign) {
                     <div class="tile-right bg-dark">
                         <div class="description">
                             <h4 class="mb8">${campaign.title}</h4>
-                                <p>Short description here?</p>
+                                <p>Campaign by
+                                    <a href="/user/profile/${campaign.creator.id}">${campaign.creator.username}</a>
+                                </p>
                                     <div class="progress-bars">
                                         <div class="progress progress-2">
                                             <span>${campaign.funded} / ${campaign.target} $</span>
                                             <div class="bar-holder">
-                                                <div class="progress-bar" data-progress="${campaign.percentage}" style="width: 0%;">
+                                                <div class="progress-bar" data-progress="${campaign.percentage}">
                                                 </div>
                                             </div>
                                         </div>

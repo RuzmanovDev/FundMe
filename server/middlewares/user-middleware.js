@@ -19,5 +19,12 @@ module.exports = {
         };
 
         next();
+    },
+    isBlockedUser(req, res, next) {
+        if (req.user && !req.user.isBlocked) {
+            next();
+        } else {
+            res.status(401).redirect('/home/error/');
+        }
     }
 };
