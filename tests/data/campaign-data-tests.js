@@ -92,8 +92,13 @@ describe('Campaign data tests', () => {
         beforeEach(() => {
             sinon.stub(Campaign, 'find', (query, cb) => {
                 let foundCampaigns = [];
-                
+
                 let filter = query;
+                
+                if (query['isDeleted'] === false) {
+                    foundCampaigns = campaigns;
+                }
+                
                 campaigns.forEach((campaign) => {
                     if (campaign.category.indexOf(filter) !== -1
                         || campaign.creator.indexOf(filter) !== -1
@@ -113,35 +118,43 @@ describe('Campaign data tests', () => {
 
         it('Expect to return 0 campaign', (done) => {
             data.filterCampaigns('somerandomstring')
-                .then((campaigns) => {
-                    expect(campaigns.length).to.equal(0);
+                .then((foundCampaigns) => {
+                    expect(foundCampaigns.length).to.equal(0);
                 })
                 .then(done, done);
         });
 
         it('Expect to return 1 campaign', (done) => {
             data.filterCampaigns('Batman')
-                .then((campaigns) => {
-                    expect(campaigns.length).to.equal(1);
+                .then((foundCampaigns) => {
+                    expect(foundCampaigns.length).to.equal(1);
                 })
                 .then(done, done);
         });
 
         it('Expect to return 2 campaigns', (done) => {
             data.filterCampaigns('Pari')
-                .then((campaigns) => {
-                    expect(campaigns.length).to.equal(2);
+                .then((foundCampaigns) => {
+                    expect(foundCampaigns.length).to.equal(2);
                 })
                 .then(done, done);
         });
 
         it('Expect to return 3 campaigns', (done) => {
             data.filterCampaigns('Weird')
-                .then((campaigns) => {
-                    expect(campaigns.length).to.equal(3);
+                .then((foundCampaigns) => {
+                    expect(foundCampaigns.length).to.equal(3);
                 })
                 .then(done, done);
         });
 
+        it('Expect to return all campaigns when function is called with no properties', (done) => {
+            data.filterCampaigns()
+                .then((foundCampaigns) => {
+
+                    expect(foundCampaigns.length).to.equal(campaigns.length);
+                })
+                .then(done, done);
+        });
     });
 });

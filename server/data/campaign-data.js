@@ -17,6 +17,7 @@ module.exports = function (models) {
         filterCampaigns(filter) {
             filter = filter || {};
             filter.isDeleted = false;
+            
             return new Promise((resolve, reject) => {
                 Campaign.find(filter, (err, campaigns) => {
                     if (err) {
