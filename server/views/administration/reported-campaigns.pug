@@ -12,14 +12,14 @@ block content
                                         img.background-image(alt='image', src='/campaigns/campaign/picture/' + campaign.image)
                             .tile-right.bg-dark
                                 .description
-                                    h4.mb8 #{campaign.title}
+                                    h4.mb8
+                                        a(href='/campaigns/campaign/' + campaign._id)  #{campaign.title}
                                     p Campaign by
-                                        a(href="/user/profile/" + campaign.creator.id) #{campaign.creator.username}
-                                    .progress-bars
-                                        .progress.progress-2
-                                            span #{campaign.funded} / #{campaign.target} $
-                                            .bar-holder
-                                                .progress-bar(data-progress= campaign.percentage)
+                                        a(href="/user/profile/" + campaign.creator.id)  #{campaign.creator.username}
+                                    p
+                                        a(href="/user/profile/" + campaign.reporter.userId)  #{campaign.reporter.username}
+                                        |  reported this post has unexpurgated content.
 block scripts
+    script(src='/public/js/admin-campaigns.js')
     if search
         script(src="/public/js/infinite-scroll.js")
