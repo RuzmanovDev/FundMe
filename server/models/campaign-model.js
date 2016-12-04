@@ -52,14 +52,25 @@ let campaignSchema = new Schema({
     },
     funded: {
         type: Number
+    },
+    reporter: {
+        type: {}
+    },
+    isReported: {
+        type: Boolean,
+        default: false
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
     }
 });
-campaignSchema.virtual('percentage').get(function () {
+
+campaignSchema.virtual('percentage').get(function() {
     let onePercent = this.target / 100;
     let result = this.funded / onePercent;
     return Math.round(result);
 });
 
 mongoose.model('Campaign', campaignSchema);
-
 module.exports = mongoose.model('Campaign');

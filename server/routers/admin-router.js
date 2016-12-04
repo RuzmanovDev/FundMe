@@ -7,6 +7,7 @@ module.exports = function({ data, app, auth, userMiddleware }) {
 
     router
         .get('/profiles', auth.isInRole('admin'), userMiddleware.isBlockedUser, adminController.getProfiles)
+        .get('/reported-campaigns', auth.isInRole('admin'), userMiddleware.isBlockedUser, adminController.getReportedCampaigns)
         .put('/users', auth.isInRole('admin'), userMiddleware.isBlockedUser, adminController.updateUser)
         .get('/users', auth.isInRole('admin'), userMiddleware.isBlockedUser, adminController.getUsersData);
 

@@ -1,7 +1,7 @@
 /*globals*/
 'use strict';
 
-module.exports = function({grid, data, database}) {
+module.exports = function({ grid, data, database }) {
     return {
         getAll(req, res) {
             let pageNumber = 0;
@@ -55,7 +55,7 @@ module.exports = function({grid, data, database}) {
                     let pagedComments = campaign.comments
                         .splice(startPage, defaultCommentsCount);
 
-                       
+
                     campaign['loggedUser'] = {};
                     if (req.user) {
                         campaign.loggedUser['loggedIn'] = true;
@@ -65,9 +65,10 @@ module.exports = function({grid, data, database}) {
                     } else {
                         campaign.loggedUser['loggedIn'] = false;
                     }
-                    
+
                     return res.status(200).render('campaigns/campaign-details', {
-                        campaign, pagedComments
+                        campaign,
+                        pagedComments
                     });
                 });
         },
@@ -182,6 +183,32 @@ module.exports = function({grid, data, database}) {
                             search: false
                         }
                     });
+                });
+        },
+        reportContent(req, res) {
+            let campaignId = req.params.id;
+
+            let reporter = {
+                username: req.user.username,
+                userId: req.user.id
+            }
+            data.updateCampaignById(campaignId, {
+                    reporter,
+                    isReported: true
+                })
+                .then(() => {
+                    res.status(201).json({
+                        reported: true
+                    });
+                });
+        },
+        deleteCampaign(req, res) {
+            let campaignId = req.params.id;
+            data.deleteCampaignById(campaignId)
+                .then(() => {
+                    res.status(200).json({
+                        redirect: '/home'
+                    })
                 });
         }
     };
