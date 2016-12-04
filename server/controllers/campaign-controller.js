@@ -98,13 +98,13 @@ module.exports = function ({ grid, data, database }) {
             } else {
                 file = { buffer: '' };
             }
-            
+
             gfs.writeFile({}, file.buffer, (_, foundFile) => {
                 let image = '58446edc1756cd0a5c6b2eaa';
                 if (file.buffer) {
                     image = foundFile._id;
                 }
-               
+
                 let campaign = {
                     title,
                     description,

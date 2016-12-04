@@ -94,11 +94,11 @@ describe('Campaign data tests', () => {
                 let foundCampaigns = [];
 
                 let filter = query;
-                
+
                 if (query['isDeleted'] === false) {
                     foundCampaigns = campaigns;
                 }
-                
+
                 campaigns.forEach((campaign) => {
                     if (campaign.category.indexOf(filter) !== -1
                         || campaign.creator.indexOf(filter) !== -1

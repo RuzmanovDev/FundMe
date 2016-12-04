@@ -1,6 +1,6 @@
 /*globals */
 
-module.exports = function(models) {
+module.exports = function (models) {
     let Campaign = models.Campaign;
     return {
         getUserCampaigns(userId) {
