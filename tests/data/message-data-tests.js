@@ -129,7 +129,6 @@ describe('Message data test', () => {
         beforeEach(() => {
             sinon.stub(Message, 'findOne', (params, cb) => {
                 let found = conversations.find(c => c.identification === params.identification);
-                console.log(`found msg ${found.texts.length}`);
                 cb(null, found);
             });
         });
