@@ -4,16 +4,16 @@ block content
     div.project-author
         div.media
             div.thumb-left
-            h4 #{user.username}
+            h4 #{user.fullname || user.username}
             img(class="settings-profile-pic" src="/user/avatar/" + user.avatar)
             br
             br
             div.author-action
-            
+
             if (user.id != loggedUser.id)
                 a.btn.btn-red(id="send-message" user-id =user.id user-avatar=user.avatar user-username=user.username ) Send a Message
             else
-                a.btn.btn-lg.btn-warning(href='/user/settings') Update profile
+                a.btn.btn-lg.btn-filled(href='/user/settings') Update profile
                 a.btn.btn-lg.btn-red(href='/messages') Messages
             br
             hr

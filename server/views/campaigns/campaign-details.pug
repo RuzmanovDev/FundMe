@@ -37,9 +37,9 @@ block content
                                 else
                                     a#upvote-btn.btn.btn-lg.btn-filled Like
                             if !campaign.isReported
-                                a#report-btn.reported.btn.btn-lg(alt="Report unexpurgated content." title="Report if unexpurgated content") Report Content
+                                a#report-btn.reported.btn.btn-lg.btn-filled(alt="Report unexpurgated content." title="Report if unexpurgated content") Report Content
                             else
-                                a.reported.btn.btn-lg(alt="Reported for unexpurgated content." title="Reported for unexpurgated content.") Reported Content
+                                a.reported.btn.btn-lg(alt="Reported for unexpurgated content." title="This post contains unexpurgated content.") Reported Content
                             if loggedUser.isAdmin
                                 a#delete-campaign-btn.reported.btn.btn-lg(alt="Block unexpurgated content." title="Block if unexpurgated content") Delete
                         .foundry_modal.text-center
