@@ -201,7 +201,8 @@ module.exports = function ({ grid, data, database }) {
             let reporter = {
                 username: req.user.username,
                 userId: req.user.id
-            }
+            };
+
             data.updateCampaignById(campaignId, {
                 reporter,
                 isReported: true
@@ -218,7 +219,7 @@ module.exports = function ({ grid, data, database }) {
                 .then(() => {
                     res.status(200).json({
                         redirect: '/home'
-                    })
+                    });
                 });
         }
     };

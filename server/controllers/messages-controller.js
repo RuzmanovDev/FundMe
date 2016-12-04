@@ -86,7 +86,7 @@ function parseMessages(messages, id) {
         let user;
         let usernames = [message.firstUser.username, message.secondUser.username].sort();
         let identification = usernames[0] + usernames[1];
-        if (message.firstUser.id != id) {
+        if (message.firstUser.id !== id) {
             user = message.firstUser;
         } else {
             user = message.secondUser;

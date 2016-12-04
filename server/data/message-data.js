@@ -8,9 +8,9 @@ module.exports = function (models) {
                 Message.find({ $or: [{ 'firstUser.id': userId }, { 'secondUser.id': userId }] }, (err, messages) => {
                     if (err) {
                         return reject(err);
-                    } else {
-                        return resolve(messages);
                     }
+
+                    return resolve(messages);
                 });
             });
         },
@@ -39,15 +39,15 @@ module.exports = function (models) {
                 Message.findOne({ 'identification': identification }, (err, message) => {
                     if (err) {
                         return reject(err);
-                    } else {
-                        return resolve(message);
                     }
+
+                    return resolve(message);
                 });
             });
         },
         addMessage(identification, text, owner, date) {
 
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 this.findByIdentification(identification)
                     .then(message => {
                         message.texts.push({
