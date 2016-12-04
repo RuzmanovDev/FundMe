@@ -21,7 +21,7 @@ module.exports = function ({grid, data, database}) {
         getSettings(req, res) {
             res.status(200).render('user/settings', {
                 avatar: req.user.avatar,
-                user: req.user,
+                user: req.user, 
                 username: req.user.username,
                 wrongPassword: false,
                 passwordsDoNotMatch: false

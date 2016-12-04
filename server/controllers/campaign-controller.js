@@ -1,7 +1,7 @@
 /*globals*/
 'use strict';
 
-module.exports = function({ grid, data, database }) {
+module.exports = function ({ grid, data, database }) {
     return {
         getAll(req, res) {
             let pageNumber = 0;
@@ -76,7 +76,6 @@ module.exports = function({ grid, data, database }) {
             return res.status(200).render('campaigns/create-campaign');
         },
         create(req, res) {
-            console.log(req.body);
             let title = req.body.title;
             let description = req.body.description;
             let createdOn = new Date();
@@ -93,8 +92,19 @@ module.exports = function({ grid, data, database }) {
 
             let gfs = grid(database.connection.db, database.mongo);
 
-            gfs.writeFile({}, req.file.buffer, (_, file) => {
-                let image = file._id;
+            let file = req.file;
+            if (file) {
+                file.buffer = req.file.buffer;
+            } else {
+                file = { buffer: '' };
+            }
+            
+            gfs.writeFile({}, file.buffer, (_, foundFile) => {
+                let image = '58446edc1756cd0a5c6b2eaa';
+                if (file.buffer) {
+                    image = foundFile._id;
+                }
+               
                 let campaign = {
                     title,
                     description,
@@ -193,9 +203,9 @@ module.exports = function({ grid, data, database }) {
                 userId: req.user.id
             }
             data.updateCampaignById(campaignId, {
-                    reporter,
-                    isReported: true
-                })
+                reporter,
+                isReported: true
+            })
                 .then(() => {
                     res.status(201).json({
                         reported: true
