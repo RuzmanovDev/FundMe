@@ -60,7 +60,7 @@ let campaignSchema = new Schema({
         type: Boolean,
         default: false
     },
-    isBlocked: {
+    isDeleted: {
         type: Boolean,
         default: false
     }
