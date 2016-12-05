@@ -8,41 +8,112 @@ let { expect } = chai;
 describe('Message controller test', () => {
     let sinon;
     let data = {
-        loadCurrentConversations() { }
+        loadCurrentConversations() {
+            return new Promise((resolve, reject) => {
+                resolve([{
+
+                    firstUser: {
+                        username: 'gosho'
+                    },
+                    secondUser: {
+                        username: 'pesho'
+                    }
+
+                }]);
+            });
+        },
+        findByIdentification() {
+            return new Promise((resolve, reject) => {
+                resolve({
+
+                    firstUser: {
+                        username: 'gosho'
+                    },
+                    secondUser: {
+                        username: 'pesho'
+                    }
+
+                });
+            });
+        }
     };
-    let req = { user: { _id: 'gosho' } };
+    let req = {
+        user: { _id: 'gosho', username: 'gosho', avatar: 'gosho' },
+        body: { id: 'gosho', username: 'gosho', avatar: 'gosho' }
+    };
     let res = {
-        render() { }
+        render() { },
+        status() { return this; },
+        json(){
+
+        }
     };
-    let controller = require('../../server/controllers/messages-controller')(data);
+    let controller = require('../../server/controllers/messages-controller')({ data });
 
     beforeEach(() => {
         sinon = sinonModule.sandbox.create();
     });
 
     describe('getMessageForm() tests', () => {
-        beforeEach(() => {
-            sinon.stub(data, 'loadCurrentConversations', (id) => {
-                return new Promise((resolve, reject) => {
-                    resolve({ id });
-                });
-            });
 
-            afterEach(() => {
-                sinon.restore();
-            });
+        it('To call the data.loadCurrentConversations function', () => {
+            let spy = sinon.spy(data, 'loadCurrentConversations');
+            controller.getMessageForm(req, res);
+            expect(spy.calledOnce).to.be.true;
+            spy.restore();
+        });
 
-            it('To call the req.user._id property', () => {
-                let spy = sinon.spy(req.user._id);
-                controller.getMessageForm(req, res);
-                expect(spy.calledOnce).to.be.true;
-            });
+        it('To call the res.status function', () => {
+            let spy = sinon.spy(res, 'status');
+            controller.getMessageForm(req, res)
+                .then(() => {
+                    expect(spy.called).to.be.true;
+                    spy.restore();
+                })
 
-            it('To call the data.loadCurrentConversations function', () => {
-                let spy = sinon.spy(data.loadCurrentConversations);
-                controller.getMessageForm(req, res);
-                expect(spy.calledOnce).to.be.true;
-            });
+        });
+
+        it('To call the res.render function', () => {
+            let spy = sinon.spy(res, 'render');
+            controller.getMessageForm(req, res)
+                .then(() => {
+                    expect(spy.called).to.be.true;
+                    spy.restore();
+                })
+
+        });
+    });
+
+    describe('initializeMessage() tests', () => {
+
+        it('To call the data.findByIdentification function', () => {
+            let spy = sinon.spy(data, 'findByIdentification');
+            controller.initializeMessage(req, res)
+                .then(() => {
+                    expect(spy.calledOnce).to.be.true;
+                    spy.restore();
+                })
+
+        });
+
+        it('To call the res.json function', () => {
+            let spy = sinon.spy(res, 'json');
+            controller.initializeMessage(req, res)
+                .then(() => {
+                    expect(spy.called).to.be.true;
+                    spy.restore();
+                })
+
+        });
+
+        it('To call the res.status function', () => {
+            let spy = sinon.spy(res, 'status');
+            controller.initializeMessage(req, res)
+                .then(() => {
+                    expect(spy.called).to.be.true;
+                    spy.restore();
+                })
+
         });
     });
 });

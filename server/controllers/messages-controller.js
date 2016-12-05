@@ -2,9 +2,9 @@ module.exports = function ({data}) {
     return {
         getMessageForm(req, res) {
             let userId = JSON.stringify(req.user._id);
-            data.loadCurrentConversations(userId.substring(1, userId.length - 1))
+            return data.loadCurrentConversations(userId.substring(1, userId.length - 1))
                 .then(messages => {
-                    res.status(200).render('messages/messages', {
+                    return res.status(200).render('messages/messages', {
                         result: parseMessages(messages, req.user._id)
                     });
                 });
@@ -26,17 +26,17 @@ module.exports = function ({data}) {
             var usernames = [firstUser.username, secondUser.username].sort();
             let identification = usernames[0] + usernames[1];
 
-            data.findByIdentification(identification)
+            return data.findByIdentification(identification)
                 .then((message) => {
                     if (message) {
-                        res.status(201).json({
+                        return res.status(201).json({
                             success: true,
                             redirect: '/messages'
                         });
                     } else {
-                        data.createConversation({ firstUser, secondUser, identification })
+                        return data.createConversation({ firstUser, secondUser, identification })
                             .then(() => {
-                                res.status(201).json({
+                                return res.status(201).json({
                                     success: true,
                                     redirect: '/messages'
                                 });
