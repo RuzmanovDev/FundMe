@@ -116,4 +116,37 @@ describe('Message controller test', () => {
 
         });
     });
+
+     describe('getTexts() tests', () => {
+
+        it('To call the data.findByIdentification function', () => {
+            let spy = sinon.spy(data, 'findByIdentification');
+            controller.getTexts(req, res)
+                .then(() => {
+                    expect(spy.calledOnce).to.be.true;
+                    spy.restore();
+                })
+
+        });
+
+        it('To call the res.json function', () => {
+            let spy = sinon.spy(res, 'json');
+            controller.getTexts(req, res)
+                .then(() => {
+                    expect(spy.called).to.be.true;
+                    spy.restore();
+                })
+
+        });
+
+        it('To call the res.status function', () => {
+            let spy = sinon.spy(res, 'status');
+            controller.getTexts(req, res)
+                .then(() => {
+                    expect(spy.called).to.be.true;
+                    spy.restore();
+                })
+
+        });
+    });
 });

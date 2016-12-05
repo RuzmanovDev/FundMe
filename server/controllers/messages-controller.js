@@ -49,9 +49,9 @@ module.exports = function ({data}) {
             let identification = usernames[0] + usernames[1];
             let loggedUsername = req.user.username;
 
-            data.findByIdentification(identification)
+            return data.findByIdentification(identification)
                 .then(message => {
-                    res.status(200).json({
+                    return res.status(200).json({
                         texts: message.texts,
                         loggedUser: loggedUsername
                     });
