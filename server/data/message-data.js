@@ -47,7 +47,7 @@ module.exports = function (models) {
         },
         addMessage(identification, text, owner, date) {
 
-            return new Promise((resolve) => {
+            return new Promise((resolve,reject) => {
                 this.findByIdentification(identification)
                     .then(message => {
                         message.texts.push({

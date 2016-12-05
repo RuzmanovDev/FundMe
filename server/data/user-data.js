@@ -78,7 +78,7 @@ module.exports = (models) => {
             });
         },
         updateUser(userId, info) {
-            return new Promise((resolve) => {
+            return new Promise((resolve,reject) => {
                 this.getById(userId)
                     .then((foundUser) => {
                         foundUser.avatar = info.avatar || foundUser.avatar;

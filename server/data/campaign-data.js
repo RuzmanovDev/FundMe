@@ -29,7 +29,7 @@ module.exports = function(models) {
             });
         },
         getAllCampaigns(pageNumber, pageSize) {
-            return new Promise((resolve) => {
+            return new Promise((resolve,reject) => {
                 let query = Campaign.find({ isDeleted: false })
                     .skip(pageNumber * pageSize)
                     .limit(pageSize);
@@ -38,7 +38,7 @@ module.exports = function(models) {
             });
         },
         findCampaignsByCategory(category, pageNumber, pageSize) {
-            return new Promise((resolve) => {
+            return new Promise((resolve,reject) => {
                 let query = Campaign.find({ category, isDeleted: false })
                     .skip(pageNumber * pageSize)
                     .limit(pageSize);
