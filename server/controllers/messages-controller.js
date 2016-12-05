@@ -64,9 +64,9 @@ module.exports = function ({data}) {
             let owner = req.user.username;
             let date = JSON.stringify(Date());
 
-            data.addMessage(identification, text, owner, date)
+            return data.addMessage(identification, text, owner, date)
                 .then(() => {
-                    res.status(200).json({
+                    return res.status(200).json({
                         texts: [{
                             date: date,
                             owner: owner,

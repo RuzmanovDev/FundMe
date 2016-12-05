@@ -35,16 +35,30 @@ describe('Message controller test', () => {
 
                 });
             });
+        }, 
+        addMessage(){
+              return new Promise((resolve, reject) => {
+                resolve({
+
+                    firstUser: {
+                        username: 'gosho'
+                    },
+                    secondUser: {
+                        username: 'pesho'
+                    }
+
+                });
+            });
         }
     };
     let req = {
         user: { _id: 'gosho', username: 'gosho', avatar: 'gosho' },
-        body: { id: 'gosho', username: 'gosho', avatar: 'gosho' }
+        body: { id: 'gosho', username: 'gosho', avatar: 'gosho', identification: 'gosho', text:'gosho' }
     };
     let res = {
         render() { },
         status() { return this; },
-        json(){
+        json() {
 
         }
     };
@@ -117,7 +131,7 @@ describe('Message controller test', () => {
         });
     });
 
-     describe('getTexts() tests', () => {
+    describe('getTexts() tests', () => {
 
         it('To call the data.findByIdentification function', () => {
             let spy = sinon.spy(data, 'findByIdentification');
@@ -142,6 +156,39 @@ describe('Message controller test', () => {
         it('To call the res.status function', () => {
             let spy = sinon.spy(res, 'status');
             controller.getTexts(req, res)
+                .then(() => {
+                    expect(spy.called).to.be.true;
+                    spy.restore();
+                })
+
+        });
+    });
+
+    describe('addMessage() tests', () => {
+
+        it('To call the data.addMessage function', () => {
+            let spy = sinon.spy(data, 'addMessage');
+            controller.addMessage(req, res)
+                .then(() => {
+                    expect(spy.calledOnce).to.be.true;
+                    spy.restore();
+                })
+
+        });
+
+        it('To call the res.json function', () => {
+            let spy = sinon.spy(res, 'json');
+            controller.addMessage(req, res)
+                .then(() => {
+                    expect(spy.called).to.be.true;
+                    spy.restore();
+                })
+
+        });
+
+        it('To call the res.status function', () => {
+            let spy = sinon.spy(res, 'status');
+            controller.addMessage(req, res)
                 .then(() => {
                     expect(spy.called).to.be.true;
                     spy.restore();
