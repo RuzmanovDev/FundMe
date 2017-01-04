@@ -2,7 +2,8 @@
 Teamwork project for TelerikAcademy season 2016, course Web Apps with NodeJS
 
 ## Description
-Web application for collecting funds. [Link](https://fund-me.herokuapp.com/home/)
+Web application for collecting funds. 
+[Link](https://fund-me.herokuapp.com/home/)
 A user posts his idea and the other users donates to his campaign.
 
 
